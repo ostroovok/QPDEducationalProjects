@@ -1,0 +1,49 @@
+﻿using System;
+using TasksLogic;
+
+namespace TestApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            //NumbersProgram.Start();
+
+            //Figures f = new Figures(7, 5);
+            //f.PrintAll();
+
+            /*
+            Console.WriteLine("\t#6");
+            Console.WriteLine(Rows.SimpleSumRow(50, 1, 1));
+            Console.WriteLine(Rows.SumRow(50, 2, false, 2));
+            Console.WriteLine(Rows.SumRow(50, 2, true, 1));
+            Console.WriteLine("\t#7");
+            Console.WriteLine(Rows.SimpleSumRow(46,4,6));
+            Console.WriteLine(Rows.Count);
+            Console.WriteLine("\t#8");
+            Console.WriteLine(Rows.SumForMaxTerms(10,4,6));
+            Console.WriteLine(Rows.Count);
+            Console.WriteLine("\t#9");
+            Console.WriteLine(Rows.SumForMaxTerms(11, 2, 1));
+            Console.WriteLine(Rows.Count);
+            Console.WriteLine("\t#10");
+            Console.WriteLine(Rows.SumForMaxSum(100, 4, 6));
+            Console.WriteLine(Rows.Count);
+            Console.WriteLine("\t#11");
+            Console.WriteLine(Rows.SumForMaxSum(100, 4, 6, true));
+            Console.WriteLine(Rows.Count);
+            Console.WriteLine("\t#12");
+            Console.WriteLine(Rows.Fibonacci(3));
+            */
+
+            int[] arr = new int[] { 1, 2, 3, 6, 7, 1, 2, 1, 1, 1, 2};
+            
+            int[] firstArr = new int[] {1, 2, 3, 4, 5 };
+            int[] secondArr = new int[] {5, 4, 3, 2, 1 };
+            
+            
+            Console.WriteLine(Arrays.IsOrderedMinToMax(arr));
+        }
+    }
+}
