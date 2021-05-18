@@ -60,7 +60,15 @@ namespace TestApp
             var arr = Arrays.RandomArray(number);
             Console.WriteLine($"Max: {Arrays.FindMax(arr)} Min: {Arrays.FindMin(arr)}");
             Console.WriteLine($"Min Odd: {Arrays.FindEvenOddMinMax(arr, false, true)}");
-
+            Arrays.SwapMinToMax(arr);
+            PrintArray(arr);
+        }
+        private static void PrintArray(int[] arr)
+        {
+            for (int i = 0; i < arr.Length; i++)
+            {
+                Console.Write($"{arr[i]}, ");
+            }
         }
     }
 }

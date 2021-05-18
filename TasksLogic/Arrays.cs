@@ -57,9 +57,21 @@ namespace TasksLogic
         }
         public static void SwapMinToMax(int[] arr)
         {
-            var max = FindMax(arr);
-            var min = FindMin(arr);
-
+            var max = int.MinValue;
+            var min = int.MaxValue;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] > max)
+                    max = i;
+            }
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] < min)
+                    min = i;
+            }
+            var t = arr[min];
+            arr[min] = arr[max];
+            arr[max] = t;
         }
         public static int FindMax(int[] arr)
         {

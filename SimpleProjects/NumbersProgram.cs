@@ -18,10 +18,10 @@ namespace TestApp
                 switch (number)
                 {
                     case 1:
-                        First(number);
+                        First(CheckInput());
                         break;
                     case 2:
-                        Second(number);
+                        Second(CheckInput());
                         break;
                     case 3:
                         Third();

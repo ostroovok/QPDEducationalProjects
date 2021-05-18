@@ -8,7 +8,7 @@ namespace TestApp
         static void Main(string[] args)
         {
 
-            //NumbersProgram.Start();
+            NumbersProgram.Start();
 
             //Figures f = new Figures(7, 5);
             //f.PrintAll();
@@ -36,14 +36,7 @@ namespace TestApp
             Console.WriteLine("\t#12");
             Console.WriteLine(Rows.Fibonacci(3));
             */
-
-            int[] arr = new int[] { 1, 2, 3, 6, 7, 1, 2, 1, 1, 1, 2};
-            
-            int[] firstArr = new int[] {1, 2, 3, 4, 5 };
-            int[] secondArr = new int[] {5, 4, 3, 2, 1 };
-            
-            
-            Console.WriteLine(Arrays.IsOrderedMinToMax(arr));
+            ArrayProgram.Start();
         }
     }
 }
