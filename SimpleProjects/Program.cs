@@ -8,7 +8,7 @@ namespace TestApp
         static void Main(string[] args)
         {
 
-            NumbersProgram.Start();
+            //NumbersProgram.Start();
 
             //Figures f = new Figures(7, 5);
             //f.PrintAll();

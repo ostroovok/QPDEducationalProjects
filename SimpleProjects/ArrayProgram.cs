@@ -13,19 +13,21 @@ namespace TestApp
         {
             while (true)
             {
+                Console.WriteLine("Number: ");
                 var number = NumbersProgram.CheckInput();
                 if (number == -1)
                     break;
                 switch (number)
                 {
                     case 1:
-                        First(Input(number));
+                        First(Input(NumbersProgram.CheckInput()));
                         break;
                     case 2:
-                        Second(Input(number));
+                        Second(Input(NumbersProgram.CheckInput()));
                         break;
                     case 3:
-                        Third(number);
+                        Console.WriteLine("Size: \n");
+                        Third(NumbersProgram.CheckInput());
                         break;
                     case 4:
                         //Fourth();
@@ -58,6 +60,7 @@ namespace TestApp
         private static void Third(int number)
         {
             var arr = Arrays.RandomArray(number);
+            PrintArray(arr);
             Console.WriteLine($"Max: {Arrays.FindMax(arr)} Min: {Arrays.FindMin(arr)}");
             Console.WriteLine($"Min Odd: {Arrays.FindEvenOddMinMax(arr, false, true)}");
             Arrays.SwapMinToMax(arr);

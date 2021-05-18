@@ -38,7 +38,7 @@ namespace TasksLogic
         }
         public static int[] CountValues(int[] arr)
         {
-            int[] outArr = new int[Math.Max(arr.Length,FindMax(arr))];
+            int[] outArr = new int[Math.Max(arr.Length + 1,FindMax(arr) + 1)];
             for (int i = 0; i < arr.Length; i++)
             {
                 outArr[arr[i]] += 1;
@@ -59,19 +59,29 @@ namespace TasksLogic
         {
             var max = int.MinValue;
             var min = int.MaxValue;
+            var minIndex = 1;
+            var maxIndex = 1;
             for (int i = 0; i < arr.Length; i++)
             {
                 if (arr[i] > max)
-                    max = i;
+                {
+                    max = arr[i];
+                    maxIndex = i;
+                }
+                    
             }
             for (int i = 0; i < arr.Length; i++)
             {
                 if (arr[i] < min)
-                    min = i;
+                {
+                    min = arr[i];
+                    minIndex = i;
+                }
+                    
             }
-            var t = arr[min];
-            arr[min] = arr[max];
-            arr[max] = t;
+            var t = arr[minIndex];
+            arr[minIndex] = arr[maxIndex];
+            arr[maxIndex] = t;
         }
         public static int FindMax(int[] arr)
         {
