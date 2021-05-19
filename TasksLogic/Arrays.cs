@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TasksLogic
 {
-    public class Arrays
+    public static class Arrays
     {
         public static int[] RandomArray(int maxLen, int min = -100, int max = 100)
         {
@@ -83,6 +83,7 @@ namespace TasksLogic
             arr[minIndex] = arr[maxIndex];
             arr[maxIndex] = t;
         }
+    
         public static int FindMax(int[] arr)
         {
             var max = int.MinValue;
@@ -141,8 +142,114 @@ namespace TasksLogic
                 }
                 return minValue;
             }
+        }   
+        public static int[] OrderedConcat(int[] first, int[] second)
+        {
+            var maxLen = first.Length + second.Length;
+            var outArr = new int[maxLen];
+            for (int i = 0, f = 0, s = 0; i < maxLen; i++)
+            {
+                if(f < first.Length && first[f] < second[s])
+                {
+                    outArr[i] = first[f];
+                    f++;
+                }
+                else if(s < second.Length)
+                {
+                    outArr[i] = second[s];
+                    s++;
+                }
+            }
+            return outArr;
+        }
+        public static int[] Shift(int[] arr, int k)
+        {
+
+            for (int j = 0; j < arr.Length - 1; j++)
+            {
+                var temp = 0;
+                if (j == arr.Length - 1 || j + k >= arr.Length)
+                {
+                    temp = arr[j];
+                    arr[j] = arr[arr.Length - k];
+                    arr[arr.Length - k] = temp;
+                }
+                else
+                {
+                    temp = arr[j];
+                    arr[j] = arr[j + k];
+                    arr[j + k] = temp;
+                }
+
+            }
+            return arr;
+        }
+        public static int[] BubbleSort(int[] arr, bool isMin)
+        {
+            for (int i = 0; i < arr.Length - 1; i++)
+            {
+
+                for (int j = 0; j < arr.Length - 1; j++)
+                {
+
+                    if (isMin)
+                    {
+                        if (arr[j] <= arr[j + 1])
+                        {
+                            var t = arr[j];
+                            arr[j] = arr[j + 1];
+                            arr[j + 1] = t;
+                        }
+                    }
+                    else
+                    {
+                        if (arr[j] >= arr[j + 1])
+                        {
+                            var t = arr[j];
+                            arr[j] = arr[j + 1];
+                            arr[j + 1] = t;
+                        }
+                    }
+                }
+
+            }
+            return arr;
         }
         #region Private Methods
+        private static void ShiftStep(int[] arr)
+        {
+            for (int j = 0; j < arr.Length; j++)
+            {
+                var temp = 0;
+                if (j + 1 == arr.Length)
+                {
+                    temp = arr[j];
+                    arr[j] = arr[0];
+                    arr[0] = temp;
+                }
+                else
+                {
+                    temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+
+            }
+        }
+        private static int[] Swap(int[] arr, int a, int b)
+        {
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] == a)
+                    a = i;
+                else if (arr[i] == b)
+                    b = i;
+            }
+            var t = arr[a];
+            arr[a] = arr[b];
+            arr[b] = t;
+            return arr;
+        }
         private static int[] ExpandArray(int[] arr)
         {
             int[] outArr = new int[arr.Length * 2];
