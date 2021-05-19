@@ -18,6 +18,7 @@ namespace TasksLogic
             }
             return arr;
         }
+        
         public static bool IsOrderedMinToMax(int[] arr)
         {
             for (int i = 0; i < arr.Length - 1; i++)
@@ -27,6 +28,7 @@ namespace TasksLogic
             }
             return true;
         }
+        
         public static bool IsOrderedMaxToMin(int[] arr)
         {
             for (int i = 0; i < arr.Length - 1; i++)
@@ -36,6 +38,7 @@ namespace TasksLogic
             }
             return true;
         }
+        
         public static int[] CountValues(int[] arr)
         {
             int[] outArr = new int[Math.Max(arr.Length + 1,FindMax(arr) + 1)];
@@ -55,6 +58,7 @@ namespace TasksLogic
             }
             return new int[] { result, outArr[result] };
         }
+        
         public static void SwapMinToMax(int[] arr)
         {
             var max = int.MinValue;
@@ -94,6 +98,7 @@ namespace TasksLogic
             }
             return max;
         }
+        
         public static int FindMin(int[] arr)
         {
             var min = int.MaxValue;
@@ -104,6 +109,7 @@ namespace TasksLogic
             }
             return min;
         }
+        
         public static int FindEvenOddMinMax(int[] arr, bool max, bool odd)
         {
             if (max)
@@ -143,6 +149,7 @@ namespace TasksLogic
                 return minValue;
             }
         }   
+        
         public static int[] OrderedConcat(int[] first, int[] second)
         {
             var maxLen = first.Length + second.Length;
@@ -162,6 +169,7 @@ namespace TasksLogic
             }
             return outArr;
         }
+        
         public static int[] Shift(int[] arr, int k)
         {
 
@@ -184,6 +192,7 @@ namespace TasksLogic
             }
             return arr;
         }
+        
         public static int[] BubbleSort(int[] arr, bool isMin)
         {
             for (int i = 0; i < arr.Length - 1; i++)
@@ -215,6 +224,7 @@ namespace TasksLogic
             }
             return arr;
         }
+        
         #region Private Methods
         private static void ShiftStep(int[] arr)
         {
