@@ -4,12 +4,14 @@ namespace TasksLogic
 {
     public static class Numbers
     {
-        public static int SumRank(int number)
+        public static int TheSumOfTheDigits(int number)
         {
             var sum = 0;
-            sum += number / 100;
-            sum += number % 10;
-            sum += number / 10 % 10;
+            while (number != 0)
+            {
+                sum += number % 10;
+                number /= 10;
+            }
             return sum;
         }
     }

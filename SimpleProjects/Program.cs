@@ -15,32 +15,32 @@ namespace TestApp
             //f.PrintAll();
 
             /*
-            Console.WriteLine("\t#6");
-            Console.WriteLine(Rows.SimpleSumRow(50, 1, 1));
-            Console.WriteLine(Rows.SumRow(50, 2, false, 2));
-            Console.WriteLine(Rows.SumRow(50, 2, true, 1));
-            Console.WriteLine("\t#7");
-            Console.WriteLine(Rows.SimpleSumRow(46,4,6));
+            Console.WriteLine("\tЗадача #6");
+            Console.WriteLine(Rows.TheSumOfTheSeries(50, 1, 1));
+            Console.WriteLine(Rows.VariableSeriesSum(50, 2, false, 2));
+            Console.WriteLine(Rows.VariableSeriesSum(50, 2, true, 1));
+            Console.WriteLine("\tЗадача #7");
+            Console.WriteLine(Rows.TheSumOfTheSeries(46,4,6));
             Console.WriteLine(Rows.Count);
-            Console.WriteLine("\t#8");
-            Console.WriteLine(Rows.SumForMaxTerms(10,4,6));
+            Console.WriteLine("\tЗадача #8");
+            Console.WriteLine(Rows.SumWithLimitedNumberOfTerms(10,4,6));
             Console.WriteLine(Rows.Count);
-            Console.WriteLine("\t#9");
-            Console.WriteLine(Rows.SumForMaxTerms(11, 2, 1));
+            Console.WriteLine("\tЗадача #9");
+            Console.WriteLine(Rows.SumWithLimitedNumberOfTerms(11, 2, 1));
             Console.WriteLine(Rows.Count);
-            Console.WriteLine("\t#10");
-            Console.WriteLine(Rows.SumForMaxSum(100, 4, 6));
+            Console.WriteLine("\tЗадача #10");
+            Console.WriteLine(Rows.LimitedSum(100, 4, 6));
             Console.WriteLine(Rows.Count);
-            Console.WriteLine("\t#11");
-            Console.WriteLine(Rows.SumForMaxSum(100, 4, 6, true));
+            Console.WriteLine("\tЗадача #11");
+            Console.WriteLine(Rows.LimitedSum(100, 4, 6, true));
             Console.WriteLine(Rows.Count);
-            Console.WriteLine("\t#12");
+            Console.WriteLine("\tЗадача #12");
             Console.WriteLine(Rows.Fibonacci(3));
             */
 
-            //ArrayProgram.Start();
+            ArrayProgram.Start();
 
-            SFirst();
+            //SFirst();
         }
         public static void SFirst()
         {

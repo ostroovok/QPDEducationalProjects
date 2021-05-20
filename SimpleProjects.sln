@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31229.75
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "SimpleProjects\TestApp.csproj", "{DD79581D-4454-49AE-9B16-03CC8F8BADD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestApp", "SimpleProjects\TestApp.csproj", "{DD79581D-4454-49AE-9B16-03CC8F8BADD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TasksLogic", "TasksLogic\TasksLogic.csproj", "{64F0B6BE-9F9D-44B3-B4B0-FD484B6C0184}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TasksLogic", "TasksLogic\TasksLogic.csproj", "{64F0B6BE-9F9D-44B3-B4B0-FD484B6C0184}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
