@@ -67,7 +67,7 @@ namespace TestApp
             foreach (var i in indexes)
             {
                 if(i == -1)
-                    Console.Write("указанного символа нет в строке");
+                    Console.Write("указанного символа нет в строке, ");
                 else
                     Console.Write($"{i}, ");
             }
