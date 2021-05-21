@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TasksLogic
+namespace TasksLogic.Theme2
 {
     public static class Numbers
     {
@@ -9,7 +9,7 @@ namespace TasksLogic
             var sum = 0;
             while (number != 0)
             {
-                sum += number % 10;
+                sum += Math.Abs(number % 10);
                 number /= 10;
             }
             return sum;

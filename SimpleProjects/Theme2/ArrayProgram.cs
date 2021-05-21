@@ -1,5 +1,5 @@
 ﻿using System;
-using TasksLogic;
+using TasksLogic.Theme2;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,44 +15,55 @@ namespace TestApp
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("Введите номер задачи (от 1 до 7) \t stop - Выход \t Элементы массивов вводятся построчно!");
+                Console.WriteLine("Введите номер задачи (от 1 до 7, кроме 6, эта задача выполняется вместе с пятой ввода 5)\n stop - Выход \t Элементы массивов вводятся построчно!");
                 Console.Write("-->\t");
-                var number = NumbersProgram.CheckInputValue();
+                var number = CheckInputValue();
+                int temp;
                 if (number == -1)
                     break;
                 switch (number)
                 {
+
                     case 1:
                         Console.Write("Размер массива: ");
-                        FirstTask(Input(NumbersProgram.CheckInputValue()));
+                        FirstTask(Input(CheckNegative()));
                         break;
+
                     case 2:
                         Console.Write("Размер массива: ");
-                        SecondTask(Input(NumbersProgram.CheckInputValue()));
+                        SecondTask(Input(CheckNegative()));
                         break;
+
                     case 3:
                         Console.Write("Размер массива: ");
-                        ThirdTask(NumbersProgram.CheckInputValue());
+                        ThirdTask(CheckNegative());
                         break;
+
                     case 4:
                         Console.Write("Размер массивов: ");
-                        FourthTask(NumbersProgram.CheckInputValue());
+                        FourthTask(CheckNegative());
                         break;
+
                     case 5:
                         FifthTask();
                         Console.WriteLine("Результат в файле out_test.txt");
                         break;
+
                     case 7:
-                        Console.WriteLine("Результат: ");
-                        SeventhTask(NumbersProgram.CheckInputValue());
+                        Console.WriteLine("Введите положительное чиcло, на которое нужно сдвинуть массив: ");
+                        SeventhTask(CheckNegative());
                         break;
+
                     default:
                         Console.WriteLine("Такого варианта нет в списке \n Нажмите любую клавишу для продолжения");
                         break;
+
                 }
                 Console.ReadLine();
             }
         }
+
+        
         #region Problem Solving Methods
         private static void FirstTask(int[] arr)
         {
@@ -79,7 +90,7 @@ namespace TestApp
         }
         private static void FourthTask(int number)
         {
-            Console.WriteLine("Массивы должны быть упорядоченными");
+            Console.WriteLine("Массивы должны быть упорядоченными по возрастанию");
 
             bool check = false;
             int[] first = OrderedInput(number, check);
@@ -108,13 +119,41 @@ namespace TestApp
         }
         #endregion
         #region Utils Methods
+        private static int CheckNegative()
+        {
+            var temp = CheckInputValue();
+            while (temp < 0)
+            {
+                Console.WriteLine("Не может быть отрицательным!");
+                Console.Write("Введите еще раз: ");
+                temp = CheckInputValue();
+            }
+            return temp;
+        }
+        private static int CheckInputValue()
+        {
+            var value = Console.ReadLine();
+            if (value.ToLower() == "stop")
+                Start();
+            int number;
+            bool success = int.TryParse(value, out number);
+            while (!success)
+            {
+                Console.WriteLine("Не число!");
+                value = Console.ReadLine();
+                if (value.ToLower() == "stop")
+                    Start();
+                success = int.TryParse(value, out number);
+            }
+            return number;
+        }
         private static int[] Input(int number)
         {
             Console.WriteLine("Введите массив: ");
             int[] arr = new int[number];
             for (int i = 0; i < number; i++)
             {
-                arr[i] = NumbersProgram.CheckInputValue();
+                arr[i] = CheckInputValue();
             }
             return arr;
         }
@@ -124,12 +163,18 @@ namespace TestApp
             if (!isMin)
             {
                 while (!Arrays.IsOrderedAscending(arr))
+                {
+                    Console.WriteLine("Введите еще раз, массив не соответсвует условиям");
                     arr = Input(number);
+                }    
             }
             else
             {
                 while (!Arrays.IsOrderedDescending(arr))
+                {
+                    Console.WriteLine("Введите еще раз, массив не соответсвует условиям");
                     arr = Input(number);
+                }     
             }
             return arr;
         }

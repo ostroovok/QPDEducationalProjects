@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using TasksLogic;
+using TasksLogic.Theme2;
+using TestApp.Theme2;
 
 namespace TestApp
 {
@@ -11,8 +12,7 @@ namespace TestApp
 
             //NumbersProgram.Start();
 
-            //Figures f = new Figures(7, 5);
-            //f.PrintAll();
+            //FiguresProgram.Start();
 
             /*
             Console.WriteLine("\tЗадача #6");

@@ -1,5 +1,5 @@
 ﻿using System;
-using TasksLogic;
+using TasksLogic.Theme2;
 
 namespace TestApp
 {
@@ -10,7 +10,7 @@ namespace TestApp
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("Введите номер задачи (от 1 до 4) \t stop - Выход \t help - Помощь");
+                Console.WriteLine("Введите номер задачи (от 1 до 4) \t stop - Выход");
                 Console.Write("-->\t");
                 var number = CheckInputValue();
                 if (number == -1)
@@ -22,7 +22,7 @@ namespace TestApp
                         FirstTask(CheckInputValue());
                         break;
                     case 2:
-                        SecondTask(CheckInputValue());
+                        SecondTask();
                         break;
                     case 3:
                         ThirdTask();
@@ -41,28 +41,21 @@ namespace TestApp
         {
             var value = Console.ReadLine();
             if (value.ToLower() == "stop")
-                return -1;
-            if (value.ToLower() == "help")
-                PrintInfo();
+                Start();
             int number;
             bool success = int.TryParse(value, out number);
             while (!success)
             {
                 Console.WriteLine("Не число!");
                 value = Console.ReadLine();
+                if (value.ToLower() == "stop")
+                    Start();
                 success = int.TryParse(value, out number);
             }
             return number;
         }
 
         #region Private Methods
-        private static void PrintInfo()
-        {
-            Console.WriteLine("1 Задача - Сумма цифр в трехзначном числе");
-            Console.WriteLine("2 Задача - Вывод числа с наибольшей суммой цифр среди чисел, введенных пользователем");
-            Console.WriteLine("3 Задача - Сумма первых трех нечетных чисел, среди введенных пользователем");
-            Console.WriteLine("4 Задача - Сумма последних трех нечетных чисел, среди введенных пользователем");
-        }
         private static void FourthTask()
         {
             var count = 0;
@@ -105,6 +98,12 @@ namespace TestApp
             var sum = 0;
             Console.Write("Количество чисел: ");
             var n = CheckInputValue();
+            while (n < 0)
+            {
+                Console.WriteLine("Количество не может быть отрицательным!");
+                Console.Write("Введите еще раз: ");
+                n = CheckInputValue();
+            }
             Console.WriteLine("Введите числа: ");
             while (count < n)
             {
@@ -119,20 +118,28 @@ namespace TestApp
             Console.WriteLine($"Сумма первых 3-х нечетных: {sum}");
         }
 
-        private static void SecondTask(int number)
+        private static void SecondTask()
         {
             Console.WriteLine(" 0 - Выход");
+            Console.Write("Введите число: ");
             var result = 0;
             var maxValue = int.MinValue;
-            var temp = Numbers.TheSumOfTheDigits(number);
-            while (temp != 0)
+            var number = CheckInputValue();
+            while (number < 0)
+            {
+                Console.WriteLine("Количество не может быть отрицательным!");
+                Console.Write("Введите еще раз: ");
+                number = CheckInputValue();
+            }
+            number = Numbers.TheSumOfTheDigits(number);
+            while (number != 0)
             {
                 Console.Write("Введите число: ");
                 var toMethod = CheckInputValue();
-                temp = Numbers.TheSumOfTheDigits(toMethod);
-                if (temp > maxValue)
+                number = Numbers.TheSumOfTheDigits(toMethod);
+                if (number > maxValue)
                 {
-                    maxValue = temp;
+                    maxValue = number;
                     result = toMethod;
                 }
             }
@@ -140,7 +147,7 @@ namespace TestApp
         }
         private static void FirstTask(int number)
         {
-            if (number < 100 || number > 999)
+            if (Math.Abs(number) < 100 || Math.Abs(number) > 999)
                 Console.WriteLine("Введенное число не соответствует условиям задачи");
             else
                 Console.WriteLine($"Вывод: {Numbers.TheSumOfTheDigits(number)}");

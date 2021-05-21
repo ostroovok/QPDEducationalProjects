@@ -4,96 +4,64 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TasksLogic
+namespace TasksLogic.Theme2
 {
-    public class Figures
+    public static class Figures
     {
-        public struct Size
-        {
-            public int Height { get; }
-            public int Width { get; }
 
-            public Size(int height, int width)
-            {
-                Height = height;
-                Width = width;
-            }
-            public static bool operator ==(Size s1, Size s2)
-            {
-                return s1.Width == s2.Width && s1.Height == s2.Height;
-            }
-            public static bool operator !=(Size s1, Size s2)
-            {
-                return s1.Width != s2.Width && s1.Height != s2.Height;
-            }
-        }
-        public Size SizeOfFigure { get; set; }
-        public int Width { get => SizeOfFigure.Width; }
-        public int Height { get => SizeOfFigure.Height; }
-
-        public Figures(Size figureSize)
+        public static void PrintAll(int m, int n)
         {
-            SizeOfFigure = figureSize;
+            PrintSquare(m, n);
+                Console.WriteLine();
+            PrintLeftUpTriangle(m);
+                Console.WriteLine();
+            PrintLeftDownTriangle(m);
+                Console.WriteLine();
+            PrintRightUpTriangle(m);
+                Console.WriteLine();
+            PrintRightDownTriangle(m);
+                Console.WriteLine();
+            PrintRhombus(n);
         }
 
-        public Figures(int h, int w)
+        public static void PrintSquare(int m, int n)
         {
-            SizeOfFigure = new Size(h, w);
-        }
-
-        public void PrintAll()
-        {
-            PrintSquare();
-                Console.WriteLine();
-            PrintLeftUpTriangle();
-                Console.WriteLine();
-            PrintLeftDownTriangle();
-                Console.WriteLine();
-            PrintRightUpTriangle();
-                Console.WriteLine();
-            PrintRightDownTriangle();
-                Console.WriteLine();
-            PrintRhombus();
-        }
-
-        public void PrintSquare()
-        {
-            for (int i = 0; i < Height; i++)
+            for (int i = 0; i < m; i++)
             {
-                for (int j = 0; j < Height; j++)
+                for (int j = 0; j < n; j++)
                 {
                     Console.Write("*");
                 }
                 Console.WriteLine();
             }
         }
-        public void PrintRightDownTriangle()
+        public static void PrintRightDownTriangle(int m)
         {
-            for (int i = 0; i < Height; i++)
+            for (int i = 0; i < m; i++)
             {
-                for (int j = Height - i - 1; j < Height; j++)
+                for (int j = m - i - 1; j < m; j++)
                 {
                     Console.Write("*");
                 }
                 Console.WriteLine();
             }
         }
-        public void PrintRightUpTriangle()
+        public static void PrintRightUpTriangle(int m)
         {
-            for (int i = Height; i > 0; i--)
+            for (int i = m; i > 0; i--)
             {
-                for (int j = Height - i; j < Height; j++)
+                for (int j = m - i; j < m; j++)
                 {
                     Console.Write("*");
                 }
                 Console.WriteLine();
             }
         }
-        public void PrintLeftDownTriangle()
+        public static void PrintLeftDownTriangle(int m)
         {
-            for (int i = Height; i > 0; i--)
+            for (int i = m; i > 0; i--)
             {
-                for (int j = 0; j < Height; j++)
+                for (int j = 0; j < m; j++)
                 {
                     if (j >= i - 1)
                         Console.Write("*");
@@ -103,11 +71,11 @@ namespace TasksLogic
                 Console.WriteLine();
             }
         }
-        public void PrintLeftUpTriangle()
+        public static void PrintLeftUpTriangle(int m)
         {
-            for (int i = 0; i < Height; i++)
+            for (int i = 0; i < m; i++)
             {
-                for (int j = 0; j < Height; j++)
+                for (int j = 0; j < m; j++)
                 {
                     if (j >= i)
                         Console.Write("*");
@@ -117,11 +85,11 @@ namespace TasksLogic
                 Console.WriteLine();
             }
         }
-        public void PrintRhombus()
+        public static void PrintRhombus(int n)
         {
-            for (int i = Width; i > 0; i--)
+            for (int i = n; i > 0; i--)
             {
-                for (int j = 0, h = Width * 2; j < Width; j++, h--)
+                for (int j = 0, h = n * 2; j < n; j++, h--)
                 {
                     if (j >= i - 1)
                         Console.Write("*");
@@ -132,9 +100,9 @@ namespace TasksLogic
                 }
                 Console.WriteLine();
             }
-            for (int i = 0; i < Width; i++)
+            for (int i = 0; i < n; i++)
             {
-                for (int j = 0, h = Width * 2; j < Width; j++, h--)
+                for (int j = 0, h = n * 2; j < n; j++, h--)
                 {
                     if (j - 1 > i - 1)
                         Console.Write("*");

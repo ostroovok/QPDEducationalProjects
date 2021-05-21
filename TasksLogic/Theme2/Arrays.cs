@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TasksLogic
+namespace TasksLogic.Theme2
 {
     public static class Arrays
     {
@@ -171,27 +171,22 @@ namespace TasksLogic
         
         public static int[] Shift(int[] arr, int k)
         {
-
-            for (int j = 0; j < arr.Length - 1; j++)
+            for (int j = 0; j < k; j++)
             {
-                var temp = 0;
-                if (j == arr.Length - 1 || j + k >= arr.Length)
+                
+                var tmp = arr[arr.Length - 1];
+
+                for (var i = arr.Length - 1; i != 0; --i)
                 {
-                    temp = arr[j];
-                    arr[j] = arr[arr.Length - k];
-                    arr[arr.Length - k] = temp;
+                    arr[i] = arr[i - 1];
                 }
-                else
-                {
-                    temp = arr[j];
-                    arr[j] = arr[j + k];
-                    arr[j + k] = temp;
-                }
+
+                arr[0] = tmp;
 
             }
             return arr;
         }
-        
+
         public static int[] BubbleSort(int[] arr, bool isMin)
         {
             for (int i = 0; i < arr.Length - 1; i++)
