@@ -38,9 +38,9 @@ namespace TestApp
             Console.WriteLine(Rows.Fibonacci(3));
             */
 
-            ArrayProgram.Start();
+            //ArrayProgram.Start();
 
-            //StringProgram.Start();
+            StringProgram.Start();
         }
 
     }

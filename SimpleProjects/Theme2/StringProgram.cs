@@ -60,9 +60,9 @@ namespace TestApp
 
 
             indexes.Clear();
-            indexes.Add(FindFirst("Где такое интересное место?", 'у'));
-            indexes.Add(FindFirst("У меня дома есть ноутбук.", 'у'));
-            indexes.Add(FindFirst("Винтажный стул", 'у'));
+            indexes.Add(FindLast("Где такое интересное место?", 'у'));
+            indexes.Add(FindLast("У меня дома есть ноутбук.", 'у'));
+            indexes.Add(FindLast("Винтажный стул", 'у'));
             Console.WriteLine("\nиндекс У: ");
             foreach (var i in indexes)
             {
@@ -93,7 +93,7 @@ namespace TestApp
 
 
             str = "Сегодня в зоопраке я видел большого жирафа";
-            str = str.Replace("большого", "");
+            str = str.Replace("большого ", "");
             Console.WriteLine(str);
 
 
@@ -125,6 +125,18 @@ namespace TestApp
                 }
             }
             return -1;
+        }
+        private static int FindLast(string str, char symbol)
+        {
+            var result = -1;
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (str.ToCharArray()[i] == symbol)
+                {
+                    result = i;
+                }
+            }
+            return result;
         }
     }
 }
