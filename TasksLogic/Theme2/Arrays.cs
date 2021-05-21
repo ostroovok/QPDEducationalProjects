@@ -18,7 +18,29 @@ namespace TasksLogic
             }
             return arr;
         }
-        public static bool IsOrderedMinToMax(int[] arr)
+
+        public static int[] CountValues(int[] arr)
+        {
+            int[] outArr = new int[Math.Max(arr.Length + 1, FindMaxValue(arr) + 1)];
+            for (int i = 0; i < arr.Length; i++)
+            {
+                outArr[arr[i]] += 1;
+            }
+
+            int result = FindMaxValue(outArr);
+            if (outArr.Contains(result))
+            {
+                for (int i = outArr.Length - 1; i >= 0; i--)
+                {
+                    if (outArr[i] == result)
+                        return new int[] { i, outArr[i] };
+                }
+            }
+            return new int[] { result, outArr[result] };
+        }
+
+
+        public static bool IsOrderedAscending(int[] arr)
         {
             for (int i = 0; i < arr.Length - 1; i++)
             {
@@ -27,7 +49,7 @@ namespace TasksLogic
             }
             return true;
         }
-        public static bool IsOrderedMaxToMin(int[] arr)
+        public static bool IsOrderedDescending(int[] arr)
         {
             for (int i = 0; i < arr.Length - 1; i++)
             {
@@ -36,26 +58,8 @@ namespace TasksLogic
             }
             return true;
         }
-        public static int[] CountValues(int[] arr)
-        {
-            int[] outArr = new int[Math.Max(arr.Length + 1,FindMax(arr) + 1)];
-            for (int i = 0; i < arr.Length; i++)
-            {
-                outArr[arr[i]] += 1;
-            }
 
-            int result = FindMax(outArr);
-            if (outArr.Contains(result))
-            {
-                for (int i = outArr.Length - 1; i >= 0 ; i--)
-                {
-                    if (outArr[i] == result)
-                        return new int[] { i, outArr[i] };
-                }
-            }
-            return new int[] { result, outArr[result] };
-        }
-        public static void SwapMinToMax(int[] arr)
+        public static void SwapMinValueToMaxValue(int[] arr)
         {
             var max = int.MinValue;
             var min = int.MaxValue;
@@ -68,7 +72,7 @@ namespace TasksLogic
                     max = arr[i];
                     maxIndex = i;
                 }
-                    
+
             }
             for (int i = 0; i < arr.Length; i++)
             {
@@ -77,14 +81,14 @@ namespace TasksLogic
                     min = arr[i];
                     minIndex = i;
                 }
-                    
+
             }
             var t = arr[minIndex];
             arr[minIndex] = arr[maxIndex];
             arr[maxIndex] = t;
         }
-    
-        public static int FindMax(int[] arr)
+
+        public static int FindMaxValue(int[] arr)
         {
             var max = int.MinValue;
             for (int i = 0; i < arr.Length; i++)
@@ -94,7 +98,7 @@ namespace TasksLogic
             }
             return max;
         }
-        public static int FindMin(int[] arr)
+        public static int FindMinValue(int[] arr)
         {
             var min = int.MaxValue;
             for (int i = 0; i < arr.Length; i++)
@@ -104,7 +108,8 @@ namespace TasksLogic
             }
             return min;
         }
-        public static int FindEvenOddMinMax(int[] arr, bool max, bool odd)
+
+        public static int FindWithСonditions(int[] arr, bool max, bool odd)
         {
             if (max)
             {
@@ -142,19 +147,20 @@ namespace TasksLogic
                 }
                 return minValue;
             }
-        }   
+        }
+
         public static int[] OrderedConcat(int[] first, int[] second)
         {
             var maxLen = first.Length + second.Length;
             var outArr = new int[maxLen];
             for (int i = 0, f = 0, s = 0; i < maxLen; i++)
             {
-                if(f < first.Length && first[f] < second[s])
+                if (f < first.Length && first[f] < second[s])
                 {
                     outArr[i] = first[f];
                     f++;
                 }
-                else if(s < second.Length)
+                else if (s < second.Length)
                 {
                     outArr[i] = second[s];
                     s++;
@@ -162,6 +168,7 @@ namespace TasksLogic
             }
             return outArr;
         }
+
         public static int[] Shift(int[] arr, int k)
         {
 
@@ -184,6 +191,7 @@ namespace TasksLogic
             }
             return arr;
         }
+
         public static int[] BubbleSort(int[] arr, bool isMin)
         {
             for (int i = 0; i < arr.Length - 1; i++)
@@ -215,57 +223,5 @@ namespace TasksLogic
             }
             return arr;
         }
-        #region Private Methods
-        private static void ShiftStep(int[] arr)
-        {
-            for (int j = 0; j < arr.Length; j++)
-            {
-                var temp = 0;
-                if (j + 1 == arr.Length)
-                {
-                    temp = arr[j];
-                    arr[j] = arr[0];
-                    arr[0] = temp;
-                }
-                else
-                {
-                    temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
-                }
-
-            }
-        }
-        private static int[] Swap(int[] arr, int a, int b)
-        {
-            for (int i = 0; i < arr.Length; i++)
-            {
-                if (arr[i] == a)
-                    a = i;
-                else if (arr[i] == b)
-                    b = i;
-            }
-            var t = arr[a];
-            arr[a] = arr[b];
-            arr[b] = t;
-            return arr;
-        }
-        private static int[] ExpandArray(int[] arr)
-        {
-            int[] outArr = new int[arr.Length * 2];
-            Array.Copy(arr, outArr, arr.Length);
-            return outArr;
-        }
-        private static int[] FindSimilar(int[] arr, int value)
-        {
-            int[] similarValues = new int[arr.Length];
-            for (int i = 0; i < arr.Length; i++)
-            {
-                if (arr[i] == value)
-                    similarValues[i] = arr[i];
-            }
-            return similarValues;
-        }
-        #endregion
     }
 }

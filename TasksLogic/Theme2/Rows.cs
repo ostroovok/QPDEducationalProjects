@@ -9,11 +9,11 @@ namespace TasksLogic
     public static class Rows
     {
         public static int Count { get; private set; } = 0;
-        public static int SumRow(int max, int plus=1, bool isOdd=false, int from=0)
+        public static int VariableSeriesSum(int max, int plus = 1, bool isOdd = false, int from = 0)
         {
             var sum = 0;
             Count = 0;
-            for (int i = from; i <= max; i+=plus)
+            for (int i = from; i <= max; i += plus)
             {
                 if (i % 2 == 0 && !isOdd)
                 {
@@ -24,11 +24,11 @@ namespace TasksLogic
                 {
                     sum += i;
                     Count++;
-                } 
+                }
             }
             return sum;
         }
-        public static int SimpleSumRow(int max, int plus = 1, int from=0)
+        public static int TheSumOfTheSeries(int max, int plus = 1, int from = 0)
         {
             Count = 0;
             var sum = 0;
@@ -39,18 +39,18 @@ namespace TasksLogic
             }
             return sum;
         }
-        public static int SumForMaxTerms(int max, int plus = 1, int from = 0)
+        public static int SumWithLimitedNumberOfTerms(int max, int plus = 1, int from = 0)
         {
             Count = 0;
             var sum = from;
-            for (int i = 1; i <= max; i ++)
+            for (int i = 1; i <= max; i++)
             {
                 Count++;
-                sum += plus*i;
+                sum += plus * i;
             }
             return sum;
         }
-        public static int SumForMaxSum(int max, int plus = 1, int from = 0, bool moreMax=false)
+        public static int LimitedSum(int max, int plus = 1, int from = 0, bool moreMax = false)
         {
             Count = 0;
             var sum = from;

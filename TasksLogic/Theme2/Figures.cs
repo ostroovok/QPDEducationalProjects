@@ -18,7 +18,7 @@ namespace TasksLogic
                 Height = height;
                 Width = width;
             }
-            public static bool operator == (Size s1, Size s2)
+            public static bool operator ==(Size s1, Size s2)
             {
                 return s1.Width == s2.Width && s1.Height == s2.Height;
             }
@@ -27,32 +27,32 @@ namespace TasksLogic
                 return s1.Width != s2.Width && s1.Height != s2.Height;
             }
         }
-        public Size FigureSize { get; set; }
-        public int Width { get => FigureSize.Width; }
-        public int Height { get => FigureSize.Height; }
+        public Size SizeOfFigure { get; set; }
+        public int Width { get => SizeOfFigure.Width; }
+        public int Height { get => SizeOfFigure.Height; }
 
         public Figures(Size figureSize)
         {
-            FigureSize = figureSize;
+            SizeOfFigure = figureSize;
         }
 
         public Figures(int h, int w)
         {
-            FigureSize = new Size(h, w);
+            SizeOfFigure = new Size(h, w);
         }
 
         public void PrintAll()
         {
             PrintSquare();
-                Console.WriteLine();
-            PrintTriangle_LD();
-                Console.WriteLine();
-            PrintTriangle_LU();
-                Console.WriteLine();
-            PrintTriangle_RU();
-                Console.WriteLine();
-            PrintTriangle_RD();
-                Console.WriteLine();
+            Console.WriteLine();
+            PrintLeftUpTriangle();
+            Console.WriteLine();
+            PrintLeftDownTriangle();
+            Console.WriteLine();
+            PrintRightUpTriangle();
+            Console.WriteLine();
+            PrintRightDownTriangle();
+            Console.WriteLine();
             PrintRhombus();
         }
 
@@ -67,7 +67,7 @@ namespace TasksLogic
                 Console.WriteLine();
             }
         }
-        public void PrintTriangle_RD()
+        public void PrintRightDownTriangle()
         {
             for (int i = 0; i < Height; i++)
             {
@@ -78,7 +78,7 @@ namespace TasksLogic
                 Console.WriteLine();
             }
         }
-        public void PrintTriangle_RU()
+        public void PrintRightUpTriangle()
         {
             for (int i = Height; i > 0; i--)
             {
@@ -89,13 +89,13 @@ namespace TasksLogic
                 Console.WriteLine();
             }
         }
-        public void PrintTriangle_LD()
+        public void PrintLeftDownTriangle()
         {
             for (int i = Height; i > 0; i--)
             {
                 for (int j = 0; j < Height; j++)
                 {
-                    if(j >= i - 1)
+                    if (j >= i - 1)
                         Console.Write("*");
                     else
                         Console.Write(" ");
@@ -103,7 +103,7 @@ namespace TasksLogic
                 Console.WriteLine();
             }
         }
-        public void PrintTriangle_LU()
+        public void PrintLeftUpTriangle()
         {
             for (int i = 0; i < Height; i++)
             {
@@ -121,7 +121,7 @@ namespace TasksLogic
         {
             for (int i = Width; i > 0; i--)
             {
-                for (int j = 0, h = Width*2; j < Width; j++, h--)
+                for (int j = 0, h = Width * 2; j < Width; j++, h--)
                 {
                     if (j >= i - 1)
                         Console.Write("*");

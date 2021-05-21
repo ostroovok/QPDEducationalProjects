@@ -14,106 +14,134 @@ namespace TestApp
         {
             while (true)
             {
-                Console.WriteLine("1 : 2 : 3 : 4 : 5 : 7");
-                Console.Write("--> ");
-                var number = NumbersProgram.CheckInput();
+                Console.Clear();
+                Console.WriteLine("Введите номер задачи (от 1 до 7) \t stop - Выход \t Элементы массивов вводятся построчно!");
+                Console.Write("-->\t");
+                var number = NumbersProgram.CheckInputValue();
                 if (number == -1)
                     break;
                 switch (number)
                 {
                     case 1:
-                        Console.WriteLine("Введите массив: ");
-                        Console.Write("Size: ");
-                        First(Input(NumbersProgram.CheckInput()));
+                        Console.Write("Размер массива: ");
+                        FirstTask(Input(NumbersProgram.CheckInputValue()));
                         break;
                     case 2:
-                        Console.WriteLine("Введите массив: ");
-                        Console.Write("Size: ");
-                        Second(Input(NumbersProgram.CheckInput()));
+                        Console.Write("Размер массива: ");
+                        SecondTask(Input(NumbersProgram.CheckInputValue()));
                         break;
                     case 3:
-                        Console.Write("Size: ");
-                        Third(NumbersProgram.CheckInput());
+                        Console.Write("Размер массива: ");
+                        ThirdTask(NumbersProgram.CheckInputValue());
                         break;
                     case 4:
-                        Console.Write("Size: ");
-                        Fourth(NumbersProgram.CheckInput());
+                        Console.Write("Размер массивов: ");
+                        FourthTask(NumbersProgram.CheckInputValue());
                         break;
                     case 5:
-                        Fifth();
+                        FifthTask();
+                        Console.WriteLine("Результат в файле out_test.txt");
                         break;
                     case 7:
-                        Seventh(NumbersProgram.CheckInput()); ;
+                        Console.WriteLine("Результат: ");
+                        SeventhTask(NumbersProgram.CheckInputValue());
                         break;
                     default:
-                        Console.WriteLine("Такого варианта нет в списке \n Нажмите любую клавишу");
+                        Console.WriteLine("Такого варианта нет в списке \n Нажмите любую клавишу для продолжения");
                         break;
                 }
                 Console.ReadLine();
             }
         }
+        #region Problem Solving Methods
+        private static void FirstTask(int[] arr)
+        {
+            Console.WriteLine($"Результат: \nЧисло: {Arrays.CountValues(arr)[0]}; Количество его повторений: {Arrays.CountValues(arr)[1]}");
+        }
+        private static void SecondTask(int[] arr)
+        {
+            Console.WriteLine("Результат: ");
+            Console.WriteLine(Arrays.IsOrderedAscending(arr) + " По возрастанию");
+            Console.WriteLine(Arrays.IsOrderedDescending(arr) + " По убыванию");
+        }
+        private static void ThirdTask(int number)
+        {
+            var arr = Arrays.RandomArray(number);
+
+            Console.WriteLine($"Максимальный элемент в массиве: {Arrays.FindMaxValue(arr)}; Минимальный  элемент в массиве: {Arrays.FindMinValue(arr)} ");
+            Console.WriteLine($"Минимальный нечетный элемент в массиве: {Arrays.FindWithСonditions(arr, false, true)}; " +
+                $"Минимальный четный элемент в массиве: {Arrays.FindWithСonditions(arr, false, false)}");
+            Console.WriteLine("Массив до смены мест максимального и минимального эл-ов:");
+            PrintArray(arr);
+            Arrays.SwapMinValueToMaxValue(arr);
+            Console.WriteLine("Массив после смены мест максимального и минимального эл-ов:");
+            PrintArray(arr);
+        }
+        private static void FourthTask(int number)
+        {
+            Console.WriteLine("Массивы должны быть упорядоченными");
+
+            bool check = false;
+            int[] first = OrderedInput(number, check);
+            int[] second = OrderedInput(number, check);
+            int[] newArr = Arrays.OrderedConcat(first, second);
+            PrintArray(newArr);
+        }
+        private static void FifthTask()
+        {
+            var arr = ReadFromFile();
+
+            Arrays.BubbleSort(arr, true);
+            WriteInFile(arr);
+            PrintArray(arr);
+            Arrays.BubbleSort(arr, false);
+            WriteInFile(arr);
+            PrintArray(arr);
+        }
+        private static void SeventhTask(int number)
+        {
+            var arr = Arrays.RandomArray(10);
+
+            PrintArray(arr);
+            Arrays.Shift(arr, number);
+            PrintArray(arr);
+        }
+        #endregion
+        #region Utils Methods
         private static int[] Input(int number)
         {
+            Console.WriteLine("Введите массив: ");
             int[] arr = new int[number];
             for (int i = 0; i < number; i++)
             {
-                arr[i] = NumbersProgram.CheckInput();
+                arr[i] = NumbersProgram.CheckInputValue();
             }
             return arr;
         }
         private static int[] OrderedInput(int number, bool isMin)
         {
-            Console.WriteLine("Введите упорядоченный массив ");
             int[] arr = Input(number);
             if (!isMin)
             {
-                while (!Arrays.IsOrderedMinToMax(arr))
+                while (!Arrays.IsOrderedAscending(arr))
                     arr = Input(number);
             }
             else
             {
-                while (!Arrays.IsOrderedMaxToMin(arr))
+                while (!Arrays.IsOrderedDescending(arr))
                     arr = Input(number);
             }
             return arr;
         }
-        private static void First(int[] arr)
+        private static void WriteInFile(int[] arr)
         {
-            Console.WriteLine("Out: " + Arrays.CountValues(arr)[0] + " : " + Arrays.CountValues(arr)[1]);
-        }
-        private static void Second(int[] arr)
-        {
-            Console.WriteLine(Arrays.IsOrderedMinToMax(arr));
-            Console.WriteLine(Arrays.IsOrderedMaxToMin(arr));
-        }
-        private static void Third(int number)
-        {
-            var arr = Arrays.RandomArray(number);
-            
-            Console.WriteLine($"Max: {Arrays.FindMax(arr)} Min: {Arrays.FindMin(arr)} ");
-            Console.WriteLine($"Min Odd: {Arrays.FindEvenOddMinMax(arr, false, true)}");
-            PrintArray(arr);
-            Arrays.SwapMinToMax(arr);
-            PrintArray(arr);
-        }
-        private static void Fourth(int number)
-        {
-            int[] first = OrderedInput(number, false);
-            int[] second = OrderedInput(number, false);
-            int[] newArr = Arrays.OrderedConcat(first, second);
-            PrintArray(newArr);
-        }
-        private static void Write(int[] arr)
-        { 
-            var path = "C:\\Users\\e.barkalov\\source\\repos\\SimpleProjects\\SimpleProjects";
-            using FileStream fstream = new FileStream($"{path}\\out_test.txt", FileMode.OpenOrCreate);
+            using FileStream fstream = new FileStream($"out_test.txt", FileMode.OpenOrCreate);
             byte[] byteArr = Encoding.Default.GetBytes(String.Join(' ', Array.ConvertAll(arr, Convert.ToString)));
             fstream.Write(byteArr);
         }
-        private static int[] Read()
+        private static int[] ReadFromFile()
         {
-            var path = "C:\\Users\\e.barkalov\\source\\repos\\SimpleProjects\\SimpleProjects";
-            using FileStream fstream = File.OpenRead($"{path}\\test_1.txt");
+            using FileStream fstream = File.OpenRead($"test_1.txt");
 
             byte[] byteArr = new byte[fstream.Length];
 
@@ -121,26 +149,6 @@ namespace TestApp
 
             string textFromFile = Encoding.Default.GetString(byteArr);
             return Array.ConvertAll(textFromFile.Split(), Convert.ToInt32);
-        }
-        private static void Fifth()
-        {
-            var arr = Read();
-
-            Arrays.BubbleSort(arr, true);
-            Write(arr);
-            PrintArray(arr); 
-            Arrays.BubbleSort(arr, false);
-            Write(arr);
-            PrintArray(arr);
-        }
-        private static void Seventh(int number)
-        {
-            var arr = Arrays.RandomArray(10);
-  
-            PrintArray(arr);
-            Arrays.Shift(arr, number);
-            //Console.Write("\t");
-            PrintArray(arr);
         }
         private static void PrintArray(int[] arr)
         {
@@ -150,5 +158,6 @@ namespace TestApp
             }
             Console.Write(arr.Last() + ".\n");
         }
+        #endregion
     }
 }
