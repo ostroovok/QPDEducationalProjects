@@ -66,7 +66,10 @@ namespace TestApp
             Console.WriteLine("\nиндекс У: ");
             foreach (var i in indexes)
             {
-                Console.Write($"{i}, ");
+                if(i == -1)
+                    Console.Write("указанного символа нет в строке");
+                else
+                    Console.Write($"{i}, ");
             }
 
             Console.WriteLine();
