@@ -44,15 +44,15 @@ namespace TasksLogic
         public void PrintAll()
         {
             PrintSquare();
-            Console.WriteLine();
+                Console.WriteLine();
             PrintLeftUpTriangle();
-            Console.WriteLine();
+                Console.WriteLine();
             PrintLeftDownTriangle();
-            Console.WriteLine();
+                Console.WriteLine();
             PrintRightUpTriangle();
-            Console.WriteLine();
+                Console.WriteLine();
             PrintRightDownTriangle();
-            Console.WriteLine();
+                Console.WriteLine();
             PrintRhombus();
         }
 

@@ -58,7 +58,7 @@ namespace TasksLogic
             }
             return true;
         }
-
+        
         public static void SwapMinValueToMaxValue(int[] arr)
         {
             var max = int.MinValue;
@@ -87,7 +87,7 @@ namespace TasksLogic
             arr[minIndex] = arr[maxIndex];
             arr[maxIndex] = t;
         }
-
+    
         public static int FindMaxValue(int[] arr)
         {
             var max = int.MinValue;
@@ -108,7 +108,7 @@ namespace TasksLogic
             }
             return min;
         }
-
+        
         public static int FindWithСonditions(int[] arr, bool max, bool odd)
         {
             if (max)
@@ -147,8 +147,8 @@ namespace TasksLogic
                 }
                 return minValue;
             }
-        }
-
+        }   
+        
         public static int[] OrderedConcat(int[] first, int[] second)
         {
             var maxLen = first.Length + second.Length;
@@ -168,7 +168,7 @@ namespace TasksLogic
             }
             return outArr;
         }
-
+        
         public static int[] Shift(int[] arr, int k)
         {
 
@@ -191,7 +191,7 @@ namespace TasksLogic
             }
             return arr;
         }
-
+        
         public static int[] BubbleSort(int[] arr, bool isMin)
         {
             for (int i = 0; i < arr.Length - 1; i++)

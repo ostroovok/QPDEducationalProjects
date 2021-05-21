@@ -9,7 +9,7 @@ namespace TasksLogic
     public static class Rows
     {
         public static int Count { get; private set; } = 0;
-        public static int VariableSeriesSum(int max, int plus = 1, bool isOdd = false, int from = 0)
+        public static int VariableSeriesSum(int max, int plus=1, bool isOdd=false, int from=0)
         {
             var sum = 0;
             Count = 0;
@@ -28,7 +28,7 @@ namespace TasksLogic
             }
             return sum;
         }
-        public static int TheSumOfTheSeries(int max, int plus = 1, int from = 0)
+        public static int TheSumOfTheSeries(int max, int plus = 1, int from=0)
         {
             Count = 0;
             var sum = 0;
@@ -50,7 +50,7 @@ namespace TasksLogic
             }
             return sum;
         }
-        public static int LimitedSum(int max, int plus = 1, int from = 0, bool moreMax = false)
+        public static int LimitedSum(int max, int plus = 1, int from = 0, bool moreMax=false)
         {
             Count = 0;
             var sum = from;

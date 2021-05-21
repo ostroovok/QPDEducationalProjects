@@ -67,7 +67,7 @@ namespace TestApp
         private static void ThirdTask(int number)
         {
             var arr = Arrays.RandomArray(number);
-
+            
             Console.WriteLine($"Максимальный элемент в массиве: {Arrays.FindMaxValue(arr)}; Минимальный  элемент в массиве: {Arrays.FindMinValue(arr)} ");
             Console.WriteLine($"Минимальный нечетный элемент в массиве: {Arrays.FindWithСonditions(arr, false, true)}; " +
                 $"Минимальный четный элемент в массиве: {Arrays.FindWithСonditions(arr, false, false)}");
@@ -134,7 +134,7 @@ namespace TestApp
             return arr;
         }
         private static void WriteInFile(int[] arr)
-        {
+        { 
             using FileStream fstream = new FileStream($"out_test.txt", FileMode.OpenOrCreate);
             byte[] byteArr = Encoding.Default.GetBytes(String.Join(' ', Array.ConvertAll(arr, Convert.ToString)));
             fstream.Write(byteArr);

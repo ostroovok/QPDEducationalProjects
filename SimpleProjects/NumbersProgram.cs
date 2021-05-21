@@ -73,7 +73,7 @@ namespace TestApp
             Console.Write("Количество чисел: ");
             var n = CheckInputValue();
             Console.WriteLine("Введите числа: ");
-
+            
             while (count < n)
             {
                 var t = CheckInputValue();
