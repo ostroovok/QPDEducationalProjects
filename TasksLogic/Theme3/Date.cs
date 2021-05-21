@@ -35,5 +35,22 @@ namespace TasksLogic.Theme3
         {
             return this == other;
         }
+        public override string ToString()
+        {
+            StringBuilder sb = new();
+            if (Day < 10)
+                sb.Append($"0{Day}.");
+            else
+                sb.Append($"{Day}.");
+            if (Month < 10)
+                sb.Append($"0{Month}.");
+            else
+                sb.Append($"{Month}.");
+            if (Year < 10)
+                sb.Append($"0{Year}");
+            sb.Append(Year);
+
+            return sb.ToString();
+        }
     }
 }

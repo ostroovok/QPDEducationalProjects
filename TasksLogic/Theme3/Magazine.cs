@@ -24,9 +24,9 @@ namespace TasksLogic.Theme3
         }
         public override string GetInfo()
         {
-            return "Magazine Info:\n" + base.GetInfo() +
+            return "{\n" + base.GetInfo() +
                 $"Monthly frequency: {Periodicity}\n" +
-                $"Magazine number: {Number}\n";
+                $"Magazine number: {Number}\n" + "}\n";
         }
     }
 }

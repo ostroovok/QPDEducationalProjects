@@ -23,9 +23,9 @@ namespace TasksLogic.Theme3
         }
         public override string GetInfo()
         {
-            return "Book Info:\n" + base.GetInfo() + 
+            return "{\n" + base.GetInfo() + 
                 $"Book author: {Author}\n" +
-                $"Book genre: {Genre}\n";
+                $"Book genre: {Genre}\n" + "}\n";
         }
     }
 }

@@ -19,7 +19,7 @@ namespace TasksLogic.Theme3
            return $"Id: {Id}\n" +
                 $"Title: {Title}\n" +
                 $"Quantity: {Quantity}\n" +
-                $"Date: {Date}\n" +
+                $"Date: {Date.ToString()}\n" +
                 $"Edition: {Edition}\n";
         }
 

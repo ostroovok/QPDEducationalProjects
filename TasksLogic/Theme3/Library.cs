@@ -9,6 +9,7 @@ namespace TasksLogic.Theme3
     public class Library
     {
         public List<IBook> LibraryFund { get; }
+        public int Count { get => LibraryFund.Count; }
 
         public Library(List<IBook> libraryFund)
         {
@@ -19,9 +20,13 @@ namespace TasksLogic.Theme3
             LibraryFund = new();
         }
 
-        public void Insert(IBook book)
+        public bool Insert(IBook book)
         {
-            LibraryFund.Add(book);
+            if (Find(book.Id) == null)
+            {
+                LibraryFund.Add(book);
+            }
+            return false;
         }
         public void Delete(IBook book)
         {

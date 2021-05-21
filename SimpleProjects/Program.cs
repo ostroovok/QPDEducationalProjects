@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TasksLogic.Theme2;
 using TestApp.Theme2;
+using TestApp.Theme3;
 
 namespace TestApp
 {
@@ -40,7 +41,9 @@ namespace TestApp
 
             //ArrayProgram.Start();
 
-            StringProgram.Start();
+            //StringProgram.Start();
+
+            Librarian.Start();
         }
 
     }
