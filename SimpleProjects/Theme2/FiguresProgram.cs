@@ -11,6 +11,7 @@ namespace TestApp.Theme2
     {
         public static void Start()
         {
+            Console.Clear();
             while (true)
             {
                 Console.WriteLine("-help для вывода возможных команд");

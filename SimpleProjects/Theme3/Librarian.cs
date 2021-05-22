@@ -12,6 +12,7 @@ namespace TestApp.Theme3
     {
         public static void Start()
         {
+            Console.Clear();
             bool exit = true;
             Library lib = new();
             while (exit)

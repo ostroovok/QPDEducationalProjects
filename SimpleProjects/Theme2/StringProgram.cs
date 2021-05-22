@@ -10,6 +10,7 @@ namespace TestApp
     {
         public static void Start()
         {
+            Console.Clear();
             var hello = "Привет!";
             var name = "Меня зовут Егор";
             var age = "Мне 20 лет";

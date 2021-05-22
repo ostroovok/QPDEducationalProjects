@@ -147,10 +147,12 @@ namespace TestApp
         }
         private static void FirstTask(int number)
         {
-            if (Math.Abs(number) < 100 || Math.Abs(number) > 999)
+            while (Math.Abs(number) < 100 || Math.Abs(number) > 999)
+            {
                 Console.WriteLine("Введенное число не соответствует условиям задачи");
-            else
-                Console.WriteLine($"Вывод: {Numbers.TheSumOfTheDigits(number)}");
+                number = CheckInputValue();
+            }
+            Console.WriteLine($"Вывод: {Numbers.TheSumOfTheDigits(number)}");
         }
         #endregion  
     }
