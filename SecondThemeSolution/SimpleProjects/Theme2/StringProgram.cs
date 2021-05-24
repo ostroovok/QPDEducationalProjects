@@ -16,6 +16,9 @@ namespace TestApp
             var age = "Мне 20 лет";
 
             Console.WriteLine($"{hello} {name}, {age}.");
+            Console.WriteLine($"{0} {1}, {2}.", hello, name, age);
+            Console.WriteLine($"{hello}" + $"{name}" + $"{age}.");
+            Console.WriteLine(string.Join(hello, name, age));
 
 
 
@@ -48,9 +51,14 @@ namespace TestApp
             Console.WriteLine();
 
             List<int> indexes = new();
-            indexes.Add(FindFirst(" Хорошо в лесу...", 'о'));
-            indexes.Add(FindFirst(" Эх, дороги, пыль да туман", 'о'));
-            indexes.Add(FindFirst(" Семнадцать вариантов решения", 'о'));
+
+            string s1 = " Хорошо в лесу...";
+            string s2 = " Эх, дороги, пыль да туман";
+            string s3 = " Семнадцать вариантов решения";
+            indexes.Add(s1.IndexOf('о'));
+            indexes.Add(s2.IndexOf('о'));
+            indexes.Add(s3.IndexOf('о'));
+
             Console.WriteLine("индекс О: ");
             foreach (var i in indexes)
             {
@@ -61,9 +69,12 @@ namespace TestApp
 
 
             indexes.Clear();
-            indexes.Add(FindLast("Где такое интересное место?", 'у'));
-            indexes.Add(FindLast("У меня дома есть ноутбук.", 'у'));
-            indexes.Add(FindLast("Винтажный стул", 'у'));
+            s1 = "Где такое интересное место?";
+            s2 = "У меня дома есть ноутбук.";
+            s3 = "Винтажный стул";
+            indexes.Add(s1.LastIndexOf('у'));
+            indexes.Add(s2.LastIndexOf('у'));
+            indexes.Add(s3.LastIndexOf('у'));
             Console.WriteLine("\nиндекс У: ");
             foreach (var i in indexes)
             {
@@ -83,13 +94,8 @@ namespace TestApp
             Console.WriteLine();
 
 
-            str = "Привет, я иду в магазин.";
-            strArr = str.Split();
-            for (int i = 0; i < strArr.Length; i++)
-            {
-                if (strArr[i].ToLower() == "магазин")
-                    strArr[i] = "парк";
-            }
+            str = "Привет, я иду в магазин";
+            str = str.Replace("магазин", "парк");
             Console.WriteLine(str);
 
 
@@ -117,30 +123,6 @@ namespace TestApp
             {
                 Console.Write($"{s} : ");
             }
-        }
-
-        private static int FindFirst(string str, char symbol)
-        {
-            for (int i = 0; i < str.Length; i++)
-            {
-                if (str.ToCharArray()[i] == symbol)
-                {
-                    return i;
-                }
-            }
-            return -1;
-        }
-        private static int FindLast(string str, char symbol)
-        {
-            var result = -1;
-            for (int i = 0; i < str.Length; i++)
-            {
-                if (str.ToCharArray()[i] == symbol)
-                {
-                    result = i;
-                }
-            }
-            return result;
         }
     }
 }
