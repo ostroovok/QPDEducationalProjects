@@ -10,6 +10,10 @@ namespace TestApp.Theme4
 {
     public static class CalculatorProgram
     {
+        public static void Main(string[] args)
+        {
+            Start();
+        }
         public static void Start()
         {
             Calculator calc = new();

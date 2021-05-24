@@ -6,6 +6,10 @@ namespace TestApp.Theme3
 {
     public static class Librarian
     {
+        public static void Main(string[] args)
+        {
+            Start();
+        }
         public static void Start()
         {
             Console.Clear();

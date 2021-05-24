@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using TasksLogic;
 using TestApp.Theme2;
-using TestApp.Theme3;
-using TestApp.Theme4;
 
 namespace TestApp
 {
@@ -13,7 +11,7 @@ namespace TestApp
         {     
             Console.Clear();
             Console.WriteLine("Выберите номер задачи:\nБЛОК 1 \n\t1. Числа \n\t2. Фигуры \n\t3. Ряды \n\t4.Массивы\n\t5. Строки" +
-                "\nБЛОК 2 \n\t6. Библиотекарь\nБЛОК 3 \n\t7. Калькулятор\n\n");
+                "\nБЛОК 2\n\n");
             int num = CheckInputValue();
             switch (num)
             {
@@ -31,12 +29,6 @@ namespace TestApp
                     break;
                 case 5:
                     StringProgram.Start();
-                    break;
-                case 6:
-                    Librarian.Start();
-                    break;
-                case 7:
-                    CalculatorProgram.Start();
                     break;
                 default:
                     Console.WriteLine("Введенного значение нет в списке");
