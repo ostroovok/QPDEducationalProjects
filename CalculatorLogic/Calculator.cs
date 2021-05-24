@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TasksLogic.Theme4
+namespace CaclulatorLogic
 {
     public class Calculator
     {

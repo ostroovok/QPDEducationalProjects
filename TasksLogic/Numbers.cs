@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TasksLogic.Theme2
+namespace TasksLogic
 {
     public static class Numbers
     {

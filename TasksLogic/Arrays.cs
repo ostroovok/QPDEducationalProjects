@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TasksLogic.Theme2
+namespace TasksLogic
 {
     public static class Arrays
     {

@@ -1,5 +1,5 @@
 ﻿using System;
-using TasksLogic.Theme2;
+using TasksLogic;
 
 namespace TestApp
 {

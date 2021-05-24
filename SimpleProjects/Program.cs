@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using TasksLogic.Theme2;
+using TasksLogic;
 using TestApp.Theme2;
 using TestApp.Theme3;
 using TestApp.Theme4;

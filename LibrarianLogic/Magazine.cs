@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 
-namespace TasksLogic.Theme3
+namespace LibrarianLogic
 {
     public class Magazine : AbstractBook
     {
