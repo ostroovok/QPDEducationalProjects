@@ -42,42 +42,57 @@ namespace TasksLogic
         public static int SumWithLimitedNumberOfTerms(int max, int plus = 1, int from = 0)
         {
             Count = 0;
-            var sum = from;
-            for (int i = 1; i <= max; i++)
+            int sum = 0;
+            for (int i = from; Count < max; i+=plus)
             {
                 Count++;
-                sum += plus * i;
+                sum += i;
+            }
+            return sum;
+        }
+        public static int IncreasingSumWithLimitedNumberOfTerms(int max, int plus = 1, int from = 0)
+        {
+            Count = 0;
+            int sum = 0;
+            while (Count < max)
+            {
+                Count++;
+                sum += plus;
+                plus += plus;
             }
             return sum;
         }
         public static int LimitedSum(int max, int plus = 1, int from = 0, bool moreMax=false)
         {
             Count = 0;
-            var sum = from;
-            if (moreMax)
+            var sum = 0;
+            if (!moreMax)
             {
-                for (int i = 1; sum < max; i++)
+                for (int i = from; sum < max; i+=plus)
                 {
                     Count++;
-                    sum += plus * i;
-                    if (sum + plus * (i + 1) > max)
+                    sum += i;
+                    if (sum + i > max)
                         return sum;
                 }
             }
-            for (int i = 1; sum < max; i++)
+            for (int i = from; sum < max; i+=plus)
             {
                 Count++;
-                sum += plus * i;
+                sum += i;
             }
             return sum;
         }
         public static int Fibonacci(int number)
         {
-            if (number <= 0)
-                return 0;
-            if (number == 1)
-                return 1;
-            return Fibonacci(number - 1) + Fibonacci(number - 2);
+            if (number == 0 || number == 1)
+            {
+                return number;
+            }
+            else
+            {
+                return Fibonacci(number - 1) + Fibonacci(number - 2);
+            }
         }
     }
 }

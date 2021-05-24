@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestApp.Theme2
+namespace TestApp
 {
     public class FiguresProgram
     {
@@ -24,36 +24,36 @@ namespace TestApp.Theme2
                         break;
                     case "printall":
                         Console.WriteLine("Введите m: ");
-                        m = CheckInputValue();
+                        m = NumbersUtils.CheckInputValue();
                         Console.Write("Введите n: ");
-                        n = CheckInputValue();
+                        n = NumbersUtils.CheckInputValue();
                         Figures.PrintAll(m, n);
                         break;
                     case "printsq":
                         Console.WriteLine("Введите m: ");
-                        m = CheckInputValue();
+                        m = NumbersUtils.CheckInputValue();
                         Console.Write("Введите n: ");
-                        n = CheckInputValue();
+                        n = NumbersUtils.CheckInputValue();
                         Figures.PrintSquare(m, n);
                         break;
                     case "printtrianglerd":
                         Console.Write("Введите n: ");
-                        n = CheckInputValue();
+                        n = NumbersUtils.CheckInputValue();
                         Figures.PrintRightDownTriangle(n);
                         break;
                     case "printtriangleru":
                         Console.Write("Введите n: ");
-                        n = CheckInputValue();
+                        n = NumbersUtils.CheckInputValue();
                         Figures.PrintRightUpTriangle(n);
                         break;
                     case "printtriangleld":
                         Console.Write("Введите n: ");
-                        n = CheckInputValue();
+                        n = NumbersUtils.CheckInputValue();
                         Figures.PrintLeftDownTriangle(n);
                         break;
                     case "printtrianglelu":
                         Console.Write("Введите n: ");
-                        n = CheckInputValue();
+                        n = NumbersUtils.CheckInputValue();
                         Figures.PrintLeftUpTriangle(n);
                         break;
                     default:
@@ -75,20 +75,6 @@ namespace TestApp.Theme2
                 $"printrh - нарисовать ромб с стороной n\n"
                 );
         }
-        public static int CheckInputValue()
-        {
-            var value = Console.ReadLine();
-            int number;
-            bool success = int.TryParse(value, out number);
-            while (!success)
-            {
-                Console.WriteLine("Не число!");
-                value = Console.ReadLine();
-                if (value.ToLower() == "stop")
-                    Start();
-                success = int.TryParse(value, out number);
-            }
-            return number;
-        }
+        
     }
 }

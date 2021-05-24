@@ -21,22 +21,24 @@ namespace TasksLogic
 
         public static int[] CountValues(int[] arr)
         {
-            int[] outArr = new int[Math.Max(arr.Length + 1, FindMaxValue(arr) + 1)];
+            int[] countDigits = new int[10];
+            Array.Fill(countDigits, 0);
             for (int i = 0; i < arr.Length; i++)
             {
-                outArr[arr[i]] += 1;
-            }
-
-            int result = FindMaxValue(outArr);
-            if (outArr.Contains(result))
-            {
-                for (int i = outArr.Length - 1; i >= 0; i--)
+                var temp = arr[i];
+                var numbers = Numbers.TheArrayOfTheDigits(temp);
+                for (int j = 0; j < numbers.Length; j++)
                 {
-                    if (outArr[i] == result)
-                        return new int[] { i, outArr[i] };
+                    countDigits[numbers[j]] += 1;
                 }
             }
-            return new int[] { result, outArr[result] };
+            int result = FindMaxValue(countDigits);
+            for (int i = countDigits.Length - 1; i >= 0; i--)
+            {
+                if (countDigits[i] == result)
+                    return new int[] { i, countDigits[i] };
+            }
+            return new int[] { result, countDigits[result] };
         }
 
 

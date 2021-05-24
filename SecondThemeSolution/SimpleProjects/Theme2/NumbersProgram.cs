@@ -10,16 +10,16 @@ namespace TestApp
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("Введите номер задачи (от 1 до 4) \t stop - Выход");
+                Console.WriteLine("Введите номер задачи (от 1 до 4)");
                 Console.Write("-->\t");
-                var number = CheckInputValue();
+                var number = NumbersUtils.CheckInputValue();
                 if (number == -1)
                     break;
                 switch (number)
                 {
                     case 1:
                         Console.WriteLine("Введите трехзначное число для подсчета суммы цифр:  ");
-                        FirstTask(CheckInputValue());
+                        FirstTask(NumbersUtils.CheckInputValue());
                         break;
                     case 2:
                         SecondTask();
@@ -37,23 +37,7 @@ namespace TestApp
                 Console.ReadLine();
             }
         }
-        public static int CheckInputValue()
-        {
-            var value = Console.ReadLine();
-            if (value.ToLower() == "stop")
-                Start();
-            int number;
-            bool success = int.TryParse(value, out number);
-            while (!success)
-            {
-                Console.WriteLine("Не число!");
-                value = Console.ReadLine();
-                if (value.ToLower() == "stop")
-                    Start();
-                success = int.TryParse(value, out number);
-            }
-            return number;
-        }
+        
 
         #region Private Methods
         private static void FourthTask()
@@ -63,13 +47,12 @@ namespace TestApp
             var first = 0;
             var second = 0;
             var third = 0;
-            Console.Write("Количество чисел: ");
-            var n = CheckInputValue();
-            Console.WriteLine("Введите числа: ");
-            
+            Console.Write("Количество чисел: \n");
+            var n = NumbersUtils.CheckNegative();
+            Console.WriteLine("Отлично! Теперь заполните массив: \n");
             while (count < n)
             {
-                var t = CheckInputValue();
+                var t = NumbersUtils.CheckInputValue();
                 if (t % 2 != 0)
                 {
                     switch (oddCount % 3)
@@ -96,18 +79,13 @@ namespace TestApp
             var count = 0;
             var oddCount = 0;
             var sum = 0;
-            Console.Write("Количество чисел: ");
-            var n = CheckInputValue();
-            while (n < 0)
-            {
-                Console.WriteLine("Количество не может быть отрицательным!");
-                Console.Write("Введите еще раз: ");
-                n = CheckInputValue();
-            }
-            Console.WriteLine("Введите числа: ");
+            Console.Write("Количество чисел: \n");
+            var n = NumbersUtils.CheckNegative();
+            Console.WriteLine("Отлично! Теперь заполните массив: \n");
+
             while (count < n)
             {
-                var t = CheckInputValue();
+                var t = NumbersUtils.CheckInputValue();
                 if (t % 2 != 0 && oddCount < 3)
                 {
                     sum += t;
@@ -118,29 +96,21 @@ namespace TestApp
             Console.WriteLine($"Сумма первых 3-х нечетных: {sum}");
         }
 
-        private static void SecondTask()
+        private static void SecondTask() // ---- 
         {
             Console.WriteLine(" 0 - Выход");
-            Console.Write("Введите число: ");
             var result = 0;
             var maxValue = int.MinValue;
-            var number = CheckInputValue();
-            while (number < 0)
-            {
-                Console.WriteLine("Количество не может быть отрицательным!");
-                Console.Write("Введите еще раз: ");
-                number = CheckInputValue();
-            }
-            number = Numbers.TheSumOfTheDigits(number);
+            var number = -1;
             while (number != 0)
             {
-                Console.Write("Введите число: ");
-                var toMethod = CheckInputValue();
-                number = Numbers.TheSumOfTheDigits(toMethod);
-                if (number > maxValue)
+                number = NumbersUtils.CheckInputValue();
+
+                var temp = Numbers.TheSumOfTheDigits(number);
+                if (temp > maxValue)
                 {
-                    maxValue = number;
-                    result = toMethod;
+                    result = number;
+                    maxValue = temp;
                 }
             }
             Console.WriteLine($"Число с максимальной суммой цифр в нем: {result}");
@@ -150,7 +120,7 @@ namespace TestApp
             while (Math.Abs(number) < 100 || Math.Abs(number) > 999)
             {
                 Console.WriteLine("Введенное число не соответствует условиям задачи");
-                number = CheckInputValue();
+                number = NumbersUtils.CheckInputValue();
             }
             Console.WriteLine($"Вывод: {Numbers.TheSumOfTheDigits(number)}");
         }

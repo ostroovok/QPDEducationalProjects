@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
+
 namespace TestApp
 {
     public static class ArrayProgram
@@ -15,10 +16,9 @@ namespace TestApp
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("Введите номер задачи (от 1 до 7, кроме 6, эта задача выполняется вместе с пятой ввода 5)\n stop - Выход из выбранного номера\t Элементы массивов вводятся построчно!");
+                Console.WriteLine("Введите номер задачи (от 1 до 7, кроме 6, эта задача выполняется вместе с пятой ввода 5)\n Элементы массивов вводятся построчно!");
                 Console.Write("-->\t");
-                var number = CheckInputValue();
-                int temp;
+                var number = NumbersUtils.CheckInputValue();
                 if (number == -1)
                     break;
                 switch (number)
@@ -26,32 +26,32 @@ namespace TestApp
 
                     case 1:
                         Console.Write("Размер массива: ");
-                        FirstTask(Input(CheckNegative()));
+                        FirstTask(Input(NumbersUtils.CheckNegativeOrZero()));
                         break;
 
                     case 2:
                         Console.Write("Размер массива: ");
-                        SecondTask(Input(CheckNegative()));
+                        SecondTask(Input(NumbersUtils.CheckNegativeOrZero()));
                         break;
 
                     case 3:
                         Console.Write("Размер массива: ");
-                        ThirdTask(CheckNegative());
+                        ThirdTask(Input(NumbersUtils.CheckNegativeOrZero()));
                         break;
 
                     case 4:
                         Console.Write("Размер массивов: ");
-                        FourthTask(CheckNegative());
+                        FourthTask(NumbersUtils.CheckNegativeOrZero());
                         break;
 
                     case 5:
                         FifthTask();
-                        Console.WriteLine("Результат в файле out_test.txt");
+                        Console.WriteLine("Результат в файле test_1.txt");
                         break;
 
                     case 7:
                         Console.WriteLine("Введите положительное чиcло, на которое нужно сдвинуть массив: ");
-                        SeventhTask(CheckNegative());
+                        SeventhTask(NumbersUtils.CheckNegativeOrZero());
                         break;
 
                     default:
@@ -67,17 +67,30 @@ namespace TestApp
         #region Problem Solving Methods
         private static void FirstTask(int[] arr)
         {
-            Console.WriteLine($"Результат: \nЧисло: {Arrays.CountValues(arr)[0]}; Количество его повторений: {Arrays.CountValues(arr)[1]}");
+            Console.WriteLine($"Результат: \nЦифра: {Arrays.CountValues(arr)[0]}; Количество его повторений: {Arrays.CountValues(arr)[1]}");
         }
         private static void SecondTask(int[] arr)
         {
             Console.WriteLine("Результат: ");
-            Console.WriteLine(Arrays.IsOrderedAscending(arr) + " По возрастанию");
-            Console.WriteLine(Arrays.IsOrderedDescending(arr) + " По убыванию");
+            if (Arrays.IsOrderedAscending(arr))
+            {
+                Console.WriteLine("Отсортирован по возрастанию");
+            }
+            else
+            {
+                Console.WriteLine("Не отсортирован по возрастанию");
+            }
+            if (Arrays.IsOrderedDescending(arr))
+            {
+                Console.WriteLine("Отсортирован по убыванию");
+            }
+            else
+            {
+                Console.WriteLine("Не отсортирован по убыванию");
+            }
         }
-        private static void ThirdTask(int number)
+        private static void ThirdTask(int[] arr)
         {
-            var arr = Arrays.RandomArray(number);
             
             Console.WriteLine($"Максимальный элемент в массиве: {Arrays.FindMaxValue(arr)}; Минимальный  элемент в массиве: {Arrays.FindMinValue(arr)} ");
             Console.WriteLine($"Минимальный нечетный элемент в массиве: {Arrays.FindWithСonditions(arr, false, true)}; " +
@@ -103,10 +116,10 @@ namespace TestApp
             var arr = ReadFromFile();
 
             Arrays.BubbleSort(arr, true);
-            WriteInFile(arr);
+            WriteToFile(arr);
             PrintArray(arr);
             Arrays.BubbleSort(arr, false);
-            WriteInFile(arr);
+            WriteToFile(arr);
             PrintArray(arr);
         }
         private static void SeventhTask(int number)
@@ -119,41 +132,15 @@ namespace TestApp
         }
         #endregion
         #region Utils Methods
-        private static int CheckNegative()
-        {
-            var temp = CheckInputValue();
-            while (temp < 0)
-            {
-                Console.WriteLine("Не может быть отрицательным!");
-                Console.Write("Введите еще раз: ");
-                temp = CheckInputValue();
-            }
-            return temp;
-        }
-        private static int CheckInputValue()
-        {
-            var value = Console.ReadLine();
-            if (value.ToLower() == "stop")
-                Start();
-            int number;
-            bool success = int.TryParse(value, out number);
-            while (!success)
-            {
-                Console.WriteLine("Не число!");
-                value = Console.ReadLine();
-                if (value.ToLower() == "stop")
-                    Start();
-                success = int.TryParse(value, out number);
-            }
-            return number;
-        }
+        
+        
         private static int[] Input(int number)
         {
             Console.WriteLine("Введите массив: ");
             int[] arr = new int[number];
             for (int i = 0; i < number; i++)
             {
-                arr[i] = CheckInputValue();
+                arr[i] = NumbersUtils.CheckInputValue();
             }
             return arr;
         }
@@ -178,22 +165,47 @@ namespace TestApp
             }
             return arr;
         }
-        private static void WriteInFile(int[] arr)
+        private static void WriteToFile(int[] arr)
         { 
-            using FileStream fstream = new FileStream($"out_test.txt", FileMode.OpenOrCreate);
-            byte[] byteArr = Encoding.Default.GetBytes(String.Join(' ', Array.ConvertAll(arr, Convert.ToString)));
-            fstream.Write(byteArr);
+            try
+            {
+                using FileStream fstream = new FileStream($"test_1.txt", FileMode.OpenOrCreate);
+                byte[] byteArr = Encoding.Default.GetBytes(string.Join(' ', Array.ConvertAll(arr, Convert.ToString)));
+                fstream.Write(byteArr);
+            }
+            catch
+            {
+                throw new FileNotFoundException("Файл не был найден, проверьте указанное местоположение файла");
+            }
         }
         private static int[] ReadFromFile()
         {
-            using FileStream fstream = File.OpenRead($"test_1.txt");
+            string textFromFile = "";
+            List<int> outList = new();
+            try
+            {
+                using FileStream fstream = File.OpenRead($"test_1.txt");
+                byte[] byteArr = new byte[fstream.Length];
 
-            byte[] byteArr = new byte[fstream.Length];
+                fstream.Read(byteArr, 0, byteArr.Length);
 
-            fstream.Read(byteArr, 0, byteArr.Length);
+                textFromFile = Encoding.Default.GetString(byteArr);
+            }
+            catch
+            {
+                throw new FileNotFoundException("Файл не был найден, проверьте указанное местоположение файла");
+            }
 
-            string textFromFile = Encoding.Default.GetString(byteArr);
-            return Array.ConvertAll(textFromFile.Split(), Convert.ToInt32);
+            try
+            {
+                outList = Array.ConvertAll(textFromFile.Split(), Convert.ToInt32).ToList();
+            }
+            catch
+            {
+                throw new ArgumentException("В файле указаны не числа или не только числа");
+            }
+
+            return outList.ToArray();
         }
         private static void PrintArray(int[] arr)
         {
