@@ -340,17 +340,17 @@ namespace TestApp.Theme3
             while (!success)
             {
 
-                Console.WriteLine("Не число, либо число равно 0 или меньше!");
+                Console.WriteLine("Не число, либо число равно нулю или меньше!");
                 value = Console.ReadLine();
-                if (value.ToLower() == "-end")
+                if (value.ToLower() == "-end" || value.ToLower() == "-close")
                     Start();
                 success = int.TryParse(value, out number) && number > 0;
 
             }
 
             return number;
-
         }
+
 
         public static void PrintCommands()
         {
