@@ -9,24 +9,23 @@ namespace TasksLogic
     public static class Rows
     {
         public static int Count { get; private set; } = 0;
-        public static int VariableSeriesSum(int max, int plus=1, bool isOdd=false, int from=0)
+        public static int SeriesModifiedSum(int max, int from, int plus)
         {
             var sum = 0;
-            Count = 0;
             for (int i = from; i <= max; i += plus)
             {
-                if (i % 2 == 0 && !isOdd)
-                {
-                    sum += i;
-                    Count++;
-                }
-                if (i % 2 != 0 && isOdd)
-                {
-                    sum += i;
-                    Count++;
-                }
+                sum += i;
             }
             return sum;
+        }
+        public static int SeriesSumTermsForEven(int max)
+        {
+            var count = 0;
+            for (int i = 0; i < max; i += 2)
+            {
+                count++;
+            }
+            return count;
         }
         public static int TheSumOfTheSeries(int max, int plus = 1, int from=0)
         {

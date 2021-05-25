@@ -151,7 +151,7 @@ namespace TestApp
             {
                 while (!Arrays.IsOrderedAscending(arr))
                 {
-                    Console.WriteLine("Введите еще раз, массив не соответсвует условиям");
+                    Console.WriteLine("Введите еще раз, массив не соответсвует условиям, он не упорядочен по возрастанию");
                     arr = Input(number);
                 }    
             }
@@ -159,7 +159,7 @@ namespace TestApp
             {
                 while (!Arrays.IsOrderedDescending(arr))
                 {
-                    Console.WriteLine("Введите еще раз, массив не соответсвует условиям");
+                    Console.WriteLine("Введите еще раз, массив не соответсвует условиям, он не упорядочен по убыванию");
                     arr = Input(number);
                 }     
             }

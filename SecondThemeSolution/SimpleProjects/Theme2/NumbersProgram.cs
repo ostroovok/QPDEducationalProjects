@@ -48,8 +48,8 @@ namespace TestApp
             var second = 0;
             var third = 0;
             Console.Write("Количество чисел: \n");
-            var n = NumbersUtils.CheckNegative();
-            Console.WriteLine("Отлично! Теперь заполните массив: \n");
+            var n = NumbersUtils.CheckNegativeOrZero();
+            Console.WriteLine("Отлично! Теперь введите числа: \n");
             while (count < n)
             {
                 var t = NumbersUtils.CheckInputValue();
@@ -80,8 +80,8 @@ namespace TestApp
             var oddCount = 0;
             var sum = 0;
             Console.Write("Количество чисел: \n");
-            var n = NumbersUtils.CheckNegative();
-            Console.WriteLine("Отлично! Теперь заполните массив: \n");
+            var n = NumbersUtils.CheckNegativeOrZero();
+            Console.WriteLine("Отлично! Теперь введите числа: \n");
 
             while (count < n)
             {

@@ -26,13 +26,13 @@ namespace TestApp
                         Console.WriteLine("Введите верхнюю границу для третьего ряда: ");
                         var num = NumbersUtils.CheckNegativeOrZero();
                         Console.WriteLine(Rows.TheSumOfTheSeries(50, 1, 1));
-                        Console.WriteLine(Rows.VariableSeriesSum(50, 2, false, 2));
-                        Console.WriteLine(Rows.VariableSeriesSum(num, 2, true, 1));
+                        Console.WriteLine(Rows.SeriesModifiedSum(50, 2, 2));
+                        Console.WriteLine(Rows.SeriesModifiedSum(num, 1, 2));
                         break;
 
                     case "2":
                         Console.WriteLine("Посчитать сумму ряда. Сколько слагаемых?");
-                        Console.WriteLine(Rows.TheSumOfTheSeries(46, 4, 6));
+                        Console.WriteLine(Rows.SeriesSumTermsForEven(46));
                         Console.WriteLine(Rows.Count);
                         break;
 
