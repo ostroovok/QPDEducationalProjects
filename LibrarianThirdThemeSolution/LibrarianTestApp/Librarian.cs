@@ -96,7 +96,9 @@ namespace TestApp.Theme3
             PropertyInfo[] properties = temp.GetType().GetTypeInfo().GetProperties();
 
             for (int i = 0; i < properties.Length; i++)
+            {
                 Console.WriteLine($"{i + 1}. Св-во объекта:\n \tТип: {properties[i].PropertyType.Name} \tНазвание: {properties[i].Name} \tЗначение: {properties[i].GetValue(temp)}");
+            }   
 
             bool changeIsOver = false;
             
@@ -120,7 +122,9 @@ namespace TestApp.Theme3
                         Console.WriteLine($"Нажмите Enter чтобы продолжить или введите -close для выхода из меню изменения");
 
                         if (Console.ReadLine() == "-close")
+                        {
                             changeIsOver = true;
+                        }
 
                         continue;
                     }
@@ -142,8 +146,9 @@ namespace TestApp.Theme3
                 Console.WriteLine($"Вы успешно изменили св-во {propertyToChange.Name}, нажмите Enter чтобы продолжить или введите -close для выхода из меню изменения\n");
 
                 if (Console.ReadLine() == "-close")
+                {
                     changeIsOver = true;
-                
+                }
             }
         }
         public static void ElementToDelete(Library lib)
@@ -314,7 +319,7 @@ namespace TestApp.Theme3
 
                 Console.WriteLine("Такого варианта нет!");
                 value = Console.ReadLine();
-                if (value.ToLower() == "-end")
+                if (value.ToLower() == "-end" || value.ToLower() == "-close")
                     Start();
                 success = int.TryParse(value, out number) && number <= maxValue && number > 0;
 
@@ -335,7 +340,7 @@ namespace TestApp.Theme3
             while (!success)
             {
 
-                Console.WriteLine("Не число или число отрицательное!");
+                Console.WriteLine("Не число, либо число равно 0 или меньше!");
                 value = Console.ReadLine();
                 if (value.ToLower() == "-end")
                     Start();
