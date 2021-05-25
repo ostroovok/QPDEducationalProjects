@@ -36,7 +36,7 @@ namespace TestApp
 
                     case 3:
                         Console.Write("Размер массива: ");
-                        ThirdTask(Input(NumbersUtils.CheckNegativeOrZero()));
+                        ThirdTask(LimitedInput(NumbersUtils.CheckNegativeOrZero()));
                         break;
 
                     case 4:
@@ -132,8 +132,7 @@ namespace TestApp
         }
         #endregion
         #region Utils Methods
-        
-        
+
         private static int[] Input(int number)
         {
             Console.WriteLine("Введите массив: ");
@@ -141,6 +140,16 @@ namespace TestApp
             for (int i = 0; i < number; i++)
             {
                 arr[i] = NumbersUtils.CheckInputValue();
+            }
+            return arr;
+        }
+        private static int[] LimitedInput(int number)
+        {
+            Console.WriteLine("Введите массив: ");
+            int[] arr = new int[number];
+            for (int i = 0; i < number; i++)
+            {
+                arr[i] = NumbersUtils.CheckLimitedInputValue(100);
             }
             return arr;
         }

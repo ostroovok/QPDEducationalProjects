@@ -32,7 +32,9 @@ namespace TestApp.Theme4
             var temp = value.Split();
 
             if (temp.Length != 3)
+            {
                 throw new ArgumentException("Неверный ввод");
+            }
 
             var op = temp[1];
 
