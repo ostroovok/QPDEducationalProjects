@@ -18,46 +18,50 @@ namespace TestApp
                 Console.WriteLine("Введите номер задачи (от 1 до 7)");
                 Console.Write("-->\t");
                 var number = Console.ReadLine();
-                int temp;
                 switch (number)
                 {
 
                     case "1":
                         Console.WriteLine("Введите верхнюю границу для третьего ряда: ");
                         var num = NumbersUtils.CheckNegativeOrZero();
-                        Console.WriteLine(Rows.TheSumOfTheSeries(50, 1, 1));
+                        Console.WriteLine(Rows.SeriesModifiedSum(50, 1, 1));
                         Console.WriteLine(Rows.SeriesModifiedSum(50, 2, 2));
                         Console.WriteLine(Rows.SeriesModifiedSum(num, 1, 2));
                         break;
 
                     case "2":
                         Console.WriteLine("Посчитать сумму ряда. Сколько слагаемых?");
-                        Console.WriteLine(Rows.SeriesSumTermsForEven(46));
-                        Console.WriteLine(Rows.Count);
+                        var temp = Rows.SeriesSumTerms(46);
+                        Console.WriteLine("Сумма: " + temp[0]);
+                        Console.WriteLine("Кол-во слагаемых: " + temp[1]);
                         break;
 
                     case "3":
                         Console.WriteLine("Посчитать сумму ряда, всего 10 слагаемых");
-                        Console.WriteLine(Rows.SumWithLimitedNumberOfTerms(10, 4, 6));
-                        Console.WriteLine(Rows.Count);
+                        temp = Rows.SumWithLimitedNumberOfTerms(10, 4, 6);
+                        Console.WriteLine("Сумма: " + temp[0]);
+                        Console.WriteLine("Кол-во слагаемых: " + temp[1]);
                         break;
 
                     case "4":
                         Console.WriteLine("Посчитать сумму ряда, всего 11 слагаемых");
-                        Console.WriteLine(Rows.IncreasingSumWithLimitedNumberOfTerms(11, 1, 1));
-                        Console.WriteLine(Rows.Count);
+                        temp = Rows.IncreasingSumWithLimitedNumberOfTerms(11, 1, 1);
+                        Console.WriteLine("Сумма: " + temp[0]);
+                        Console.WriteLine("Кол-во слагаемых: " + temp[1]);
                         break;
 
                     case "5":
                         Console.WriteLine("Посчитать сумму ряда. Остановиться, когда сумма превысит 100. Сколько слагаемых?");
-                        Console.WriteLine(Rows.LimitedSum(100, 4, 6, true));
-                        Console.WriteLine(Rows.Count);
+                        temp = Rows.LimitedSum(100, 4, 6, true);
+                        Console.WriteLine("Сумма: " + temp[0]);
+                        Console.WriteLine("Кол-во слагаемых: " + temp[1]);
                         break;
 
                     case "6":
                         Console.WriteLine("Посчитать сумму ряда. последнюю, которая еще не превышает 100. Сколько слагаемых?");
-                        Console.WriteLine(Rows.LimitedSum(100, 4, 6, false));
-                        Console.WriteLine(Rows.Count);
+                        temp = Rows.LimitedSum(100, 4, 6, false);
+                        Console.WriteLine("Сумма: " + temp[0]);
+                        Console.WriteLine("Кол-во слагаемых: " + temp[1]);
                         break;
 
                     case "7":

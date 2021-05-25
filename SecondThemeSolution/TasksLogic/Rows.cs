@@ -8,7 +8,6 @@ namespace TasksLogic
 {
     public static class Rows
     {
-        public static int Count { get; private set; } = 0;
         public static int SeriesModifiedSum(int max, int from, int plus)
         {
             var sum = 0;
@@ -18,69 +17,60 @@ namespace TasksLogic
             }
             return sum;
         }
-        public static int SeriesSumTermsForEven(int max)
+        public static int[] SeriesSumTerms(int max)
         {
             var count = 0;
+            var sum = 0;
             for (int i = 0; i < max; i += 2)
             {
+                sum += i;
                 count++;
             }
-            return count;
+            return new int[] { sum, count };
         }
-        public static int TheSumOfTheSeries(int max, int plus = 1, int from=0)
+        public static int[] SumWithLimitedNumberOfTerms(int max, int plus = 1, int from = 0)
         {
-            Count = 0;
-            var sum = 0;
-            for (int i = from; i <= max; i += plus)
+            var count = 0;
+            int sum = 0;
+            for (int i = from; count < max; i+=plus)
             {
-                Count++;
+                count++;
                 sum += i;
             }
-            return sum;
+            return new int[] { sum, count };
         }
-        public static int SumWithLimitedNumberOfTerms(int max, int plus = 1, int from = 0)
+        public static int[] IncreasingSumWithLimitedNumberOfTerms(int max, int plus = 1, int from = 0)
         {
-            Count = 0;
+            var count = 0;
             int sum = 0;
-            for (int i = from; Count < max; i+=plus)
+            while (count < max)
             {
-                Count++;
-                sum += i;
-            }
-            return sum;
-        }
-        public static int IncreasingSumWithLimitedNumberOfTerms(int max, int plus = 1, int from = 0)
-        {
-            Count = 0;
-            int sum = 0;
-            while (Count < max)
-            {
-                Count++;
+                count++;
                 sum += plus;
                 plus += plus;
             }
-            return sum;
+            return new int[] { sum, count };
         }
-        public static int LimitedSum(int max, int plus = 1, int from = 0, bool moreMax=false)
+        public static int[] LimitedSum(int max, int plus = 1, int from = 0, bool moreMax=false)
         {
-            Count = 0;
+            var count = 0;
             var sum = 0;
             if (!moreMax)
             {
                 for (int i = from; sum < max; i+=plus)
                 {
-                    Count++;
+                    count++;
                     sum += i;
                     if (sum + i > max)
-                        return sum;
+                        return new int[] { sum, count };
                 }
             }
             for (int i = from; sum < max; i+=plus)
             {
-                Count++;
+                count++;
                 sum += i;
             }
-            return sum;
+            return new int[] { sum, count };
         }
         public static int Fibonacci(int number)
         {
