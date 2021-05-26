@@ -16,7 +16,15 @@ namespace SharpikLogic
         }
         public bool ContainsQuestion(string mess)
         {
-            return Question.Contains(mess.ToLower());
+            for (int i = 0; i < Question.Length; i++)
+            {
+                mess = mess.ToLower();
+                if (mess.Contains(Question[i]))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

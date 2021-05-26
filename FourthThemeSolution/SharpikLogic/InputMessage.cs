@@ -8,22 +8,21 @@ namespace SharpikLogic
 {
     public class InputMessage
     {
-        public event Logic.EnteredQuestion EnteredQuestion;
+        public event Answer.EnteredQuestion EnteredQuestion;
         public bool Enable { get => _message.Enable; set => _message.Enable = value; }
         public string ActiveQuestion { get; set; }
 
 
-        private Logic _message = new();
+        private Answer _message = new();
 
         public InputMessage()
         {
-            EnteredQuestion += _message.GetAnswer;
+            EnteredQuestion += _message.GenerateAnswer;
         }
 
         public string InputQuestion(string q)
         {
-            ActiveQuestion = q;
-            EnteredQuestion?.Invoke(this);
+            EnteredQuestion?.Invoke(this, q);
             return _message.ActualAnswer;
         }
     }
