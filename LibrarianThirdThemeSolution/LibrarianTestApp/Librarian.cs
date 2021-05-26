@@ -155,7 +155,8 @@ namespace TestApp.Theme3
                     propertyToChange.SetValue(temp, Convert.ChangeType(value, propertyToChange.PropertyType));
                 }
 
-                Console.WriteLine($"Вы успешно изменили св-во {propertyToChange.Name}, нажмите Enter чтобы продолжить или введите -close для выхода из меню изменения\n");
+                Console.WriteLine($"Вы успешно изменили св-во {propertyToChange.Name}, нажмите Enter чтобы продолжить или введите -close для выхода из меню изменения, " +
+                    $"другие команды в данный момент недоступны\n");
 
                 if (Console.ReadLine() == "-close")
                 {
