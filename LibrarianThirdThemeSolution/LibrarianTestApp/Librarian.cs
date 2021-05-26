@@ -140,6 +140,18 @@ namespace TestApp.Theme3
                 else
                 {
                     var value = Console.ReadLine();
+
+                    if(value.GetType() == typeof(string))
+                    {
+                        if (propertyToChange.Name.ToLower() == "title")
+                        {
+                            while (!CheckInputString(value))
+                            {
+                                value = Console.ReadLine();
+                            }
+                        }
+                    }
+                    
                     propertyToChange.SetValue(temp, Convert.ChangeType(value, propertyToChange.PropertyType));
                 }
 
