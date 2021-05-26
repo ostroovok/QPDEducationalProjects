@@ -6,6 +6,7 @@ namespace TestApp.Theme3
 {
     public static class Librarian
     {
+        private static bool _exit = true;
         public static void Main(string[] args)
         {
             Start();
@@ -13,9 +14,8 @@ namespace TestApp.Theme3
         public static void Start()
         {
             Console.Clear();
-            bool exit = true;
             Library lib = new();
-            while (exit)
+            while (_exit)
             {
                 Console.WriteLine("-help - список команд;\t-end - конец работы");
                 switch (Console.ReadLine())
@@ -28,7 +28,7 @@ namespace TestApp.Theme3
                         PrintCommands();
                         break;
                     case "-end":
-                        Exit(out exit);
+                        Exit();
                         break;
                     case "-del":
                         ElementToDelete(lib);
@@ -76,9 +76,9 @@ namespace TestApp.Theme3
                 }
             }
         }
-        public static void Exit(out bool exit)
+        public static void Exit()
         {
-            exit = false;
+            _exit = false;
         }
         public static void Change(Library lib)
         {
@@ -119,7 +119,7 @@ namespace TestApp.Theme3
 
                         Console.WriteLine("Вы не можете изменить id\n");
 
-                        Console.WriteLine($"Нажмите Enter чтобы продолжить или введите -close для выхода из меню изменения");
+                        Console.WriteLine($"Нажмите Enter чтобы продолжить или введите -close для выхода из меню изменения, другие команды в данный момент недоступны");
 
                         if (Console.ReadLine() == "-close")
                         {
@@ -135,7 +135,7 @@ namespace TestApp.Theme3
                 }
                 else if (propertyToChange.PropertyType == typeof(Date))
                 {
-                    propertyToChange.SetValue(temp, CheckInputDate());
+                    propertyToChange.SetValue(temp, CheckInputYear());
                 }  
                 else
                 {
@@ -193,17 +193,17 @@ namespace TestApp.Theme3
 
                     Console.WriteLine("Какой именно из эл-ов вы хотеите удалить?");
 
-                    for (int i = 0; i < temp.Length; i++)
+                    for (int i = 1; i <= temp.Length; i++)
                     {
 
-                        Console.WriteLine($"{i}.{temp[i].GetInfo()}\n");
+                        Console.WriteLine($"{i}.{temp[i-1].GetInfo()}\n");
 
                     }
                     Console.Write("Введите его номер: ");
 
-                    int number = CheckInputValue();
+                    int number = CheckInputValue(temp.Length);
 
-                    lib.Delete(temp[number]);
+                    lib.Delete(temp[number-1]);
                 }
                 else
                     lib.Delete(temp[0]);
@@ -211,10 +211,10 @@ namespace TestApp.Theme3
         }
         public static IBook CreateNew(Library lib)
         {
-                Console.WriteLine("Укажите тип создаваемого объекта.  Выберите один из вариантов, указав его номер\n1. Книга\n2. Журнал");
+            Console.WriteLine("Укажите тип создаваемого объекта.  Выберите один из вариантов, указав его номер\n1. Книга\n2. Журнал");
             var n = CheckInputValue(2);
 
-                Console.Write("Введите id: ");
+            Console.Write("Введите id: ");
             var id = CheckInputValue();
 
             while(lib.Find(id) != null)
@@ -224,16 +224,22 @@ namespace TestApp.Theme3
                 id = CheckInputValue();
 
             }
-                Console.Write("Введите название: ");
-            var title = Console.ReadLine();
 
-                Console.Write("Введите количество: ");
+            Console.Write("Введите название: ");
+            var title = Console.ReadLine();
+            while (!CheckInputString(title))
+            {
+                Console.Write("Введите название еще раз: ");
+                title = Console.ReadLine();
+            }
+
+            Console.Write("Введите количество: ");
             var quantity = CheckInputValue();
 
-                Console.WriteLine("Введите дату издания: ");
-            var date = CheckInputDate();
+            Console.WriteLine("Введите дату издания: ");
+            var date = CheckInputYear();
 
-                Console.Write("Введите издательство: ");
+            Console.Write("Введите издательство: ");
             var edition = Console.ReadLine();
 
             if (n == 1)
@@ -262,7 +268,30 @@ namespace TestApp.Theme3
             }
             
         }
-
+        public static void PrintCommands()
+        {
+            Console.WriteLine(
+                $"-ins - добавить новый экземпляр\n" +
+                $"-help - вывести список доступных команд\n" +
+                $"-end - закончить работу\n" +
+                $"-del - удалить экземпляр\n" +
+                $"-change - изменить экземпляр\n" +
+                $"-printall - вывести все имеющиеся экземпляры\n" +
+                $"-findid - найти экземпляр по id\n" +
+                $"-findn - найти экземпляр по имени\n"
+                );
+        }
+        #region Private Methods
+        private static bool CheckInputString(string str)
+        {
+            var check = str.Replace(" ", "");
+            if(check.Length == 0)
+            {
+                Console.WriteLine("Вы ввели пустую строку");
+                return false;
+            }
+            return true;
+        }
         private static Date CheckInputDate()
         {
 
@@ -302,13 +331,33 @@ namespace TestApp.Theme3
 
             }
 
-            return new(y,m,d);
+            return new(y, m, d);
 
+        }
+        private static Date CheckInputYear()
+        {
+            Console.Write("\tВведите год: ");
+
+            var y = CheckInputValue();
+
+            while (y > DateTime.Now.Year || y < 0)
+            {
+
+                Console.WriteLine("\tНекорректные данные");
+                y = CheckInputValue();
+
+            }
+            return new Date(y,1,1);
         }
 
         private static int CheckInputValue(int maxValue)
         {
             var value = Console.ReadLine();
+
+            if (value.ToLower() == "-end")
+            {
+                Console.WriteLine("Вы не можете сейчас выйти, сначала вам необходимо закончить");
+            }
 
             int number;
 
@@ -319,8 +368,12 @@ namespace TestApp.Theme3
 
                 Console.WriteLine("Такого варианта нет!");
                 value = Console.ReadLine();
-                if (value.ToLower() == "-end" || value.ToLower() == "-close")
-                    Start();
+
+                if (value.ToLower() == "-end")
+                {
+                    Console.WriteLine("Вы не можете сейчас выйти, сначала вам необходимо закончить");
+                }
+
                 success = int.TryParse(value, out number) && number <= maxValue && number > 0;
 
             }
@@ -330,8 +383,12 @@ namespace TestApp.Theme3
         }
         private static int CheckInputValue()
         {
-
             var value = Console.ReadLine();
+
+            if (value.ToLower() == "-end")
+            {
+                Console.WriteLine("Вы не можете сейчас выйти, сначала вам необходимо закончить");
+            }
 
             int number;
 
@@ -339,31 +396,19 @@ namespace TestApp.Theme3
 
             while (!success)
             {
-
                 Console.WriteLine("Не число, либо число равно нулю или меньше!");
                 value = Console.ReadLine();
-                if (value.ToLower() == "-end" || value.ToLower() == "-close")
-                    Start();
+                if (value.ToLower() == "-end")
+                {
+                    Console.WriteLine("Вы не можете сейчас выйти, сначала вам необходимо закончить");
+                }
                 success = int.TryParse(value, out number) && number > 0;
 
             }
 
             return number;
         }
-
-
-        public static void PrintCommands()
-        {
-            Console.WriteLine(
-                $"-ins - добавить новый экземпляр\n" +
-                $"-help - вывести список доступных команд\n" +
-                $"-end - закончить работу\n" +
-                $"-del - удалить экземпляр\n" +
-                $"-change - изменить экземпляр\n" +
-                $"-printall - вывести все имеющиеся экземпляры\n" +
-                $"-findid - найти экземпляр по id\n" +
-                $"-findn - найти экземпляр по имени\n"
-                );
-        }
+        #endregion
+        
     }
 }

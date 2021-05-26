@@ -19,7 +19,7 @@ namespace LibrarianLogic
            return $"Id: {Id}\n" +
                 $"Title: {Title}\n" +
                 $"Quantity: {Quantity}\n" +
-                $"Date: {Date.ToString()}\n" +
+                $"Year: {Date.Year}\n" +
                 $"Edition: {Edition}\n";
         }
 
