@@ -24,37 +24,42 @@ namespace TestApp
                         break;
                     case "printall":
                         Console.WriteLine("Введите m: ");
-                        m = NumbersUtils.CheckInputValue();
+                        m = NumbersUtils.CheckLimitedNegativeOrZero(20);
                         Console.Write("Введите n: ");
-                        n = NumbersUtils.CheckInputValue();
+                        n = NumbersUtils.CheckLimitedNegativeOrZero(20);
                         Figures.PrintAll(m, n);
                         break;
                     case "printsq":
                         Console.WriteLine("Введите m: ");
-                        m = NumbersUtils.CheckInputValue();
+                        m = NumbersUtils.CheckLimitedNegativeOrZero(20);
                         Console.Write("Введите n: ");
-                        n = NumbersUtils.CheckInputValue();
+                        n = NumbersUtils.CheckLimitedNegativeOrZero(20);
                         Figures.PrintSquare(m, n);
                         break;
                     case "printtrianglerd":
                         Console.Write("Введите n: ");
-                        n = NumbersUtils.CheckInputValue();
+                        n = NumbersUtils.CheckLimitedNegativeOrZero(20);
                         Figures.PrintRightDownTriangle(n);
                         break;
                     case "printtriangleru":
                         Console.Write("Введите n: ");
-                        n = NumbersUtils.CheckInputValue();
+                        n = NumbersUtils.CheckLimitedNegativeOrZero(20);
                         Figures.PrintRightUpTriangle(n);
                         break;
                     case "printtriangleld":
                         Console.Write("Введите n: ");
-                        n = NumbersUtils.CheckInputValue();
+                        n = NumbersUtils.CheckLimitedNegativeOrZero(20);
                         Figures.PrintLeftDownTriangle(n);
                         break;
                     case "printtrianglelu":
                         Console.Write("Введите n: ");
-                        n = NumbersUtils.CheckInputValue();
+                        n = NumbersUtils.CheckLimitedNegativeOrZero(20);
                         Figures.PrintLeftUpTriangle(n);
+                        break;
+                    case "printrh":
+                        Console.Write("Введите n: ");
+                        n = NumbersUtils.CheckLimitedNegativeOrZero(20);
+                        Figures.PrintRhombus(n);
                         break;
                     default:
                         Console.WriteLine("Такой команды не существует, либо вы не можете ее вызвать, пока не закончите предыдущее действие");

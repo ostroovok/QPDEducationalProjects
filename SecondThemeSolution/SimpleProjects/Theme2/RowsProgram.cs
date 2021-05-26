@@ -31,7 +31,7 @@ namespace TestApp
 
                     case "2":
                         Console.WriteLine("Посчитать сумму ряда. Сколько слагаемых?");
-                        var temp = Rows.SeriesSumTerms(46);
+                        var temp = Rows.SeriesSumTerms(46, 6, 4);
                         Console.WriteLine("Сумма: " + temp[0]);
                         Console.WriteLine("Кол-во слагаемых: " + temp[1]);
                         break;

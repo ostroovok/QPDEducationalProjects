@@ -17,11 +17,11 @@ namespace TasksLogic
             }
             return sum;
         }
-        public static int[] SeriesSumTerms(int max)
+        public static int[] SeriesSumTerms(int max, int from, int plus)
         {
             var count = 0;
             var sum = 0;
-            for (int i = 0; i < max; i += 2)
+            for (int i = from; i <= max; i += plus)
             {
                 sum += i;
                 count++;

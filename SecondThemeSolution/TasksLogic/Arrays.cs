@@ -157,7 +157,7 @@ namespace TasksLogic
             var outArr = new int[maxLen];
             for (int i = 0, f = 0, s = 0; i < maxLen; i++)
             {
-                if (f < first.Length && first[f] < second[s])
+                if (f < first.Length && first[f] < second[Math.Min(s, second.Length-1)])
                 {
                     outArr[i] = first[f];
                     f++;
@@ -166,6 +166,11 @@ namespace TasksLogic
                 {
                     outArr[i] = second[s];
                     s++;
+                }
+                else
+                {
+                    outArr[i] = first[f];
+                    f++;
                 }
             }
             return outArr;
