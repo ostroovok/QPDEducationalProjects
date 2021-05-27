@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 
 namespace LibrarianLogic
@@ -72,7 +73,7 @@ namespace LibrarianLogic
                             bw.Write(temp.Id);
                             bw.Write(temp.Title);
                             bw.Write(temp.Quantity);
-                            bw.Write(temp.Date.ToString());
+                            //bw.Write(temp.Date.Year);
                             bw.Write(temp.Edition);
 
                         }
@@ -85,7 +86,7 @@ namespace LibrarianLogic
                             bw.Write(temp.Id);
                             bw.Write(temp.Title);
                             bw.Write(temp.Quantity);
-                            bw.Write(temp.Date.ToString());
+                            //bw.Write(temp.Date.Year);
                             bw.Write(temp.Edition);
                         }
                     }
@@ -99,19 +100,25 @@ namespace LibrarianLogic
         public void Load(string fileName)
         {
             IBook b;
+            if (!File.Exists(fileName))
+                return;
             try
             {
                 using(BinaryReader br = new BinaryReader(File.Open(fileName, FileMode.Open)))
                 {
-                    while(br.PeekChar() > -1)
+                    var count = br.BaseStream.Length;
+                    while(count > 0)
                     {
                         var author = br.ReadString();
                         var genre = br.ReadString();
                         var id = br.ReadInt32();
                         var title = br.ReadString();
                         var quantity = br.ReadInt32();
-                        //var date = 
-                        //b = new Book(, );
+                        Date date = new(2001, 1, 1); //br.ReadInt32()
+                        var edition = br.ReadString();
+                        LibraryFund.Add(new Book(id, title, quantity, author, genre, date, edition));
+                        LibraryFund.Last().GetInfo();
+                        count--;
                     }
                 }
             }

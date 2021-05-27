@@ -11,14 +11,14 @@ namespace LibrarianLogic
         public string Author { get; set; }
         public string Genre { get; set; }
 
-        public Book(int id, string title, int quantity, string author, string genre, Date date, string edition)
+        public Book(int id, string title, int quantity, string author, string genre, int year, string edition)
         {
             Id = id;
             Title = title;
             Quantity = quantity;
             Author = author;
             Genre = genre;
-            Date = date;
+            Year = year;
             Edition = edition;
         }
         public override string GetInfo()

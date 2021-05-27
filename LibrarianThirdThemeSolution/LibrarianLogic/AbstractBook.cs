@@ -11,7 +11,7 @@ namespace LibrarianLogic
         public int Id { get; protected set; }
         public string Title { get; set; }
         public int Quantity { get; set; }
-        public virtual Date Date { get; protected set; }
+        public virtual int Year { get; protected set; }
         public string Edition { get; set; }
 
         public virtual string GetInfo()
@@ -19,18 +19,18 @@ namespace LibrarianLogic
             return $"Id: {Id}\n" +
                  $"Title: {Title}\n" +
                  $"Quantity: {Quantity}\n" +
-                 $"Year: {Date.Year}\n" +
+                 $"Year: {Year}\n" +
                  $"Edition: {Edition}\n";
         }
         public override bool Equals(object o)
         {
             AbstractBook b = o as AbstractBook;
-            return b.Id == Id && b.Date == Date;
+            return b.Id == Id && b.Year == Year;
         }
 
         public override int GetHashCode()
         {
-            return Id * Date.Year * Date.Month * Date.Day;
+            return Id * Year;
         }
     }
 }

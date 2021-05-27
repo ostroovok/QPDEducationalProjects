@@ -15,6 +15,7 @@ namespace TestApp.Theme3
         {
             Console.Clear();
             Library lib = new();
+            //lib.Load("LibSaver.dat");
             while (_exit)
             {
                 Console.WriteLine("-help - список команд;\t-end - конец работы");
@@ -347,7 +348,7 @@ namespace TestApp.Theme3
             return new(y, m, d);
 
         }
-        private static Date CheckInputYear()
+        private static int CheckInputYear()
         {
             Console.Write("\tВведите год: ");
 
@@ -356,11 +357,11 @@ namespace TestApp.Theme3
             while (y > DateTime.Now.Year || y < 0)
             {
 
-                Console.WriteLine("\tНекорректные данные");
+                Console.WriteLine("\tНекорректные данные, этот год еще не наступил");
                 y = CheckInputValue();
 
             }
-            return new Date(y,1,1);
+            return y;
         }
 
         private static int CheckInputValue(int maxValue)

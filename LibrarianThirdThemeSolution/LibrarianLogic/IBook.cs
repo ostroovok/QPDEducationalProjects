@@ -11,7 +11,7 @@ namespace LibrarianLogic
         int Id { get; }
         string Title { get; set; }
         int Quantity { get; set; }
-        Date Date { get; }
+        int Year { get; }
         string Edition { get; set; }
 
         string GetInfo();
