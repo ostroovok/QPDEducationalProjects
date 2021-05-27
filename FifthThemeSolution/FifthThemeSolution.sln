@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibrarianTestApp", "..\Libr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibrarianLogic", "..\LibrarianThirdThemeSolution\LibrarianLogic\LibrarianLogic.csproj", "{4D9139ED-19F6-473B-9B04-CE7C404ECE49}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpikLogic", "..\FourthThemeSolution\SharpikLogic\SharpikLogic.csproj", "{2D00697E-0817-40E0-8FF2-F785295674F2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpikTestApp", "..\FourthThemeSolution\SharpikTestApp\SharpikTestApp.csproj", "{1F3E00DA-432C-4C4D-9723-782859F36EAA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{4D9139ED-19F6-473B-9B04-CE7C404ECE49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D9139ED-19F6-473B-9B04-CE7C404ECE49}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D9139ED-19F6-473B-9B04-CE7C404ECE49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D00697E-0817-40E0-8FF2-F785295674F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D00697E-0817-40E0-8FF2-F785295674F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D00697E-0817-40E0-8FF2-F785295674F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D00697E-0817-40E0-8FF2-F785295674F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F3E00DA-432C-4C4D-9723-782859F36EAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F3E00DA-432C-4C4D-9723-782859F36EAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F3E00DA-432C-4C4D-9723-782859F36EAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F3E00DA-432C-4C4D-9723-782859F36EAA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

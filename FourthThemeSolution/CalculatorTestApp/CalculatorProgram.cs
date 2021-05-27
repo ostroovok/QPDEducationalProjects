@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,28 +28,28 @@ namespace TestApp.Theme4
             }
 
             Console.Write("Ввод осуществляется через проблем. Пример: y * x\n\n--> ");
-
+            ArrayList arr = CheckInputValue();
+            var result = calc.PerformOperation((string)arr[0], (double)arr[1], (double)arr[2]);
+            Console.WriteLine(result);
+        }
+        public static ArrayList CheckInputValue()
+        {
             var value = Console.ReadLine();
             var temp = value.Split();
 
-            if (temp.Length != 3)
-            {
-                throw new ArgumentException("Неверный ввод");
-            }
-
             var op = temp[1];
+            double x = 1;
+            double y = 1;
 
-            try
+            while (temp.Length != 3 || !double.TryParse(temp[0], out x) || !double.TryParse(temp[2], out y))
             {
-                var x = int.Parse(temp[0]);
-                var y = int.Parse(temp.Last());
-                Console.WriteLine(calc.PerformOperation(op, x, y));
+                Console.WriteLine("Неверный ввод");
+                Console.WriteLine("Введите еще раз: ");
+                value = Console.ReadLine();
+                temp = value.Split();
+                op = temp[1];
             }
-            catch
-            {
-                throw new ArgumentException("Неверный ввод");
-            }
-            
+            return new ArrayList() { op, x, y };
         }
     }
 }
