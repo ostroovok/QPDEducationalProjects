@@ -17,5 +17,10 @@ namespace SharpikLogic
                     }; }
         public static string[] ByePhrases { get => new string[] { "Пока", "До свидания", "Всего хорошего" }; } 
         public static string[] Anecdotes { get => new string[] { "Приходит муж домой, а там жена! ха-ха", "Купил мужик шляпу, а она ему как раз!" }; } 
+
+        public static void Generate()
+        {
+            
+        }
     }
 }

@@ -115,7 +115,6 @@ namespace LibrarianLogic
                         var year = br.ReadInt32();
                         var edition = br.ReadString();
                         LibraryFund.Add(new Book(id, title, quantity, author, genre, year, edition));
-                        LibraryFund.Last().GetInfo();
                     }
                 }
             }

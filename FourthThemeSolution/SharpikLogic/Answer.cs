@@ -22,7 +22,7 @@ namespace SharpikLogic
                 new(new string[] { "привет", "здравствуй", "здравствуйте", "добрый день", "добрый вечер", "доброе утро", "доброй ночи" }, 
                     Phrases.HelloPhrases ),
 
-                new(new string[] { "как тебя зовут?" }, new string[] { "Шарпик", "Меня зовут Шарпик" } ),
+                new(new string[] { "как тебя зовут?" }, new string[] { "Шарпик" } ),
 
                 new(new string[] { "анекдот" }, Phrases.Anecdotes ),
 
