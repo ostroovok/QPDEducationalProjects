@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibrarianLogic
 {
+    [Serializable]
     public class AbstractBook : IBook
     {
         public int Id { get; protected set; }
@@ -16,13 +17,12 @@ namespace LibrarianLogic
 
         public virtual string GetInfo()
         {
-           return $"Id: {Id}\n" +
-                $"Title: {Title}\n" +
-                $"Quantity: {Quantity}\n" +
-                $"Year: {Date.Year}\n" +
-                $"Edition: {Edition}\n";
+            return $"Id: {Id}\n" +
+                 $"Title: {Title}\n" +
+                 $"Quantity: {Quantity}\n" +
+                 $"Year: {Date.Year}\n" +
+                 $"Edition: {Edition}\n";
         }
-
         public override bool Equals(object o)
         {
             AbstractBook b = o as AbstractBook;
