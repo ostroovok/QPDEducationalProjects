@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace LibrarianLogic
 {
-    [Serializable]
     public class AbstractBook : IBook
     {
         public int Id { get; protected set; }
