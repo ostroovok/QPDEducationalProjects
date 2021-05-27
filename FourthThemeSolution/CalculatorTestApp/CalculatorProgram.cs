@@ -37,7 +37,7 @@ namespace TestApp.Theme4
             var value = Console.ReadLine();
             var temp = value.Split();
 
-            var op = temp[1];
+            var op = "";
             double x = 1;
             double y = 1;
 
@@ -47,8 +47,9 @@ namespace TestApp.Theme4
                 Console.WriteLine("Введите еще раз: ");
                 value = Console.ReadLine();
                 temp = value.Split();
-                op = temp[1];
+                
             }
+            op = temp[1];
             return new ArrayList() { op, x, y };
         }
     }
