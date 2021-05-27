@@ -72,16 +72,28 @@ namespace TasksLogic
             }
             return new int[] { sum, count };
         }
+
         public static int Fibonacci(int number)
         {
-            if (number == 0 || number == 1)
+            var sum = 0;
+            for (int i = 1; i <= number; i++)
             {
-                return number;
+                sum += FibStep(i);
+            }
+            return sum;
+        }
+        private static int FibStep(int number)
+        {
+            int res;
+            if (number == 1 || number == 2)
+            {
+                return 1;
             }
             else
             {
-                return Fibonacci(number - 1) + Fibonacci(number - 2);
+                 res = FibStep(number - 1) + FibStep(number - 2);
             }
+            return res;
         }
     }
 }

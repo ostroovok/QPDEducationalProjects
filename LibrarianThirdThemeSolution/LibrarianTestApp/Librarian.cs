@@ -28,6 +28,7 @@ namespace TestApp.Theme3
                         PrintCommands();
                         break;
                     case "-end":
+                        //lib.Save("LibSaver.dat");
                         Exit();
                         break;
                     case "-del":
@@ -279,7 +280,6 @@ namespace TestApp.Theme3
                 return new Magazine(id, title, quantity, date, edition, periodicity, number);
 
             }
-            
         }
         public static void PrintCommands()
         {
