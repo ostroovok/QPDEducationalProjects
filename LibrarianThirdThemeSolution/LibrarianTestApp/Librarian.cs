@@ -78,6 +78,8 @@ namespace TestApp.Theme3
                 }
             }
         }
+
+        #region Public Methods
         public static void Exit()
         {
             _exit = false;
@@ -295,6 +297,8 @@ namespace TestApp.Theme3
                 $"-findn - найти экземпляр по имени\n"
                 );
         }
+        #endregion
+
         #region Private Methods
         private static bool CheckInputString(string str)
         {

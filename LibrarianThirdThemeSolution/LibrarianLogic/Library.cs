@@ -59,11 +59,11 @@ namespace LibrarianLogic
         {
             try
             {
+                File.Delete(fileName);
                 using (BinaryWriter bw = new BinaryWriter(File.Open(fileName, FileMode.OpenOrCreate)))
                 {
                     foreach (var b in LibraryFund)
                     {
-                        //var properties = b.GetType().GetTypeInfo().GetProperties();
                         if(b is Book)
                         {
                             var temp = b as Book;
@@ -73,7 +73,7 @@ namespace LibrarianLogic
                             bw.Write(temp.Id);
                             bw.Write(temp.Title);
                             bw.Write(temp.Quantity);
-                            //bw.Write(temp.Date.Year);
+                            bw.Write(temp.Year);
                             bw.Write(temp.Edition);
 
                         }
@@ -86,7 +86,7 @@ namespace LibrarianLogic
                             bw.Write(temp.Id);
                             bw.Write(temp.Title);
                             bw.Write(temp.Quantity);
-                            //bw.Write(temp.Date.Year);
+                            bw.Write(temp.Year);
                             bw.Write(temp.Edition);
                         }
                     }
@@ -94,37 +94,34 @@ namespace LibrarianLogic
             }
             catch(Exception e)
             {
-                Console.WriteLine(e.Message);
+                throw new Exception($"Не удалось сохранить данные. Текст ошибки: {e.Message}");
             }
         }
         public void Load(string fileName)
         {
-            IBook b;
             if (!File.Exists(fileName))
-                return;
+                throw new Exception("Указанный файл не найден");
             try
             {
                 using(BinaryReader br = new BinaryReader(File.Open(fileName, FileMode.Open)))
                 {
-                    var count = br.BaseStream.Length;
-                    while(count > 0)
+                    while(br.PeekChar() > -1)
                     {
                         var author = br.ReadString();
                         var genre = br.ReadString();
                         var id = br.ReadInt32();
                         var title = br.ReadString();
                         var quantity = br.ReadInt32();
-                        Date date = new(2001, 1, 1); //br.ReadInt32()
+                        var year = br.ReadInt32();
                         var edition = br.ReadString();
-                        LibraryFund.Add(new Book(id, title, quantity, author, genre, date, edition));
+                        LibraryFund.Add(new Book(id, title, quantity, author, genre, year, edition));
                         LibraryFund.Last().GetInfo();
-                        count--;
                     }
                 }
             }
             catch(Exception e)
             {
-                Console.WriteLine(e.Message);
+                throw new Exception($"Не удалось загрузить данные. Текст ошибки: {e.Message}");
             }
         }
     }
