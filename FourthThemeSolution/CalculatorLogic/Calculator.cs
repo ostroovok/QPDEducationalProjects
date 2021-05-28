@@ -24,7 +24,7 @@ namespace CaclulatorLogic
         {
             if (!_operations.ContainsKey(op))
             {
-                throw new ArgumentException($"Недоступная операция: {op}");
+                Console.WriteLine($"Недоступная операция: {op}");
             }
                 
             return _operations[op](x,y);
@@ -33,7 +33,7 @@ namespace CaclulatorLogic
         {
             if (!_operations.ContainsKey(op))
             {
-                throw new ArgumentException($"Операция уже существует: {op}");
+                Console.WriteLine($"Операция уже существует: {op}");
             }    
 
             _operations.Add(op, newOp);

@@ -11,6 +11,7 @@ namespace TestApp.Theme4
 {
     public static class CalculatorProgram
     {
+        private static bool _exit = true;
         public static void Main(string[] args)
         {
             Start();
@@ -27,29 +28,42 @@ namespace TestApp.Theme4
                 Console.WriteLine($"{i + 1}. {declaredOp[i]}");
             }
 
+            double leftOperand;
+            double rightOperand;
+            string operation;
+
+            Console.WriteLine("Для выхода введите 0 и найжмите Enter");
             Console.Write("Ввод осуществляется через проблем. Пример: y * x\n\n--> ");
-            ArrayList arr = CheckInputValue();
-            var result = calc.PerformOperation((string)arr[0], (double)arr[1], (double)arr[2]);
-            Console.WriteLine(result);
+            while (_exit)
+            {
+                GetExpressionFromConsole(out leftOperand, out rightOperand, out operation);
+
+                var result = calc.PerformOperation(operation, leftOperand, rightOperand);
+
+                Console.WriteLine(result);
+            }
+            
         }
-        public static ArrayList CheckInputValue()
+        public static void GetExpressionFromConsole(out double leftOperand, out double rightOperand, out string operation)
         {
             var value = Console.ReadLine();
+            if(value == "0")
+            {
+                _exit = false;
+                leftOperand = 0;
+                rightOperand = 0;
+                operation = "-";
+                return;
+            }
             var temp = value.Split();
-
-            var op = temp[1];
-            double x = 1;
-            double y = 1;
-
-            while (temp.Length != 3 || !double.TryParse(temp[0], out x) || !double.TryParse(temp[2], out y))
+            while (temp.Length != 3 || !double.TryParse(temp[0], out leftOperand) || !double.TryParse(temp[2], out rightOperand))
             {
                 Console.WriteLine("Неверный ввод");
                 Console.WriteLine("Введите еще раз: ");
                 value = Console.ReadLine();
                 temp = value.Split();
-                op = temp[1];
             }
-            return new ArrayList() { op, x, y };
+            operation = temp[1];
         }
     }
 }
