@@ -1,5 +1,5 @@
-﻿using System;
-using SharpikLogic;
+﻿using SharpikLogic;
+using System;
 
 namespace SharpikTestApp
 {

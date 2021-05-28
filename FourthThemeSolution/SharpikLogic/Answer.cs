@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SharpikLogic
 {
@@ -10,7 +8,6 @@ namespace SharpikLogic
     {
         public delegate void EnteredQuestion(InputMessage q, string questionMessage);
 
-        public bool Enable { get; set; } = true;
         public List<Message> AllMessages { get; private set; }
 
         public string ActualAnswer { get; private set; }
@@ -19,7 +16,7 @@ namespace SharpikLogic
         {
             AllMessages = new List<Message>
             {
-                new(new string[] { "привет", "здравствуй", "здравствуйте", "добрый день", "добрый вечер", "доброе утро", "доброй ночи" }, 
+                new(new string[] { "привет", "здравствуй", "здравствуйте", "добрый день", "добрый вечер", "доброе утро", "доброй ночи" },
                     Phrases.HelloPhrases ),
 
                 new(new string[] { "как тебя зовут?" }, new string[] { "Шарпик" } ),
@@ -36,7 +33,7 @@ namespace SharpikLogic
 
         public void GenerateAnswer(InputMessage q, string qMess)
         {
-            if (!Enable)
+            if (!q.Enable)
             {
                 return;
             }
@@ -48,7 +45,7 @@ namespace SharpikLogic
                     ActualAnswer = AllMessages[i].Answer[rnd.Next(AllMessages[i].Answer.Length)];
                     if (i == 4)
                     {
-                        Enable = false;
+                        q.Enable = false;
                     }
                     return;
                 }

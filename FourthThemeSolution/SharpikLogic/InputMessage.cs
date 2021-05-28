@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SharpikLogic
+﻿namespace SharpikLogic
 {
     public class InputMessage
     {
         public event Answer.EnteredQuestion EnteredQuestion;
-        public bool Enable { get => _message.Enable; set => _message.Enable = value; }
+        public bool Enable { get; set; } = true;
         public string ActiveQuestion { get; set; }
 
 

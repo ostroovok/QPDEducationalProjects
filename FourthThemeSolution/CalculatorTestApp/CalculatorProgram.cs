@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using CaclulatorLogic;
+﻿using CaclulatorLogic;
+using System;
 
 namespace TestApp.Theme4
 {
@@ -42,12 +36,12 @@ namespace TestApp.Theme4
 
                 Console.WriteLine(result);
             }
-            
+
         }
         public static void GetExpressionFromConsole(out double leftOperand, out double rightOperand, out string operation)
         {
             var value = Console.ReadLine();
-            if(value == "0")
+            if (value == "0")
             {
                 _exit = false;
                 leftOperand = 0;
