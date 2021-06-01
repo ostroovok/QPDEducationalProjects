@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LibrarianLogic
+﻿namespace LibrarianLogic
 {
     public interface IBook
     {
@@ -15,5 +9,6 @@ namespace LibrarianLogic
         string Edition { get; set; }
 
         string GetInfo();
+        void SetId();
     }
 }

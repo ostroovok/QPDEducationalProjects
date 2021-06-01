@@ -1,15 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LibrarianLogic
+﻿namespace LibrarianLogic
 {
-    public class Book: AbstractBook
+    public class Book : AbstractBook
     {
         public string Author { get; set; }
         public string Genre { get; set; }
+
+        public Book(string title, int quantity, string author, string genre, int year, string edition)
+        {
+            SetId();
+            Title = title;
+            Quantity = quantity;
+            Author = author;
+            Genre = genre;
+            Year = year;
+            Edition = edition;
+        }
 
         public Book(int id, string title, int quantity, string author, string genre, int year, string edition)
         {
@@ -21,11 +26,12 @@ namespace LibrarianLogic
             Year = year;
             Edition = edition;
         }
+
         public override string GetInfo()
         {
-            return "{\n" + base.GetInfo() + 
-                $"Book author: {Author}\n" +
-                $"Book genre: {Genre}\n" + "}\n";
+            return "{\n" + base.GetInfo() +
+                $"Автор книги: {Author}\n" +
+                $"Жанр книги: {Genre}\n" + "}\n";
         }
     }
 }

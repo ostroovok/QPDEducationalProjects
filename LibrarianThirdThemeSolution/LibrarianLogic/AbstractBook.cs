@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LibrarianLogic
 {
@@ -17,20 +13,17 @@ namespace LibrarianLogic
         public virtual string GetInfo()
         {
             return $"Id: {Id}\n" +
-                 $"Title: {Title}\n" +
-                 $"Quantity: {Quantity}\n" +
-                 $"Year: {Year}\n" +
-                 $"Edition: {Edition}\n";
+                 $"Название: {Title}\n" +
+                 $"Количество: {Quantity}\n" +
+                 $"Год: {Year}\n" +
+                 $"Издание: {Edition}\n";
         }
-        public override bool Equals(object o)
+        public void SetId()
         {
-            AbstractBook b = o as AbstractBook;
-            return b.Id == Id && b.Year == Year;
-        }
-
-        public override int GetHashCode()
-        {
-            return Id * Year;
+            var ticksForNewId = DateTime.Now.Ticks.ToString();
+            var first = ticksForNewId.Substring(0,4);
+            var last = ticksForNewId.Substring(14);
+            Id = int.Parse(first + last);
         }
     }
 }

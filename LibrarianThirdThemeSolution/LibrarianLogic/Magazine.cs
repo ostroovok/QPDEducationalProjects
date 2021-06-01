@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Reflection;
-
-namespace LibrarianLogic
+﻿namespace LibrarianLogic
 {
     public class Magazine : AbstractBook
     {
@@ -22,11 +15,21 @@ namespace LibrarianLogic
             Periodicity = periodicity;
             Number = number;
         }
+        public Magazine(string title, int quantity, int year, string edition, int periodicity, int number)
+        {
+            SetId();
+            Title = title;
+            Quantity = quantity;
+            Year = year;
+            Edition = edition;
+            Periodicity = periodicity;
+            Number = number;
+        }
         public override string GetInfo()
         {
             return "{\n" + base.GetInfo() +
-                $"Monthly frequency: {Periodicity}\n" +
-                $"Magazine number: {Number}\n" + "}\n";
+                $"Периодичность: {Periodicity}\n" +
+                $"Номер журнала: {Number}\n" + "}\n";
         }
     }
 }
