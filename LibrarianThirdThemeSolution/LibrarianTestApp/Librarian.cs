@@ -19,11 +19,6 @@ namespace TestApp.Theme3
         {
             Console.Clear();
             Library lib = new();
-            bool loadResult = lib.Load("LibSaver");
-            if (loadResult)
-            {
-                Console.WriteLine("Не найден загружаемый файл");
-            }
             while (_exit)
             {
                 Console.WriteLine("-help - список команд;\t-end - конец работы");
@@ -33,15 +28,10 @@ namespace TestApp.Theme3
                         lib.Insert(CreateNew());
                         Console.WriteLine("Объект создан.");
                         break;
-                    case "-save":
-                        lib.Save("LibSaver");
-                        Console.WriteLine("Сохранение прошло успешно");
-                        break;
                     case "-help":
                         PrintCommands();
                         break;
                     case "-end":
-                        lib.Save("LibSaver");
                         Exit();
                         break;
                     case "-del":
