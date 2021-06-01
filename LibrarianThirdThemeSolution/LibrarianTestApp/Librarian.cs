@@ -22,7 +22,7 @@ namespace TestApp.Theme3
             while (_exit)
             {
                 Console.WriteLine("-help - список команд;\t-end - конец работы");
-                switch (Console.ReadLine())
+                switch (Console.ReadLine().ToLower())
                 {
                     case "-ins":
                         lib.Insert(CreateNew());
@@ -73,7 +73,7 @@ namespace TestApp.Theme3
                     case "-findn":
                         Console.Write("Введите название нужного экземпляра: ");
                         var title = Console.ReadLine();
-                        if(title == "-close")
+                        if(title.ToLower() == "-close")
                         {
                             break;
                         }
@@ -84,7 +84,10 @@ namespace TestApp.Theme3
                             resTitle = lib.Find(Console.ReadLine());
                         }
                         foreach (var v in resTitle)
+                        {
                             Console.WriteLine($"\n{v.GetInfo()}\n");
+                        }
+                            
                         break;
 
                     default:
@@ -154,9 +157,19 @@ namespace TestApp.Theme3
 
                 if(propertyToChange.PropertyType == typeof(int))
                 {
-                    if (propertyToChange.Name == "Year")
+                    if (propertyToChange.Name.ToLower() == "year")
                     {
                         int newValue = CheckInputYear();
+                        if (newValue == -1)
+                        {
+                            break;
+                        }
+                        lib.ChangeElementProperty(idToChange, propertyToChange, newValue);
+                        changeIsOver = ExitChangeMenu(propertyToChange.Name);
+                    }
+                    else if (propertyToChange.Name.ToLower() == "periodicity")
+                    {
+                        int newValue = CheckInputValue(31);
                         if (newValue == -1)
                         {
                             break;
@@ -198,7 +211,7 @@ namespace TestApp.Theme3
                         "Нажмите Enter чтобы продолжить или введите -close для выхода из меню изменения, " +
                     $"другие команды в данный момент недоступны\n");
 
-                    if (Console.ReadLine() == "-close")
+                    if (Console.ReadLine().ToLower() == "-close")
                     {
                         break;
                     }
@@ -318,7 +331,7 @@ namespace TestApp.Theme3
             Console.WriteLine($"Вы успешно изменили св-во {propertyName}, нажмите Enter чтобы продолжить или введите -close для выхода из меню изменения, " +
                     $"другие команды в данный момент недоступны\n");
 
-            if (Console.ReadLine() == "-close")
+            if (Console.ReadLine().ToLower() == "-close")
             {
                 return true;
             }
@@ -351,19 +364,28 @@ namespace TestApp.Theme3
         /// <returns>Введенный год</returns>
         private static int CheckInputYear()
         {
-            var y = CheckInputValue();
-            if(y == -1)
-            {
-                return -1;
-            }
-            while (y > DateTime.Now.Year || y < 0)
-            {
+            int year;
 
-                Console.WriteLine("\tВведите год от 1 г. н.э. до текущего");
-                y = CheckInputValue();
+            bool success;
 
-            }
-            return y;
+            do
+            {
+                var value = Console.ReadLine();
+
+                if (value.ToLower() == "-close")
+                {
+                    return -1;
+                }
+
+                success = int.TryParse(value, out year) && year > 0 && year < DateTime.Now.Year;
+                if (!success)
+                {
+                    Console.WriteLine("\tВведите год от 1 г. н.э. до текущего");
+                }
+
+            } while (!success);
+
+            return year;
         }
         /// <summary>
         /// Осуществляет контроль ввода, не позволяет ввести отрицательное, не целое, равное 0 и/или число больше переданного
