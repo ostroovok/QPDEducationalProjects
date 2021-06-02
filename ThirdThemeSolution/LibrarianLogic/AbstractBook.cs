@@ -21,9 +21,8 @@ namespace LibrarianLogic
         public void SetId()
         {
             var ticksForNewId = DateTime.Now.Ticks.ToString();
-            var first = ticksForNewId.Substring(0,4);
-            var last = ticksForNewId.Substring(14);
-            Id = int.Parse(first + last);
+            var last = ticksForNewId.Substring(12);
+            Id = int.Parse(last);
         }
     }
 }

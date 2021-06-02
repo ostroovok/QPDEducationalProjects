@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Text;
 
 namespace LibrarianLogic
 {
@@ -25,10 +26,18 @@ namespace LibrarianLogic
         /// Ищет эл-т по переданному id и удаляет его
         /// </summary>
         /// <param name="id">Необходим для поиска</param>
-        public void Delete(int id)
+        public bool Delete(int id)
         {
             IBook objToDelete = Find(id);
-            LibraryFund.Remove(objToDelete);
+            if(objToDelete == null)
+            {
+                return false;
+            }
+            else
+            {
+                LibraryFund.Remove(objToDelete);
+                return true;
+            }
         }
         /// <summary>
         /// Производит поиск по id эл-та
@@ -80,33 +89,73 @@ namespace LibrarianLogic
             return false;
         }
         /// <summary>
-        /// Возвращает св-ва объекта с переданным id 
+        /// Проводит поиск, если эл-т не найден, возвращает false
+        /// Далее составляет массив св-в найденного эл-та
+        /// Если было передано св-во на изменение с именем id возвращает false
+        /// Далее выбирает, если св-во типа int проверяет переданное значение и конвертирует
+        /// Если ковертировать не получилось, то переданное значение некорректно, возвращает false
+        /// Если string присваивает
         /// </summary>
-        /// <param name="id">Необходим для поиска</param>
+        /// <param name="id">идентификатор. по которому идет поиск объекта</param>
+        /// <param name="propertyNumber">номер св-ва по списку, составленному с помощью рефлексии</param>
+        /// <param name="value">новое значение св-ва для изменения</param>
         /// <returns></returns>
-        public PropertyInfo[] GetElementProperties(int id)
+        public bool ChangeElementProperty(int id, int propertyNumber, string value)
         {
-            IBook b = Find(id);
-            return b.GetType().GetTypeInfo().GetProperties();
-        }
-        /// <summary>
-        /// Меняет св-во объекта, найденного по id на новое, переданное значение
-        /// </summary>
-        /// <param name="elementId">id изменяемого объекта</param>
-        /// <param name="propertyToChange">Св-во для изменения</param>
-        /// <param name="newValue">Новое значение для изменяемого св-ва типа int</param>
-        /// <returns></returns>
-        public bool ChangeElementProperty(int elementId, PropertyInfo propertyToChange, int newValue)
-        {
-            if(propertyToChange.Name == "Id")
+            var obj = Find(id);
+
+            if(obj == null)
             {
                 return false;
             }
-            else
+
+            PropertyInfo[] objProperties= obj.GetType().GetProperties();
+            if(objProperties[propertyNumber].Name == "Id")
             {
-                propertyToChange.SetValue(Find(elementId), newValue);
+                return false;
+            }
+
+            if (objProperties[propertyNumber].PropertyType == typeof(int))
+            {
+                int convertValue;
+                if (!int.TryParse(value, out convertValue))
+                {
+                    return false;
+                }
+                objProperties[propertyNumber].SetValue(obj, convertValue);
                 return true;
             }
+            else
+            {
+                objProperties[propertyNumber].SetValue(obj, value);
+                return true;
+            }
+            
+        }
+        /// <summary>
+        /// Составляет список эл-в типа string с именами св-в объекта
+        /// В случае, если эл-т не был найден вернет список с единственным значением "notFound"
+        /// Конвертирует в массив и возвращает его
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public string[] GetElementPropertiesInfo(int id)
+        {
+            var obj = Find(id);
+            if(obj == null)
+            {
+                return new string[] { "notFound" };
+            }
+            PropertyInfo[] objProperties = obj.GetType().GetProperties();
+
+            List<string> propertiesNames = new();
+
+            for (int i = 0; i < objProperties.Length; i++)
+            {
+                propertiesNames.Add(objProperties[i].Name);
+            }
+
+            return propertiesNames.ToArray();
         }
         /// <summary>
         /// Меняет св-во объекта, найденного по id на новое, переданное значение
