@@ -117,7 +117,7 @@ namespace TestApp.Theme3
             Console.WriteLine("Введите id элемента, который вы хотите изменить: ");
 
             var idToChange = CheckInputValue();
-            if(idToChange == -1)
+            if (idToChange == -1)
             {
                 return;
             }
@@ -145,7 +145,7 @@ namespace TestApp.Theme3
                 Console.WriteLine("Что вы хотите изменить?");
 
                 var choice = CheckInputValue(properties.Length);
-                if(choice == -1)
+                if (choice == -1)
                 {
                     break;
                 }
@@ -154,7 +154,7 @@ namespace TestApp.Theme3
                 Console.WriteLine($"Вы выбрали {propertyToChange.Name}, введите новое значение, " +
                     $"учитывая тип {propertyToChange.PropertyType.Name}: ");
 
-                if(propertyToChange.PropertyType == typeof(int))
+                if (propertyToChange.PropertyType == typeof(int))
                 {
                     if (propertyToChange.Name.ToLower() == "year")
                     {
@@ -179,7 +179,7 @@ namespace TestApp.Theme3
                     else
                     {
                         int newValue = CheckInputValue();
-                        if(newValue == -1)
+                        if (newValue == -1)
                         {
                             break;
                         }
@@ -194,10 +194,10 @@ namespace TestApp.Theme3
                         }
                     }
                 }
-                else if(propertyToChange.PropertyType == typeof(string))
+                else if (propertyToChange.PropertyType == typeof(string))
                 {
                     var newValue = CheckInputString();
-                    if(newValue == "")
+                    if (newValue == "")
                     {
                         break;
                     }
@@ -239,7 +239,7 @@ namespace TestApp.Theme3
             {
                 Console.Write("Не найдено эл-ов с таким id\nВведите id еще раз: ");
                 idToDelete = CheckInputValue();
-                if(idToDelete == -1)
+                if (idToDelete == -1)
                 {
                     return;
                 }
@@ -343,7 +343,7 @@ namespace TestApp.Theme3
         private static string CheckInputString()
         {
             var str = Console.ReadLine();
-            if(str.ToLower() == "-close")
+            if (str.ToLower() == "-close")
             {
                 return "";
             }
