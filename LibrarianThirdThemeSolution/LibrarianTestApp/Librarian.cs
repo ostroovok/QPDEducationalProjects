@@ -36,7 +36,6 @@ namespace TestApp.Theme3
                         break;
                     case "-del":
                         ElementToDelete(lib);
-                        Console.WriteLine("Объект удален.");
                         break;
                     case "-change":
                         Change(lib);
@@ -55,7 +54,7 @@ namespace TestApp.Theme3
                         break;
 
                     case "-findid":
-                        Console.Write("Введите Id нужного экземпляра: ");
+                        Console.Write("Введите Id нужного объекта: ");
                         var idToFind = CheckInputValue();
                         if(idToFind == -1)
                         {
@@ -71,7 +70,7 @@ namespace TestApp.Theme3
                         break;
 
                     case "-findn":
-                        Console.Write("Введите название нужного экземпляра: ");
+                        Console.Write("Введите название нужного объекта: ");
                         var title = Console.ReadLine();
                         if(title.ToLower() == "-close")
                         {
@@ -202,7 +201,7 @@ namespace TestApp.Theme3
                     {
                         break;
                     }
-                    lib.ChangeElementProperty(idToChange, propertyToChange, CheckInputString());
+                    lib.ChangeElementProperty(idToChange, propertyToChange, newValue);
                     changeIsOver = ExitChangeMenu(propertyToChange.Name);
                 }
                 else
@@ -227,7 +226,7 @@ namespace TestApp.Theme3
         public static void ElementToDelete(Library lib)
         {
 
-            Console.Write("Введите id удаляемого экземпляра: ");
+            Console.Write("Введите id удаляемого объекта: ");
 
             var idToDelete = CheckInputValue();
 
@@ -247,7 +246,7 @@ namespace TestApp.Theme3
             }
 
             lib.Delete(idToDelete);
-            Console.WriteLine("Вы успешно удалили экземпляр");
+            Console.WriteLine("Объект удален.");
         }
         /// <summary>
         /// Осуществляет контроль за корректностью ввода праметров, если ввод неверный, предлагает исправить
