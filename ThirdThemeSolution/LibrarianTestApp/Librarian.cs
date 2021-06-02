@@ -21,8 +21,8 @@ namespace TestApp.Theme3
             Library lib = new();
             while (_exit)
             {
-                Console.WriteLine("-help - список команд;\t-end - конец работы");
-                switch (Console.ReadLine().ToLower())
+                Console.WriteLine("\n-help - список команд;\t-end - конец работы");
+                switch (Console.ReadLine().ToLower().Replace(" ", ""))
                 {
                     case "-ins":
                         lib.Insert(CreateNewObjectViaTheConsole());
@@ -134,6 +134,7 @@ namespace TestApp.Theme3
                 Console.WriteLine($"{i+1}. {propertiesNames[i]} ");
             }
 
+            Console.WriteLine("\nНомер: ");
             var propertyNumber = GetLimitedIntegerExpressionFromConsole(propertiesNames.Length);
             if(propertyNumber == -1)
             {
