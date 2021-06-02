@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<PhrasesXML Version="1">
+	<message name="HelloPhrases">
+		<answer>
+			<string>Привет</string>
+			<string>Здравствуйте</string>
+			<string>Доброго времени суток</string>
+		</answer>
+		<question>
+			<string>привет</string>
+			<string>здравствуй</string>
+			<string>здравствуйте</string>
+			<string>добрый день</string>
+			<string>добрый вечер</string>
+			<string>доброе утро</string>
+			<string>доброй ночи</string>
+		</question>
+	</message>
+
+	<message name="ByePhrases">
+		<answer>
+			<string>Пока</string>
+			<string>До свидания</string>
+			<string>Всего хорошего</string>
+		</answer>
+		<question>
+			<string>пока</string>
+			<string>до свидания</string>
+		</question>
+	</message>
+
+	<message name="Anecdotes">
+		<answer>
+			<string>Приходит муж домой, а там жена!</string>
+			<string>Купил мужик шляпу, а она ему как раз!</string>
+		</answer>
+		<question>
+			<string>анекдот</string>
+		</question>
+	</message>
+
+	<message>
+		<answer>
+			<string>Шарпик</string>
+			<string>Меня зовут Шарпик</string>
+		</answer>
+		<question>
+			<string>Как тебя зовут</string>
+		</question>
+	</message>
+	
+	<message name="Aphorisms">
+		<answer>
+			<string>Если тебе тяжело, значит ты поднимаешься в гору. Если тебе легко, значит ты летишь в пропасть.</string>
+			<string>Какое слово скажешь, такое в ответ и услышишь.</string>
+			<string>Шутку, как и соль, должно употреблять с умеренностью.</string>
+			<string>Не происходит изменений лишь с высшей мудростью и низшей глупостью.</string>
+		</answer>
+		<question>
+			<string>---</string>
+		</question>
+	</message>
+</PhrasesXML>
+
