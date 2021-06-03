@@ -1,6 +1,5 @@
 ﻿using LibrarianLogic;
 using System;
-using System.Reflection;
 
 namespace TestApp.Theme3
 {
@@ -56,7 +55,7 @@ namespace TestApp.Theme3
                     case "-findid":
                         Console.Write("\nВведите Id нужного объекта: ");
                         var idToFind = GetIntegerExpressionFromConsole();
-                        if(idToFind == -1)
+                        if (idToFind == -1)
                         {
                             break;
                         }
@@ -72,7 +71,7 @@ namespace TestApp.Theme3
                     case "-findn":
                         Console.Write("\nВведите название нужного объекта: ");
                         var title = Console.ReadLine();
-                        if(title.ToLower() == "-end")
+                        if (title.ToLower() == "-end")
                         {
                             break;
                         }
@@ -86,7 +85,7 @@ namespace TestApp.Theme3
                         {
                             Console.WriteLine($"\n{v.GetInfo()}\n");
                         }
-                            
+
                         break;
 
                     default:
@@ -116,7 +115,7 @@ namespace TestApp.Theme3
         {
             Console.Write("\nВведите id эл-та: ");
             var objId = GetIntegerExpressionFromConsole();
-            if(objId == -1)
+            if (objId == -1)
             {
                 return;
             }
@@ -132,21 +131,21 @@ namespace TestApp.Theme3
 
             for (int i = 0; i < propertiesNames.Length; i++)
             {
-                Console.WriteLine($"{i+1}. {propertiesNames[i]} ");
+                Console.WriteLine($"{i + 1}. {propertiesNames[i]} ");
             }
 
             Console.WriteLine("\nНомер: ");
 
             var propertyNumber = GetLimitedIntegerExpressionFromConsole(propertiesNames.Length);
 
-            if(propertyNumber == -1)
+            if (propertyNumber == -1)
             {
                 return;
             }
 
             Console.Write("\nВведите новое значение св-ва: ");
 
-            var propertyNewValue = GetStringExpressionFromConsole(); 
+            var propertyNewValue = GetStringExpressionFromConsole();
 
 
             if (propertyNewValue == "")

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Reflection;
-using System.Text;
 
 namespace LibrarianLogic
 {
@@ -29,7 +27,7 @@ namespace LibrarianLogic
         public bool Delete(int id)
         {
             IBook objToDelete = Find(id);
-            if(objToDelete == null)
+            if (objToDelete == null)
             {
                 return false;
             }
@@ -71,7 +69,7 @@ namespace LibrarianLogic
                 if (book.Title.ToLower().Contains(title.ToLower()))
                 {
                     outList.Add(book);
-                }  
+                }
             }
             return outList.ToArray();
         }
@@ -82,7 +80,7 @@ namespace LibrarianLogic
         /// <returns></returns>
         public bool Contains(int id)
         {
-            if(Find(id) != null)
+            if (Find(id) != null)
             {
                 return true;
             }
@@ -105,13 +103,13 @@ namespace LibrarianLogic
         {
             var obj = Find(id);
 
-            if(obj == null)
+            if (obj == null)
             {
                 return false;
             }
 
-            PropertyInfo[] objProperties= obj.GetType().GetProperties();
-            if(objProperties[propertyNumber].Name == "Id")
+            PropertyInfo[] objProperties = obj.GetType().GetProperties();
+            if (objProperties[propertyNumber].Name == "Id")
             {
                 return false;
             }
@@ -138,7 +136,7 @@ namespace LibrarianLogic
                 objProperties[propertyNumber].SetValue(obj, value);
                 return true;
             }
-            
+
         }
         /// <summary>
         /// Составляет список эл-в типа string с именами св-в объекта
@@ -150,7 +148,7 @@ namespace LibrarianLogic
         public string[] GetElementPropertiesInfo(int id)
         {
             var obj = Find(id);
-            if(obj == null)
+            if (obj == null)
             {
                 return new string[] { "notFound" };
             }
@@ -164,25 +162,6 @@ namespace LibrarianLogic
             }
 
             return propertiesNames.ToArray();
-        }
-        /// <summary>
-        /// Меняет св-во объекта, найденного по id на новое, переданное значение
-        /// </summary>
-        /// <param name="elementId">id изменяемого объекта</param>
-        /// <param name="propertyToChange">Св-во для изменения</param>
-        /// <param name="newValue">Новое значение для изменяемого св-ва типа string</param>
-        /// <returns></returns>
-        public bool ChangeElementProperty(int elementId, PropertyInfo propertyToChange, string newValue)
-        {
-            if (propertyToChange.Name == "Id")
-            {
-                return false;
-            }
-            else
-            {
-                propertyToChange.SetValue(Find(elementId), newValue);
-                return true;
-            }
         }
     }
 }
