@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Xml;
 
@@ -12,7 +11,7 @@ namespace SharpikLogic
 
         public bool Enable { get; set; } = true;
         public string ActualAnswer { get; private set; }
-        public List<Message> AllMessages { get => _messages; private set => _messages = value;  }
+        public List<Message> AllMessages { get => _messages; private set => _messages = value; }
 
         private List<Message> _messages;
         private int _byePhIndex = 0;
@@ -77,7 +76,7 @@ namespace SharpikLogic
         /// </summary>
         private void LoadAnswersFromFile()
         {
-            
+
             var fileName = "C:\\Users\\e.barkalov\\source\\repos\\SimpleProjects\\FifthThemeSolution\\SharpikLogicXML\\PhrasesXML.xml";
 
             XmlDocument xDoc = new();
@@ -86,7 +85,7 @@ namespace SharpikLogic
             {
                 xDoc.Load(fileName);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception($"Загрузочный файл не найден, текст ошибки: {ex.Message}");
             }
@@ -95,8 +94,8 @@ namespace SharpikLogic
 
             for (int i = 0; i < xRoot.ChildNodes.Count; i++)
             {
-                
-                if(xRoot.ChildNodes[i].Attributes.Count > 0)
+
+                if (xRoot.ChildNodes[i].Attributes.Count > 0)
                 {
                     XmlAttribute checkAtr = xRoot.ChildNodes[i].Attributes[0];
                     if (checkAtr.Value.ToLower() == "byephrases")

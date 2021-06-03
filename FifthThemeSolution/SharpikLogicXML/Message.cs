@@ -1,6 +1,4 @@
-﻿using System.Xml;
-
-namespace SharpikLogic
+﻿namespace SharpikLogic
 {
     public class Message
     {
