@@ -94,6 +94,7 @@ namespace LibrarianLogic
         /// Если было передано св-во на изменение с именем id возвращает false
         /// Далее выбирает, если св-во типа int проверяет переданное значение и конвертирует
         /// Если ковертировать не получилось, то переданное значение некорректно, возвращает false
+        /// Если переданный номер соответствует св-ву "год", то новое значение проверяется дополнительно
         /// Если string присваивает
         /// </summary>
         /// <param name="id">идентификатор. по которому идет поиск объекта</param>
@@ -118,10 +119,17 @@ namespace LibrarianLogic
             if (objProperties[propertyNumber].PropertyType == typeof(int))
             {
                 int convertValue;
+
                 if (!int.TryParse(value, out convertValue))
                 {
                     return false;
                 }
+
+                if (objProperties[propertyNumber].Name == "Year" && (convertValue < 0 || convertValue > DateTime.Now.Year))
+                {
+                    return false;
+                }
+
                 objProperties[propertyNumber].SetValue(obj, convertValue);
                 return true;
             }

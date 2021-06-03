@@ -125,6 +125,7 @@ namespace TestApp.Theme3
             if (propertiesNames[0] == "notFound")
             {
                 Console.WriteLine("\nЭлементов с таким id не было найдено");
+                return;
             }
 
             Console.WriteLine("\nВыберите номер св-ва, которое вы хотите изменить: \n\tId генерируется автоматически при создании, изменить его невозможно");
@@ -141,24 +142,14 @@ namespace TestApp.Theme3
                 return;
             }
 
-            var propertyNewValue = "";
+            var propertyNewValue = GetStringExpressionFromConsole(); 
 
             Console.Write("\nВведите новое значение св-ва: ");
-
-            if (propertiesNames[propertyNumber - 1].ToLower() == "year")
-            {
-                propertyNewValue = GetYearExpressionFromConsole().ToString();
-            }
-            else
-            {
-                propertyNewValue = GetStringExpressionFromConsole(); 
-            }
 
             if (propertyNewValue == "" || propertyNewValue == "-1")
             {
                 return;
             }
-
 
 
             if (lib.ChangeElementProperty(objId, propertyNumber - 1, propertyNewValue))
@@ -167,8 +158,8 @@ namespace TestApp.Theme3
             }
             else
             {
-                Console.WriteLine($"\nНе удалось применить изменения, проверьте введные данные {objId} : {propertyNewValue}\n\tВозможно, вы выбрали id, помните, " +
-                    $"id генерируется автоматически при создании, изменить его невозможно");
+                Console.WriteLine($"\nНе удалось применить изменения, проверьте введные данные {objId} : {propertyNewValue}\n\nВозможно, вы выбрали id, помните, " +
+                    $"id генерируется автоматически при создании, изменить его невозможно\n\nТак же важно понимать, что св-ву год нельзя присвоить значение до 1 г. н.э. или больше нынешнего года");
             }
 
         }
