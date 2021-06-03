@@ -6,7 +6,6 @@ namespace SharpikLogic
     {
         public event Answer.EnteredQuestion EnteredQuestion;
         public bool Enable { get; set; } = true;
-        public string ActiveQuestion { get; set; }
 
 
         private Answer _message = new();
@@ -18,8 +17,8 @@ namespace SharpikLogic
 
         public string InputQuestion(string q)
         {
-            Thread.Sleep(1000);
             EnteredQuestion?.Invoke(this, q);
+            Thread.Sleep(1000);
             return _message.ActualAnswer;
         }
     }

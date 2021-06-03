@@ -1,11 +1,11 @@
 ﻿using CaclulatorLogic;
 using System;
+using System.Text.RegularExpressions;
 
 namespace TestApp.Theme4
 {
     public static class CalculatorProgram
     {
-        private static bool _exit = true;
         public static void Main(string[] args)
         {
             Start();
@@ -13,7 +13,9 @@ namespace TestApp.Theme4
         public static void Start()
         {
             Calculator calc = new();
+
             calc.AddOperation("*", (x, y) => x * y);
+
             Console.WriteLine("Список доступных операций: ");
 
             var declaredOp = calc.DeclaredOperations;
@@ -23,43 +25,44 @@ namespace TestApp.Theme4
                 Console.WriteLine($"{i + 1}. {declaredOp[i]}");
             }
 
-            double leftOperand;
-            double rightOperand;
-            string operation;
+            Console.WriteLine("Для выхода введите 0 и нажмите Enter");
+            Console.Write("Пример: 5 * 7. Дробная часть отделяется запятой: 3,14");
 
-            Console.WriteLine("Для выхода введите 0 и найжмите Enter");
-            Console.Write("Ввод осуществляется через проблем. Пример: y * x. Дробная часть отделяется запятой: 3,14");
-            while (_exit)
+            while (TryGetExpressionFromConsole(out var leftOperand, out var rightOperand, out var operation))
             {
-                Console.Write("\n\n>>> ");
-                GetExpressionFromConsole(out leftOperand, out rightOperand, out operation);
-
-                var result = calc.PerformOperation(operation, leftOperand, rightOperand);
-
-                Console.WriteLine(result);
+                Console.WriteLine(calc.PerformOperation(operation, leftOperand, rightOperand));
             }
 
         }
-        public static void GetExpressionFromConsole(out double leftOperand, out double rightOperand, out string operation)
+        public static bool TryGetExpressionFromConsole(out double leftOperand, out double rightOperand, out string operation)
         {
-            var value = Console.ReadLine();
-            if (value == "0")
+            while (true)
             {
-                _exit = false;
-                leftOperand = 0;
-                rightOperand = 0;
-                operation = "-";
-                return;
+                Console.Write("\n\n>>> ");
+
+                var value = Console.ReadLine().Trim();
+                if (value == "0")
+                {
+                    leftOperand = 0;
+                    rightOperand = 0;
+                    operation = "";
+                    return false;
+                }
+                 
+                var regex = new Regex(@"\s+");
+                var result = regex.Replace(value, " ").Split();
+
+                if (result.Length != 3 || !double.TryParse(result[0], out leftOperand) || !double.TryParse(result[2], out rightOperand))
+                {
+                    Console.WriteLine("Неверный ввод");
+                    Console.Write("Введите еще раз: ");
+                    continue;
+                }
+
+                operation = result[1];
+                return true;
             }
-            var temp = value.Split();
-            while (temp.Length != 3 || !double.TryParse(temp[0], out leftOperand) || !double.TryParse(temp[2], out rightOperand))
-            {
-                Console.WriteLine("Неверный ввод");
-                Console.Write("Введите еще раз: \n\n>>> ");
-                value = Console.ReadLine();
-                temp = value.Split();
-            }
-            operation = temp[1];
+            
         }
     }
 }

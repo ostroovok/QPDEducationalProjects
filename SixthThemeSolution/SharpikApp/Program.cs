@@ -7,19 +7,24 @@ namespace SharpikTestApp
 {
     class Program
     {
+        static bool _exit = false;
         static void Main(string[] args)
         {
-            InputMessage mess = new InputMessage();
+            InputMessage mess = new();
             Console.WriteLine("Для начала диалога введите сообщение:");
+
             while (true)
             {
-                var inputStr = Console.ReadLine();
-                Console.WriteLine(Task.Run(() => mess.InputQuestion(inputStr)).Result);
-
                 if (!mess.Enable)
                 {
                     break;
                 }
+
+                var inputStr = Console.ReadLine();
+
+                Task.Run(() =>
+                    Console.WriteLine(mess.InputQuestion(inputStr)));
+
             }
         }
     }
