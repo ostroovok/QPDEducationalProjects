@@ -13,6 +13,7 @@ namespace TestApp.Theme4
         public static void Start()
         {
             Calculator calc = new();
+            calc.AddOperation("*", (x, y) => x * y);
             Console.WriteLine("Список доступных операций: ");
 
             var declaredOp = calc.DeclaredOperations;

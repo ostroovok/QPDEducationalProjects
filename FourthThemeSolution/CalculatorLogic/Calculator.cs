@@ -15,7 +15,6 @@ namespace CaclulatorLogic
                 { "+", (x, y) => x + y },
                 { "-", (x, y) => x - y },
                 { "/", (x, y) => x / y },
-                { "*", (x, y) => x * y },
             };
         }
         public double? PerformOperation(string op, double x, double y)
@@ -29,7 +28,7 @@ namespace CaclulatorLogic
         }
         public void AddOperation(string op, Func<double, double, double> newOp)
         {
-            if (!_operations.ContainsKey(op))
+            if (_operations.ContainsKey(op))
             {
                 Console.WriteLine($"Операция уже существует: {op}");
                 return;

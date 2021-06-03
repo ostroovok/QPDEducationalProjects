@@ -10,14 +10,16 @@ namespace TestApp
         {
             //FirstTask.Start();
 
-            FillExperiment();
+            FillArrayExperiment();
 
             //BubbleSortExperiment();
 
             QuickSortExperiment();
         }
-
-        static void FillExperiment()
+        /// <summary>
+        /// Метод, испытывающий обычное заполнение массива и многопоточное заполнение
+        /// </summary>
+        static void FillArrayExperiment()
         {
             int[] arr = new int[100000000];
             Console.WriteLine($"Размер массива: {arr.Length}\n\n");
