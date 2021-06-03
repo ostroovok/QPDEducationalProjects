@@ -11,7 +11,6 @@ namespace SharpikTestApp
             Console.WriteLine("Для начала диалога введите сообщение:");
             while (true)
             {
-
                 var temp = mess.InputQuestion(Console.ReadLine());
 
                 Console.WriteLine(temp);

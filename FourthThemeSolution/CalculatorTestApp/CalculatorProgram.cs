@@ -48,7 +48,7 @@ namespace TestApp.Theme4
                     operation = "";
                     return false;
                 }
-                 
+
                 var regex = new Regex(@"\s+");
                 var result = regex.Replace(value, " ").Split();
 
@@ -62,7 +62,7 @@ namespace TestApp.Theme4
                 operation = result[1];
                 return true;
             }
-            
+
         }
     }
 }
