@@ -26,7 +26,7 @@ namespace TestApp.Theme3
                 {
                     case "-ins":
                         lib.Insert(CreateNewObjectViaTheConsole());
-                        Console.WriteLine("Объект создан.");
+                        Console.WriteLine("\nОбъект создан.");
                         break;
                     case "-help":
                         PrintAvailableCommands();
@@ -43,7 +43,7 @@ namespace TestApp.Theme3
 
                     case "-printall":
                         if (lib.Count == 0)
-                            Console.WriteLine("Элементов не найдено.");
+                            Console.WriteLine("\nЭлементов не найдено.");
                         else
                         {
                             foreach (var v in lib.LibraryFund)
@@ -54,7 +54,7 @@ namespace TestApp.Theme3
                         break;
 
                     case "-findid":
-                        Console.Write("Введите Id нужного объекта: ");
+                        Console.Write("\nВведите Id нужного объекта: ");
                         var idToFind = GetIntegerExpressionFromConsole();
                         if(idToFind == -1)
                         {
@@ -63,14 +63,14 @@ namespace TestApp.Theme3
                         var resId = lib.Find(idToFind);
                         while (resId == null)
                         {
-                            Console.Write("Не найдено эл-ов с таким id.\nВведите id еще раз: ");
+                            Console.Write("\nНе найдено эл-ов с таким id.\nВведите id еще раз: ");
                             resId = lib.Find(GetIntegerExpressionFromConsole());
                         }
                         Console.WriteLine(resId.GetInfo());
                         break;
 
                     case "-findn":
-                        Console.Write("Введите название нужного объекта: ");
+                        Console.Write("\nВведите название нужного объекта: ");
                         var title = Console.ReadLine();
                         if(title.ToLower() == "-end")
                         {
@@ -79,7 +79,7 @@ namespace TestApp.Theme3
                         var resTitle = lib.Find(title);
                         while (resTitle.Length == 0)
                         {
-                            Console.Write("Не найдено эл-ов с таким названием.\nВведите название еще раз: ");
+                            Console.Write("\nНе найдено эл-ов с таким названием.\nВведите название еще раз: ");
                             resTitle = lib.Find(Console.ReadLine());
                         }
                         foreach (var v in resTitle)
@@ -90,7 +90,7 @@ namespace TestApp.Theme3
                         break;
 
                     default:
-                        Console.WriteLine("Строка пустая или вы ввели команду, которой не существует,\n\t либо она сейчас недоступна");
+                        Console.WriteLine("\nСтрока пустая или вы ввели команду, которой не существует,\n\t либо она сейчас недоступна");
                         break;
                 }
             }
@@ -136,17 +136,20 @@ namespace TestApp.Theme3
             }
 
             Console.WriteLine("\nНомер: ");
+
             var propertyNumber = GetLimitedIntegerExpressionFromConsole(propertiesNames.Length);
+
             if(propertyNumber == -1)
             {
                 return;
             }
 
-            var propertyNewValue = GetStringExpressionFromConsole(); 
-
             Console.Write("\nВведите новое значение св-ва: ");
 
-            if (propertyNewValue == "" || propertyNewValue == "-1")
+            var propertyNewValue = GetStringExpressionFromConsole(); 
+
+
+            if (propertyNewValue == "")
             {
                 return;
             }
@@ -172,7 +175,7 @@ namespace TestApp.Theme3
         public static void ElementToDelete(Library lib)
         {
 
-            Console.Write("Введите id удаляемого объекта: ");
+            Console.Write("\nВведите id удаляемого объекта: ");
 
             var idToDelete = GetIntegerExpressionFromConsole();
 
@@ -197,28 +200,28 @@ namespace TestApp.Theme3
         /// <returns>Созданный экземпляр выбранного класса</returns>
         public static IBook CreateNewObjectViaTheConsole()
         {
-            Console.WriteLine("Укажите тип создаваемого объекта. Прервать создание невозможно.\n Выберите один из вариантов, указав его номер\n\t1. Книга\n\t2. Журнал");
+            Console.WriteLine("\nУкажите тип создаваемого объекта. Прервать создание невозможно.\n Выберите один из вариантов, указав его номер\n\t1. Книга\n\t2. Журнал");
             var typeToCreate = GetLimitedIntegerExpressionFromConsole(2);
 
-            Console.Write("Введите название: ");
+            Console.Write("\nВведите название: ");
             var title = GetStringExpressionFromConsole();
 
-            Console.Write("Введите количество: ");
+            Console.Write("\nВведите количество: ");
             var quantity = GetIntegerExpressionFromConsole();
 
-            Console.Write("Введите год издания: ");
+            Console.Write("\nВведите год издания: ");
             var date = GetYearExpressionFromConsole();
 
-            Console.Write("Введите издательство: ");
+            Console.Write("\nВведите издательство: ");
             var edition = GetStringExpressionFromConsole();
 
             if (typeToCreate == 1)
             {
 
-                Console.Write("Введите имя автора книги: ");
+                Console.Write("\nВведите имя автора книги: ");
                 var author = GetStringExpressionFromConsole();
 
-                Console.Write("Введите название жанра книги: ");
+                Console.Write("\nВведите название жанра книги: ");
                 var genre = GetStringExpressionFromConsole();
 
                 return new Book(title, quantity, author, genre, date, edition);
@@ -227,10 +230,10 @@ namespace TestApp.Theme3
             else
             {
 
-                Console.Write("Введите периодичность журнала: ");
+                Console.Write("\nВведите периодичность журнала: ");
                 var periodicity = GetStringExpressionFromConsole();
 
-                Console.Write("Введите номер журнала: ");
+                Console.Write("\nВведите номер журнала: ");
                 var number = GetIntegerExpressionFromConsole();
 
                 return new Magazine(title, quantity, date, edition, periodicity, number);
@@ -243,7 +246,7 @@ namespace TestApp.Theme3
         public static void PrintAvailableCommands()
         {
             Console.WriteLine(
-                $"-ins - добавить новый экземпляр\n" +
+                $"\n-ins - добавить новый экземпляр\n" +
                 $"-help - вывести список доступных команд\n" +
                 $"-end - закончить работу\n" +
                 $"-del - удалить экземпляр\n" +

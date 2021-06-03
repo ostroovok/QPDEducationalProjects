@@ -125,7 +125,7 @@ namespace LibrarianLogic
                     return false;
                 }
 
-                if (objProperties[propertyNumber].Name == "Year" && (convertValue < 0 || convertValue > DateTime.Now.Year))
+                if (objProperties[propertyNumber].Name == "Year" && (convertValue <= 0 || convertValue > DateTime.Now.Year))
                 {
                     return false;
                 }
