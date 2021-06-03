@@ -67,6 +67,11 @@ namespace SixthThemeLogic
         #endregion
 
         #region Quick Sort
+        /// <summary>
+        /// Метод вызова парарллельной быстрой сортировки
+        /// </summary>
+        /// <param name="arr">Массив для сортировки</param>
+        /// <returns>Отсортированный массив, результат приватного метода ThreadQuickSortStep</returns>
         public static int[] ThreadQuickSort(int[] arr)
         {
             return ThreadQuickSortStep(arr, 0, arr.Length - 1); ;

@@ -17,7 +17,7 @@ namespace TestApp
             QuickSortExperiment();
         }
         /// <summary>
-        /// Метод, испытывающий обычное заполнение массива и многопоточное заполнение
+        /// Метод, сравнивающий обычное заполнение массива и параллельное заполнение
         /// </summary>
         static void FillArrayExperiment()
         {
@@ -39,6 +39,9 @@ namespace TestApp
             sw.Stop();
             Console.WriteLine("\nЗаполнение массива рандомными элементами с помощью класса задач: " + sw.ElapsedMilliseconds + " мс.\n\n\n");
         }
+        /// <summary>
+        /// Метод, сравнивающий обычную и параллельную сортировку массива пузырьком
+        /// </summary>
         static void BubbleSortExperiment()
         {
             int[] arr = new int[100000];
@@ -63,6 +66,9 @@ namespace TestApp
             Console.WriteLine("\nСортировка пузырьком с использованием класса задач: " + sw.ElapsedMilliseconds + " мс.\n\n\n");
 
         }
+        /// <summary>
+        /// Метод, сравнивающий обычную и параллельную быструю сортировку
+        /// </summary>
         static void QuickSortExperiment()
         {
             int[] arr = new int[1000000];
