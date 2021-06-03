@@ -27,9 +27,10 @@ namespace TestApp.Theme4
             string operation;
 
             Console.WriteLine("Для выхода введите 0 и найжмите Enter");
-            Console.Write("Ввод осуществляется через проблем. Пример: y * x\n\n--> ");
+            Console.Write("Ввод осуществляется через проблем. Пример: y * x. Дробная часть отделяется запятой: 3,14");
             while (_exit)
             {
+                Console.Write("\n\n>>> ");
                 GetExpressionFromConsole(out leftOperand, out rightOperand, out operation);
 
                 var result = calc.PerformOperation(operation, leftOperand, rightOperand);
@@ -53,7 +54,7 @@ namespace TestApp.Theme4
             while (temp.Length != 3 || !double.TryParse(temp[0], out leftOperand) || !double.TryParse(temp[2], out rightOperand))
             {
                 Console.WriteLine("Неверный ввод");
-                Console.WriteLine("Введите еще раз: ");
+                Console.Write("Введите еще раз: \n\n>>> ");
                 value = Console.ReadLine();
                 temp = value.Split();
             }

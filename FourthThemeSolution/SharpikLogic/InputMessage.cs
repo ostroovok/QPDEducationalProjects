@@ -4,8 +4,6 @@
     {
         public event Answer.EnteredQuestion EnteredQuestion;
         public bool Enable { get; set; } = true;
-        public string ActiveQuestion { get; set; }
-
 
         private Answer _message = new();
 
