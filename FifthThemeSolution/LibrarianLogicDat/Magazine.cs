@@ -2,10 +2,10 @@
 {
     public class Magazine : AbstractBook
     {
-        public int Periodicity { get; set; }
+        public string Periodicity { get; set; }
         public int Number { get; set; }
 
-        public Magazine(int id, string title, int quantity, int year, string edition, int periodicity, int number)
+        public Magazine(int id, string title, int quantity, int year, string edition, string periodicity, int number)
         {
             Id = id;
             Title = title;
@@ -15,7 +15,7 @@
             Periodicity = periodicity;
             Number = number;
         }
-        public Magazine(string title, int quantity, int year, string edition, int periodicity, int number)
+        public Magazine(string title, int quantity, int year, string edition, string periodicity, int number)
         {
             SetId();
             Title = title;

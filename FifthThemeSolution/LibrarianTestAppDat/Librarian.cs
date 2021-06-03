@@ -1,6 +1,5 @@
 ﻿using LibrarianLogic;
 using System;
-using System.Reflection;
 
 namespace TestApp.Theme3
 {
@@ -20,28 +19,27 @@ namespace TestApp.Theme3
             Console.Clear();
             Library lib = new();
             bool loadResult = lib.Load("LibSaver");
-            if (loadResult)
+            if (!loadResult)
             {
-                Console.WriteLine("Не найден загружаемый файл");
+                Console.WriteLine("Не найден загружаемый файл!");
             }
-            while (_exit)
+            while (_exit && loadResult)
             {
                 Console.WriteLine("-help - список команд;\t-end - конец работы");
                 switch (Console.ReadLine().ToLower())
                 {
                     case "-ins":
-                        lib.Insert(CreateNew());
-                        Console.WriteLine("Объект создан.");
+                        CreateNewObjectViaTheConsole(lib);
+                        Console.WriteLine("\nОбъект создан.");
                         break;
                     case "-save":
                         lib.Save("LibSaver");
-                        Console.WriteLine("Сохранение прошло успешно");
+                        Console.WriteLine("\nСохранение прошло успешно");
                         break;
                     case "-help":
-                        PrintCommands();
+                        PrintAvailableCommands();
                         break;
                     case "-end":
-                        lib.Save("LibSaver");
                         Exit();
                         break;
                     case "-del":
@@ -53,7 +51,7 @@ namespace TestApp.Theme3
 
                     case "-printall":
                         if (lib.Count == 0)
-                            Console.WriteLine("Элементов не найдено.");
+                            Console.WriteLine("\nЭлементов не найдено.");
                         else
                         {
                             foreach (var v in lib.LibraryFund)
@@ -64,8 +62,8 @@ namespace TestApp.Theme3
                         break;
 
                     case "-findid":
-                        Console.Write("Введите Id нужного экземпляра: ");
-                        var idToFind = CheckInputValue();
+                        Console.Write("\nВведите Id нужного объекта: ");
+                        var idToFind = GetIntegerExpressionFromConsole();
                         if (idToFind == -1)
                         {
                             break;
@@ -73,31 +71,34 @@ namespace TestApp.Theme3
                         var resId = lib.Find(idToFind);
                         while (resId == null)
                         {
-                            Console.Write("Не найдено эл-ов с таким id.\nВведите id еще раз: ");
-                            resId = lib.Find(CheckInputValue());
+                            Console.Write("\nНе найдено эл-ов с таким id.\nВведите id еще раз: ");
+                            resId = lib.Find(GetIntegerExpressionFromConsole());
                         }
                         Console.WriteLine(resId.GetInfo());
                         break;
 
                     case "-findn":
-                        Console.Write("Введите название нужного экземпляра: ");
+                        Console.Write("\nВведите название нужного объекта: ");
                         var title = Console.ReadLine();
-                        if (title == "-close")
+                        if (title.ToLower() == "-end")
                         {
                             break;
                         }
                         var resTitle = lib.Find(title);
                         while (resTitle.Length == 0)
                         {
-                            Console.Write("Не найдено эл-ов с таким названием.\nВведите название еще раз: ");
+                            Console.Write("\nНе найдено эл-ов с таким названием.\nВведите название еще раз: ");
                             resTitle = lib.Find(Console.ReadLine());
                         }
                         foreach (var v in resTitle)
+                        {
                             Console.WriteLine($"\n{v.GetInfo()}\n");
+                        }
+
                         break;
 
                     default:
-                        Console.WriteLine("Строка пустая или вы ввели команду, которой не существует,\n\t либо она сейчас недоступна");
+                        Console.WriteLine("\nСтрока пустая или вы ввели команду, которой не существует,\n\t либо она сейчас недоступна");
                         break;
                 }
             }
@@ -108,152 +109,94 @@ namespace TestApp.Theme3
         {
             _exit = false;
         }
-
         /// <summary>
-        /// Получает из библиотеки эл-т по Id, после получает его на св-ва и предлагает изменить одно из них
-        /// Затем передает id, выбранное св-во и его новое значение библиотеке для изменения
-        /// После успешного изменения дает выбор: продолжить или закончить
-        /// Закончить - ввести "-close"; Продолжить - нажать Enter
-        /// В случае выбора Id предпреждает о том, что изменить его невозможно, предлагает изменить выбор св-ва
-        /// После каждого ввода стоят проверки на значение, если оно равно -1, то пользователь ввел -close, а значит нужно выйти
+        /// Просит ввести id, после чего выводит список свойств объекта с этим id
+        /// После получения id делает проверку на наличие объекта в библиотеке, если такого не нашлось - сообщает об этом
+        /// Далее принимает значения:
+        ///     1. Номер изменяемого св-ва по выведенному списку
+        ///     2. Новое значение св-ва
+        /// После вызывает метод библиотеки по изменению и передает полученные значения
+        /// В случае неудачи сообщает об этом и просит првоерить введенные значения
         /// </summary>
-        /// <param name="lib">Библиотека</param>
+        /// <param name="lib"></param>
         public static void Change(Library lib)
         {
-
-            Console.WriteLine("Введите id элемента, который вы хотите изменить: ");
-
-            var idToChange = CheckInputValue();
-            if (idToChange == -1)
+            Console.Write("\nВведите id эл-та: ");
+            var objId = GetIntegerExpressionFromConsole();
+            if (objId == -1)
             {
                 return;
             }
-            while (!lib.Contains(idToChange))
+
+            var propertiesNames = lib.GetElementPropertiesInfo(objId);
+            if (propertiesNames[0] == "notFound")
             {
-                Console.Write("Не найдено эл-ов с таким id\nВведите id еще раз: ");
-                idToChange = CheckInputValue();
-                if (idToChange == -1)
-                {
-                    return;
-                }
+                Console.WriteLine("\nЭлементов с таким id не было найдено");
+                return;
             }
 
-            PropertyInfo[] properties = lib.GetElementProperties(idToChange);
+            Console.WriteLine("\nВыберите номер св-ва, которое вы хотите изменить: \n\tId генерируется автоматически при создании, изменить его невозможно");
 
-            for (int i = 0; i < properties.Length; i++)
+            for (int i = 0; i < propertiesNames.Length; i++)
             {
-                Console.WriteLine($"{i + 1}. Св-во объекта:\n \tТип: {properties[i].PropertyType.Name} \tНазвание: {properties[i].Name}");
+                Console.WriteLine($"{i + 1}. {propertiesNames[i]} ");
             }
 
-            bool changeIsOver = false;
+            Console.WriteLine("\nНомер: ");
 
-            while (!changeIsOver)
+            var propertyNumber = GetLimitedIntegerExpressionFromConsole(propertiesNames.Length);
+
+            if (propertyNumber == -1)
             {
-                Console.WriteLine("Что вы хотите изменить?");
-
-                var choice = CheckInputValue(properties.Length);
-                if (choice == -1)
-                {
-                    break;
-                }
-                var propertyToChange = properties[choice - 1];
-
-                Console.WriteLine($"Вы выбрали {propertyToChange.Name}, введите новое значение, " +
-                    $"учитывая тип {propertyToChange.PropertyType.Name}: ");
-
-                if (propertyToChange.PropertyType == typeof(int))
-                {
-                    if (propertyToChange.Name.ToLower() == "year")
-                    {
-                        int newValue = CheckInputYear();
-                        if (newValue == -1)
-                        {
-                            break;
-                        }
-                        lib.ChangeElementProperty(idToChange, propertyToChange, newValue);
-                        changeIsOver = ExitChangeMenu(propertyToChange.Name);
-                    }
-                    else if (propertyToChange.Name.ToLower() == "periodicity")
-                    {
-                        int newValue = CheckInputValue(31);
-                        if (newValue == -1)
-                        {
-                            break;
-                        }
-                        lib.ChangeElementProperty(idToChange, propertyToChange, newValue);
-                        changeIsOver = ExitChangeMenu(propertyToChange.Name);
-                    }
-                    else
-                    {
-                        int newValue = CheckInputValue();
-                        if (newValue == -1)
-                        {
-                            break;
-                        }
-                        bool resultStatus = lib.ChangeElementProperty(idToChange, propertyToChange, newValue);
-                        if (!resultStatus)
-                        {
-                            Console.WriteLine($"Не удалось изменить {propertyToChange.Name}, скорее всего, изменить его невозможно, выберите другое св-во");
-                        }
-                        else
-                        {
-                            changeIsOver = ExitChangeMenu(propertyToChange.Name);
-                        }
-                    }
-                }
-                else if (propertyToChange.PropertyType == typeof(string))
-                {
-                    var newValue = CheckInputString();
-                    if (newValue == "")
-                    {
-                        break;
-                    }
-                    lib.ChangeElementProperty(idToChange, propertyToChange, newValue);
-                    changeIsOver = ExitChangeMenu(propertyToChange.Name);
-                }
-                else
-                {
-                    Console.WriteLine("Введенное вами значение соответсвует отличному от свойства типа\n\n" +
-                        "Нажмите Enter чтобы продолжить или введите -close для выхода из меню изменения, " +
-                    $"другие команды в данный момент недоступны\n");
-
-                    if (Console.ReadLine().ToLower() == "-close")
-                    {
-                        break;
-                    }
-                }
+                return;
             }
+
+            Console.Write("\nВведите новое значение св-ва: ");
+
+            var propertyNewValue = GetStringExpressionFromConsole();
+
+
+            if (propertyNewValue == "")
+            {
+                return;
+            }
+
+
+            if (lib.ChangeElementProperty(objId, propertyNumber - 1, propertyNewValue))
+            {
+                Console.WriteLine($"\nСв-во {propertiesNames[propertyNumber - 1]} было успешно изменено\n");
+            }
+            else
+            {
+                Console.WriteLine($"\nНе удалось применить изменения, проверьте введные данные {objId} : {propertyNewValue}\n\nВозможно, вы выбрали id, помните, " +
+                    $"id генерируется автоматически при создании, изменить его невозможно\n\nТак же важно понимать, что св-ву год нельзя присвоить значение до 1 г. н.э. или больше нынешнего года");
+            }
+
         }
         /// <summary>
         /// Просит ввести id элемента, после проверет, существует ли такой элемент, если нет
         /// то просит ввести id еще раз
         /// В случае если библиотека содержит такой эл-т, то передает его id библиотеке на удаление
         /// </summary>
-        /// <param name="lib">Библиотке</param>
+        /// <param name="lib">Библиотка</param>
         public static void ElementToDelete(Library lib)
         {
 
-            Console.Write("Введите id удаляемого экземпляра: ");
+            Console.Write("\nВведите id удаляемого объекта: ");
 
-            var idToDelete = CheckInputValue();
+            var idToDelete = GetIntegerExpressionFromConsole();
 
             if (idToDelete == -1)
             {
                 return;
             }
 
-            while (!lib.Contains(idToDelete))
+            if (!lib.Delete(idToDelete))
             {
-                Console.Write("Не найдено эл-ов с таким id\nВведите id еще раз: ");
-                idToDelete = CheckInputValue();
-                if (idToDelete == -1)
-                {
-                    return;
-                }
+                Console.WriteLine("\nНе удалось удалить объект (не найдено эл-ов с таким id)");
+                return;
             }
-
-            lib.Delete(idToDelete);
-            Console.WriteLine("Объект удален");
+            Console.WriteLine("\nОбъект удален.");
         }
         /// <summary>
         /// Осуществляет контроль за корректностью ввода праметров, если ввод неверный, предлагает исправить
@@ -262,103 +205,83 @@ namespace TestApp.Theme3
         /// </summary>
         /// <param name="lib">Библиотека</param>
         /// <returns>Созданный экземпляр выбранного класса</returns>
-        public static IBook CreateNew()
+        public static void CreateNewObjectViaTheConsole(Library lib)
         {
-            Console.WriteLine("Укажите тип создаваемого объекта. Прервать создание невозможно.\n Выберите один из вариантов, указав его номер\n\t1. Книга\n\t2. Журнал");
-            var typeToCreate = CheckInputValue(2);
+            Console.WriteLine("\nУкажите тип создаваемого объекта. Прервать создание невозможно.\n Выберите один из вариантов, указав его номер\n\t1. Книга\n\t2. Журнал");
+            var typeToCreate = GetLimitedIntegerExpressionFromConsole(2);
 
-            Console.Write("Введите название: ");
-            var title = CheckInputString();
+            Console.Write("\nВведите название: ");
+            var title = GetStringExpressionFromConsole();
 
-            Console.Write("Введите количество: ");
-            var quantity = CheckInputValue();
+            Console.Write("\nВведите количество: ");
+            var quantity = GetIntegerExpressionFromConsole();
 
-            Console.Write("Введите год издания: ");
-            var date = CheckInputYear();
+            Console.Write("\nВведите год издания: ");
+            var date = GetYearExpressionFromConsole();
 
-            Console.Write("Введите издательство: ");
-            var edition = CheckInputString();
+            Console.Write("\nВведите издательство: ");
+            var edition = GetStringExpressionFromConsole();
 
             if (typeToCreate == 1)
             {
 
-                Console.Write("Введите имя автора книги: ");
-                var author = CheckInputString();
+                Console.Write("\nВведите имя автора книги: ");
+                var author = GetStringExpressionFromConsole();
 
-                Console.Write("Введите название жанра книги: ");
-                var genre = CheckInputString();
+                Console.Write("\nВведите название жанра книги: ");
+                var genre = GetStringExpressionFromConsole();
 
-                return new Book(title, quantity, author, genre, date, edition);
+                lib.Insert(new Book(title, quantity, author, genre, date, edition));
 
             }
             else
             {
 
-                Console.Write("Введите периодичность журнала: ");
-                var periodicity = CheckInputValue(31);
+                Console.Write("\nВведите периодичность журнала: ");
+                var periodicity = GetStringExpressionFromConsole();
 
-                Console.Write("Введите номер журнала: ");
-                var number = CheckInputValue();
+                Console.Write("\nВведите номер журнала: ");
+                var number = GetIntegerExpressionFromConsole();
 
-                return new Magazine(title, quantity, date, edition, periodicity, number);
+                lib.Insert(new Magazine(title, quantity, date, edition, periodicity, number));
 
             }
         }
         /// <summary>
         /// Выводит список доступных для ввода команд
         /// </summary>
-        public static void PrintCommands()
+        public static void PrintAvailableCommands()
         {
             Console.WriteLine(
-                $"-ins - добавить новый экземпляр\n" +
+                $"\n-ins - добавить новый экземпляр\n" +
                 $"-help - вывести список доступных команд\n" +
                 $"-end - закончить работу\n" +
                 $"-del - удалить экземпляр\n" +
                 $"-change - изменить экземпляр\n" +
                 $"-printall - вывести все имеющиеся экземпляры\n" +
                 $"-findid - найти экземпляр по id\n" +
-                $"-findn - найти экземпляр по имени\n" +
-                $"-save - сохранить изменения в файл\n"
+                $"-findn - найти экземпляр по имени\n"
                 );
         }
         #endregion
 
         #region Private Methods
         /// <summary>
-        /// Проверяет введенную команду, в случае "-close" возвращает false, 
-        /// Если пользователь нажал Enter, то возвращает true
-        /// </summary>
-        /// <param name="propertyName">
-        /// Т.к. метод вызывается после успешного изменения св-ва, он должен выводить название измененного св-ва, данный параметр им и является
-        /// </param>
-        /// <returns></returns>
-        private static bool ExitChangeMenu(string propertyName)
-        {
-            Console.WriteLine($"Вы успешно изменили св-во {propertyName}, нажмите Enter чтобы продолжить или введите -close для выхода из меню изменения, " +
-                    $"другие команды в данный момент недоступны\n");
-
-            if (Console.ReadLine().ToLower() == "-close")
-            {
-                return true;
-            }
-            return false;
-        }
-        /// <summary>
-        /// Осуществляет контроль ввода, не позволяет ввести пустую строку
+        /// Осуществляет контроль ввода строки, не позволяет ввести пустую
         /// </summary>
         /// <param name="str"></param>
         /// <returns>Введенная строка</returns>
-        private static string CheckInputString()
+        private static string GetStringExpressionFromConsole()
         {
             var str = Console.ReadLine();
-            if (str.ToLower() == "-close")
+            if (str.ToLower() == "-end")
             {
                 return "";
             }
             var check = str.Replace(" ", "");
             while (check.Length == 0)
             {
-                Console.WriteLine("Вы ввели пустую строку");
+                Console.Write("\nВы ввели пустую строку, повторите ввод: ");
                 str = Console.ReadLine();
                 check = str.Replace(" ", "");
             }
@@ -368,7 +291,7 @@ namespace TestApp.Theme3
         /// Осуществляет контроль ввода, не позволяет ввести год НЕ в диапазоне [1 н.э. , Нынешний год]
         /// </summary>
         /// <returns>Введенный год</returns>
-        private static int CheckInputYear()
+        private static int GetYearExpressionFromConsole()
         {
             int year;
 
@@ -378,15 +301,15 @@ namespace TestApp.Theme3
             {
                 var value = Console.ReadLine();
 
-                if (value.ToLower() == "-close")
+                if (value.ToLower() == "-end")
                 {
                     return -1;
                 }
 
-                success = int.TryParse(value, out year) && year > 0 && year < DateTime.Now.Year;
+                success = int.TryParse(value, out year) && year > 0 && year <= DateTime.Now.Year;
                 if (!success)
                 {
-                    Console.WriteLine("\tВведите год от 1 г. н.э. до текущего");
+                    Console.Write("\nВведите год от 1 г. н.э. до текущего: ");
                 }
 
             } while (!success);
@@ -395,11 +318,11 @@ namespace TestApp.Theme3
         }
         /// <summary>
         /// Осуществляет контроль ввода, не позволяет ввести отрицательное, не целое, равное 0 и/или число больше переданного
-        /// При вводе "-close" возвращает -1
+        /// При вводе "-end" возвращает -1
         /// </summary>
-        /// <param name="maxValue">Максимальное досутпное для ввода число</param>
+        /// <param name="limit">Максимальное досутпное для ввода число</param>
         /// <returns>Введенное число</returns>
-        private static int CheckInputValue(int maxValue)
+        private static int GetLimitedIntegerExpressionFromConsole(int limit)
         {
             int number;
 
@@ -409,15 +332,15 @@ namespace TestApp.Theme3
             {
                 var value = Console.ReadLine();
 
-                if (value.ToLower() == "-close")
+                if (value.ToLower() == "-end")
                 {
                     return -1;
                 }
 
-                success = int.TryParse(value, out number) && number <= maxValue && number > 0;
+                success = int.TryParse(value, out number) && number <= limit && number > 0;
                 if (!success)
                 {
-                    Console.WriteLine($"Введите целое положительное число, не больше {maxValue}: ");
+                    Console.Write($"\nВведите целое положительное число, не больше {limit}: ");
                 }
 
             } while (!success);
@@ -427,10 +350,10 @@ namespace TestApp.Theme3
         }
         /// <summary>
         /// Осуществляет контроль ввода, не позволяет ввести отрицательно, не целое и/или равное 0 число
-        /// При вводе "-close" возвращает -1
+        /// При вводе "-end" возвращает -1
         /// </summary>
         /// <returns>Введенное число</returns>
-        private static int CheckInputValue()
+        private static int GetIntegerExpressionFromConsole()
         {
 
             int number;
@@ -441,7 +364,7 @@ namespace TestApp.Theme3
             {
                 var value = Console.ReadLine();
 
-                if (value.ToLower() == "-close")
+                if (value.ToLower() == "-end")
                 {
                     return -1;
                 }
@@ -449,7 +372,7 @@ namespace TestApp.Theme3
                 success = int.TryParse(value, out number) && number > 0;
                 if (!success)
                 {
-                    Console.WriteLine($"Введите целое положительное число: ");
+                    Console.Write($"\nВведите целое положительное число: ");
                 }
 
             } while (!success);
@@ -457,6 +380,7 @@ namespace TestApp.Theme3
             return number;
         }
         #endregion
+
 
     }
 }
