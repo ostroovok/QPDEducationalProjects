@@ -24,7 +24,7 @@ namespace TestApp.Theme3
                 switch (Console.ReadLine().ToLower().Replace(" ", ""))
                 {
                     case "-ins":
-                        lib.Insert(CreateNewObjectViaTheConsole());
+                        CreateNewObjectViaTheConsole(lib);
                         Console.WriteLine("\nОбъект создан.");
                         break;
                     case "-help":
@@ -105,8 +105,7 @@ namespace TestApp.Theme3
         /// После получения id делает проверку на наличие объекта в библиотеке, если такого не нашлось - сообщает об этом
         /// Далее принимает значения:
         ///     1. Номер изменяемого св-ва по выведенному списку
-        ///     2. Если св-во по номеру это св-во "Год", то происходит проверка корректности ввода
-        ///     3. Новое значение св-ва
+        ///     2. Новое значение св-ва
         /// После вызывает метод библиотеки по изменению и передает полученные значения
         /// В случае неудачи сообщает об этом и просит првоерить введенные значения
         /// </summary>
@@ -197,7 +196,7 @@ namespace TestApp.Theme3
         /// </summary>
         /// <param name="lib">Библиотека</param>
         /// <returns>Созданный экземпляр выбранного класса</returns>
-        public static IBook CreateNewObjectViaTheConsole()
+        public static void CreateNewObjectViaTheConsole(Library lib)
         {
             Console.WriteLine("\nУкажите тип создаваемого объекта. Прервать создание невозможно.\n Выберите один из вариантов, указав его номер\n\t1. Книга\n\t2. Журнал");
             var typeToCreate = GetLimitedIntegerExpressionFromConsole(2);
@@ -223,7 +222,7 @@ namespace TestApp.Theme3
                 Console.Write("\nВведите название жанра книги: ");
                 var genre = GetStringExpressionFromConsole();
 
-                return new Book(title, quantity, author, genre, date, edition);
+                lib.Insert(new Book(title, quantity, author, genre, date, edition));
 
             }
             else
@@ -235,7 +234,7 @@ namespace TestApp.Theme3
                 Console.Write("\nВведите номер журнала: ");
                 var number = GetIntegerExpressionFromConsole();
 
-                return new Magazine(title, quantity, date, edition, periodicity, number);
+                lib.Insert(new Magazine(title, quantity, date, edition, periodicity, number));
 
             }
         }
