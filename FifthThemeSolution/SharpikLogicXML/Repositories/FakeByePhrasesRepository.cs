@@ -4,34 +4,15 @@ using System.Xml;
 
 namespace SharpikLogicXML.Repositories
 {
-    class FakeByePhrasesRepository : IByePhrasesRepository
+    class FakeByePhrasesRepository : IRepository
     {
         private static string[] _byePhrases = new string[] { "Пока", "До свидания", "Всего хорошего" };
 
-        private string[] _triggerPhrases = new string[] { "пока", "до свидания" };
-        public static string[] ByePhrases { get => _byePhrases; }
-
-        public string FindAnswerForQuestion(string question)
+        public string GetAnswer()
         {
-            if (!CheckInputQuestionForMatch(question))
-            {
-                return "";
-            }
             Random rnd = new();
+            Load("C:\\Users\\e.barkalov\\source\\repos\\SimpleProjects\\FifthThemeSolution\\SharpikLogicXML\\PhrasesXML.xml");
             return _byePhrases[rnd.Next(_byePhrases.Length)];
-        }
-
-        public bool CheckInputQuestionForMatch(string question)
-        {
-            for (int i = 0; i < _triggerPhrases.Length; i++)
-            {
-                question = question.ToLower();
-                if (question.Contains(_triggerPhrases[i]))
-                {
-                    return true;
-                }
-            }
-            return false;
         }
 
         public void Load(string fileName)
@@ -61,15 +42,6 @@ namespace SharpikLogicXML.Repositories
                         tempList.Add(str.InnerText);
                     }
                     _byePhrases = tempList.ToArray();
-                }
-                if (childNode.Name == "question")
-                {
-                    List<string> tempList = new();
-                    foreach (XmlNode str in childNode.ChildNodes)
-                    {
-                        tempList.Add(str.InnerText);
-                    }
-                    _triggerPhrases = tempList.ToArray();
                 }
             }
         }

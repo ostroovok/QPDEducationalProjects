@@ -4,7 +4,7 @@ using System.Xml;
 
 namespace SharpikLogicXML.Repositories
 {
-    class FakeAphorismsRepository : IAphorismsRepository
+    class FakeAphorismsRepository : IRepository
     {
         private string[] _aphorisms = new string[] {
                         "Если тебе тяжело, значит ты поднимаешься в гору. Если тебе легко, значит ты летишь в пропасть.",
@@ -12,12 +12,12 @@ namespace SharpikLogicXML.Repositories
                         "Шутку, как и соль, должно употреблять с умеренностью.",
                         "Не происходит изменений лишь с высшей мудростью и низшей глупостью."
                     };
-        public string[] Aphorisms { get => _aphorisms; }
 
-        public string FindAnswerForQuestion()
+        public string GetAnswer()
         {
             Random rnd = new();
-            return Aphorisms[rnd.Next(Aphorisms.Length)];
+            Load("C:\\Users\\e.barkalov\\source\\repos\\SimpleProjects\\FifthThemeSolution\\SharpikLogicXML\\PhrasesXML.xml");
+            return _aphorisms[rnd.Next(_aphorisms.Length)];
         }
 
         public void Load(string fileName)
