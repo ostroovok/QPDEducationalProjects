@@ -2,7 +2,7 @@
 
 namespace SharpikLogic.Repositories
 {
-    class FakeAphorismsRepository : IRepository
+    class FakeAphorismsRepository : IAphorismsRepository
     {
         private string[] _aphorisms = new string[] {
                         "Если тебе тяжело, значит ты поднимаешься в гору. Если тебе легко, значит ты летишь в пропасть.",
@@ -10,11 +10,12 @@ namespace SharpikLogic.Repositories
                         "Шутку, как и соль, должно употреблять с умеренностью.",
                         "Не происходит изменений лишь с высшей мудростью и низшей глупостью."
                     };
+        public string[] Aphorisms { get => _aphorisms; }
 
-        public string GetAnswer()
+        public string FindAnswerForQuestion()
         {
             Random rnd = new();
-            return _aphorisms[rnd.Next(_aphorisms.Length)];
+            return Aphorisms[rnd.Next(Aphorisms.Length)];
         }
     }
 }

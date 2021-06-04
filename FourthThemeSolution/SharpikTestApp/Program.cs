@@ -5,21 +5,23 @@ namespace SharpikTestApp
 {
     class Program
     {
+        private static bool isRunning = true;
         static void Main(string[] args)
         {
-            InputMessage mess = new InputMessage();
+            var bot = new Bot(ExitCallback);
+
             Console.WriteLine("Для начала диалога введите сообщение:");
-            while (true)
+
+            while (isRunning)
             {
-                var temp = mess.InputQuestion(Console.ReadLine());
-
-                Console.WriteLine(temp);
-
-                if (!mess.Enable)
-                {
-                    break;
-                }
+                var message = Console.ReadLine().Trim().ToLower();
+                Console.WriteLine(bot.HandleMessage(message));
             }
+        }
+
+        private static void ExitCallback()
+        {
+            isRunning = false;
         }
     }
 }
