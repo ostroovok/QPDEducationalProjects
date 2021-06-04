@@ -2,21 +2,13 @@
 {
     public class InputMessage
     {
-        public event Answer.EnteredQuestion EnteredQuestion;
         public bool Enable { get; set; } = true;
 
-
-        private Answer _message = new();
-
-        public InputMessage()
-        {
-            EnteredQuestion += _message.GenerateAnswer;
-        }
+        private Answer _answer = new();
 
         public string InputQuestion(string q)
         {
-            EnteredQuestion?.Invoke(this, q);
-            return _message.ActualAnswer;
+            return _answer.GenerateAnswer(this, q);
         }
     }
 }

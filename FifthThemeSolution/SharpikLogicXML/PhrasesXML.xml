@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <PhrasesXML Version="1">
-	<message name="HelloPhrases">
+	<helloPhrases>
 		<answer>
 			<string>Привет</string>
 			<string>Здравствуйте</string>
@@ -16,9 +16,9 @@
 			<string>доброе утро</string>
 			<string>доброй ночи</string>
 		</question>
-	</message>
+	</helloPhrases>
 
-	<message name="ByePhrases">
+	<byePhrases>
 		<answer>
 			<string>Пока</string>
 			<string>До свидания</string>
@@ -28,9 +28,9 @@
 			<string>пока</string>
 			<string>до свидания</string>
 		</question>
-	</message>
+	</byePhrases>
 
-	<message name="Anecdotes">
+	<anecdotes>
 		<answer>
 			<string>Приходит муж домой, а там жена!</string>
 			<string>Купил мужик шляпу, а она ему как раз!</string>
@@ -38,28 +38,15 @@
 		<question>
 			<string>анекдот</string>
 		</question>
-	</message>
+	</anecdotes>
 
-	<message>
-		<answer>
-			<string>Шарпик</string>
-			<string>Меня зовут Шарпик</string>
-		</answer>
-		<question>
-			<string>Как тебя зовут</string>
-		</question>
-	</message>
-	
-	<message name="Aphorisms">
+	<aphorisms>
 		<answer>
 			<string>Если тебе тяжело, значит ты поднимаешься в гору. Если тебе легко, значит ты летишь в пропасть.</string>
 			<string>Какое слово скажешь, такое в ответ и услышишь.</string>
 			<string>Шутку, как и соль, должно употреблять с умеренностью.</string>
 			<string>Не происходит изменений лишь с высшей мудростью и низшей глупостью.</string>
 		</answer>
-		<question>
-			<string>---</string>
-		</question>
-	</message>
+	</aphorisms>
 </PhrasesXML>
 

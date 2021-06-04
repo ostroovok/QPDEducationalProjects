@@ -4,11 +4,11 @@
     {
         public bool Enable { get; set; } = true;
 
-        private Answer _message = new();
+        private Answer _answer = new();
 
         public string InputQuestion(string q)
         {
-            return _message.GenerateAnswer(this, q);
+            return _answer.GenerateAnswer(this, q);
         }
     }
 }
