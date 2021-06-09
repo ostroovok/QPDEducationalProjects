@@ -1,31 +1,32 @@
 ﻿using SharpikLogic;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SharpikTestApp
 {
     class Program
     {
+        private static bool isRunning = true;
         static void Main(string[] args)
         {
-            InputMessage mess = new();
+            var bot = new Bot(ExitCallback);
 
             Console.WriteLine("Для начала диалога введите сообщение:");
 
-            while (true)
+            while (isRunning)
             {
-
-                if (!mess.Enable)
-                {
-                    break;
-                }
-
-                var inputStr = Console.ReadLine();
-
                 Task.Run(() =>
-                    Console.WriteLine(mess.InputQuestion(inputStr)));
-
+                {
+                    var message = Console.ReadLine().Trim().ToLower();
+                    Console.WriteLine(bot.HandleMessage(message));
+                });
             }
+        }
+
+        private static void ExitCallback()
+        {
+            isRunning = false;
         }
     }
 }

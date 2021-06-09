@@ -1,35 +1,49 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Xml;
 
-namespace SharpikLogic.Repositories
+namespace SharpikThreadLogic.Repositories
 {
-    class FakeAnecdotesRepository : IAnecdotesRepository
+    class FakeAnecdotesRepository : IRepository
     {
         private static string[] _anecdotes = new string[] { "Приходит муж домой, а там жена! ха-ха", "Купил мужик шляпу, а она ему как раз!" };
 
-        private string[] _triggerPhrases = new string[] { "анекдот" };
-        public static string[] Anecdotes { get => _anecdotes; }
-
-        public string FindAnswerForQuestion(string question)
+        public string GetAnswer()
         {
-            if (!CheckInputQuestionForMatch(question))
-            {
-                return "";
-            }
             Random rnd = new();
+            Load("C:\\Users\\e.barkalov\\source\\repos\\SimpleProjects\\FifthThemeSolution\\SharpikLogicXML\\PhrasesXML.xml");
             return _anecdotes[rnd.Next(_anecdotes.Length)];
         }
 
-        public bool CheckInputQuestionForMatch(string question)
+        public void Load(string fileName)
         {
-            for (int i = 0; i < _triggerPhrases.Length; i++)
+            XmlDocument xDoc = new();
+
+            try
             {
-                question = question.ToLower();
-                if (question.Contains(_triggerPhrases[i]))
+                xDoc.Load(fileName);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Загрузочный файл не найден, текст ошибки: {ex.Message}");
+            }
+
+            XmlElement xRoot = xDoc.DocumentElement;
+
+            var xnode = xRoot.GetElementsByTagName("anecdotes");
+
+            foreach (XmlNode childNode in xnode)
+            {
+                if (childNode.Name == "answer")
                 {
-                    return true;
+                    List<string> tempList = new();
+                    foreach (XmlNode str in childNode.ChildNodes)
+                    {
+                        tempList.Add(str.InnerText);
+                    }
+                    _anecdotes = tempList.ToArray();
                 }
             }
-            return false;
         }
     }
 }
