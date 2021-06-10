@@ -3,18 +3,15 @@
 }
 <br />
 
-
 <div class="container">
 
     <div class="col-md-12">
 
-        <textarea id="displaymessage" cols="100" rows="20"></textarea>
+        <textarea id="displaymessage" cols="100" rows="20">@Model.Answer</textarea>
         <br />
-        <label> Message :</label> <input type="text" id="message" style="width:500px" />
-        <input id="sendButton" type="button" value="Send" />
+        <label> Message :</label> 
+        <input type="text" style="width:500px" />
+        <input id="sendButton" type="button" value="Send" name="message" />
 
     </div>
-
 </div>
-<script src="~/lib/jquery/dist/jquery.js"></script>
-<script src="~/js/JavaScript.js"></script>

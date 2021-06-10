@@ -26,6 +26,14 @@ namespace ChatBotLibrary
             helloPhrasesRep = new FakeHelloPhrasesRepository();
         }
 
+        public Bot()
+        {
+            anecdotesRep = new FakeAnecdotesRepository();
+            aphorismsRep = new FakeAphorismsRepository();
+            byePhrasesRep = new FakeByePhrasesRepository();
+            helloPhrasesRep = new FakeHelloPhrasesRepository();
+        }
+
         public string HandleMessage(string message)
         {
             var messageType = GetMessageType(message);

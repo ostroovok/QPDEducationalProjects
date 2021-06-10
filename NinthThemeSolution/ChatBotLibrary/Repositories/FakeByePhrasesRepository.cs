@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Xml;
 
 namespace ChatBotLibrary.Repositories
 {
     class FakeByePhrasesRepository : IRepository
     {
-        private static string[] _byePhrases = new string[] { "Пока", "До свидания", "Всего хорошего" };
+        private static string[] _byePhrases;
 
         public string GetAnswer()
         {
             Random rnd = new();
-            Load("C:\\Users\\e.barkalov\\source\\repos\\SimpleProjects\\FifthThemeSolution\\SharpikLogicXML\\PhrasesXML.xml");
+            Load(Directory.GetCurrentDirectory() + "\\PhrasesXML.xml");
             return _byePhrases[rnd.Next(_byePhrases.Length)];
         }
 
@@ -32,7 +33,7 @@ namespace ChatBotLibrary.Repositories
 
             var xnode = xRoot.GetElementsByTagName("byePhrases");
 
-            foreach (XmlNode childNode in xnode)
+            foreach (XmlNode childNode in xnode[0].ChildNodes)
             {
                 if (childNode.Name == "answer")
                 {

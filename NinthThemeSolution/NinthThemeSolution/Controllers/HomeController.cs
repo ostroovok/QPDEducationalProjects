@@ -1,6 +1,5 @@
 ﻿using ChatBotLibrary;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace NinthThemeSolution.Controllers
 {
@@ -9,9 +8,9 @@ namespace NinthThemeSolution.Controllers
         private bool exit;
         private Bot bot;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController()
         {
-            bot = new(ExitCallback);
+            bot = new(() => exit = true);
         }
 
         public IActionResult Index()
@@ -21,13 +20,8 @@ namespace NinthThemeSolution.Controllers
         [HttpPost]
         public IActionResult Index(string message)
         {
-            ViewBag.Message = bot.HandleMessage(message);
-            return ViewBag;
+            return View();
         }
-        
-        private void ExitCallback()
-        {
-            exit = false;
-        }
+
     }
 }

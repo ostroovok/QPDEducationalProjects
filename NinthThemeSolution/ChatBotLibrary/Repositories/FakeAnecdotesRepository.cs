@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Xml;
 
 namespace ChatBotLibrary.Repositories
 {
     class FakeAnecdotesRepository : IRepository
     {
-        private static string[] _anecdotes = new string[] { "Приходит муж домой, а там жена! ха-ха", "Купил мужик шляпу, а она ему как раз!" };
+        private static string[] _anecdotes;
 
         public string GetAnswer()
         {
             Random rnd = new();
-            Load("C:\\Users\\e.barkalov\\source\\repos\\SimpleProjects\\FifthThemeSolution\\SharpikLogicXML\\PhrasesXML.xml");
+            Load(Directory.GetCurrentDirectory() + "\\PhrasesXML.xml");
             return _anecdotes[rnd.Next(_anecdotes.Length)];
         }
 
@@ -32,7 +33,7 @@ namespace ChatBotLibrary.Repositories
 
             var xnode = xRoot.GetElementsByTagName("anecdotes");
 
-            foreach (XmlNode childNode in xnode)
+            foreach (XmlNode childNode in xnode[0].ChildNodes)
             {
                 if (childNode.Name == "answer")
                 {
