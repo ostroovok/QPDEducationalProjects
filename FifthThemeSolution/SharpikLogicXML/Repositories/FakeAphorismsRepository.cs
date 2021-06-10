@@ -1,22 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Xml;
 
 namespace SharpikLogicXML.Repositories
 {
     class FakeAphorismsRepository : IRepository
     {
-        private string[] _aphorisms = new string[] {
-                        "Если тебе тяжело, значит ты поднимаешься в гору. Если тебе легко, значит ты летишь в пропасть.",
-                        "Какое слово скажешь, такое в ответ и услышишь.",
-                        "Шутку, как и соль, должно употреблять с умеренностью.",
-                        "Не происходит изменений лишь с высшей мудростью и низшей глупостью."
-                    };
+        private string[] _aphorisms;
 
         public string GetAnswer()
         {
             Random rnd = new();
-            Load("C:\\Users\\e.barkalov\\source\\repos\\SimpleProjects\\FifthThemeSolution\\SharpikLogicXML\\PhrasesXML.xml");
+            Load(Directory.GetCurrentDirectory() + "\\PhrasesXML.xml");
+            //Load("C:\\Users\\e.barkalov\\source\\repos\\SimpleProjects\\FifthThemeSolution\\SharpikLogicXML\\PhrasesXML.xml");
             return _aphorisms[rnd.Next(_aphorisms.Length)];
         }
 
@@ -37,7 +34,8 @@ namespace SharpikLogicXML.Repositories
 
             var xnode = xRoot.GetElementsByTagName("aphorisms");
 
-            foreach (XmlNode childNode in xnode)
+            
+            foreach (XmlNode childNode in xnode[0].ChildNodes)
             {
                 if (childNode.Name == "answer")
                 {

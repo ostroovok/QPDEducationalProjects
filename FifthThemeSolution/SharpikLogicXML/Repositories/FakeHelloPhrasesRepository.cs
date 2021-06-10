@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Xml;
 
 namespace SharpikLogicXML.Repositories
 {
     class FakeHelloPhrasesRepository : IRepository
     {
-        private string[] _helloPhrases = new string[] { "Привет", "Здравствуйте", "Доброго времени суток" };
+        private string[] _helloPhrases;
 
         public string GetAnswer()
         {
             Random rnd = new();
-            Load("C:\\Users\\e.barkalov\\source\\repos\\SimpleProjects\\FifthThemeSolution\\SharpikLogicXML\\PhrasesXML.xml");
+            Load(Directory.GetCurrentDirectory() + "\\PhrasesXML.xml");
+            //Load("C:\\Users\\e.barkalov\\source\\repos\\SimpleProjects\\FifthThemeSolution\\SharpikLogicXML\\PhrasesXML.xml");
             return _helloPhrases[rnd.Next(_helloPhrases.Length)];
         }
 
@@ -32,7 +34,7 @@ namespace SharpikLogicXML.Repositories
 
             var xnode = xRoot.GetElementsByTagName("helloPhrases");
 
-            foreach (XmlNode childNode in xnode)
+            foreach (XmlNode childNode in xnode[0].ChildNodes)
             {
                 if (childNode.Name == "answer")
                 {

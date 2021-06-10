@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <PhrasesXML Version="1">
+	
 	<helloPhrases>
 		<answer>
 			<string>Привет</string>
@@ -48,5 +49,6 @@
 			<string>Не происходит изменений лишь с высшей мудростью и низшей глупостью.</string>
 		</answer>
 	</aphorisms>
+	
 </PhrasesXML>
 

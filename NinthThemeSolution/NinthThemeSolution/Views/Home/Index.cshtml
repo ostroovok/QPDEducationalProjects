@@ -1,11 +1,20 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<br />
 
-<div>
-    <form>
-        <p class="text-dark">Введите сообщение: </p>
-        <p><input type="text" maxlength="25" size="40" name="Message" /></p>
-        <p>@ViewBag.Message</p>
-    </form>
+
+<div class="container">
+
+    <div class="col-md-12">
+
+        <textarea id="displaymessage" cols="100" rows="20"></textarea>
+        <br />
+        <label> Message :</label> <input type="text" id="message" style="width:500px" />
+        <input id="sendButton" type="button" value="Send" />
+
+    </div>
+
 </div>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/js/JavaScript.js"></script>
