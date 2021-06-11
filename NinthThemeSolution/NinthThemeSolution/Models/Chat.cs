@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace NinthThemeSolution.Models
 {
-    public class AnecdoteRequest
+    public class Chat
     {
         public int Id { get; set; }
-        public string Message { get; set; }
-        public List<Anecdote> Responses { get; set; }
+        public string Question { get; set; }
+        public string Answer { get; set; }
     }
 }
