@@ -26,10 +26,9 @@ namespace SharpikLogic
             byePhrasesRep = new FakeByePhrasesRepository();
             helloPhrasesRep = new FakeHelloPhrasesRepository();
         }
-
         public string HandleMessage(string message)
         {
-            Thread.Sleep(1000);
+            //Thread.Sleep(1000);
 
             var messageType = GetMessageType(message);
 

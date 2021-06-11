@@ -35,8 +35,7 @@ namespace SixthThemeLogic
                 );
             t1.Start();
             t2.Start();
-            t1.GetAwaiter().GetResult().CopyTo(arr, 0);
-            t2.GetAwaiter().GetResult().CopyTo(arr, 0);
+            Task.WaitAll();
             return arr;
         }
     }

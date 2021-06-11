@@ -1,5 +1,6 @@
 ﻿using SharpikLogic;
 using System;
+using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -7,20 +8,32 @@ namespace SharpikTestApp
 {
     class Program
     {
+
         private static bool isRunning = true;
+        private static ConcurrentQueue<string> messagesQueue = new();
         static void Main(string[] args)
         {
-            var bot = new Bot(ExitCallback);
-
             Console.WriteLine("Для начала диалога введите сообщение:");
+
+            Task.Run(() => Start());
 
             while (isRunning)
             {
-                Task.Run(() =>
+                var str = Console.ReadLine().Trim().ToLower();
+                messagesQueue.Enqueue(str);
+            }
+        }
+
+        private static void Start()
+        {
+            var bot = new Bot(ExitCallback);
+            while (isRunning)
+            {
+                if (messagesQueue.TryDequeue(out var message))
                 {
-                    var message = Console.ReadLine().Trim().ToLower();
                     Console.WriteLine(bot.HandleMessage(message));
-                });
+                }
+                Thread.Sleep(10);
             }
         }
 
