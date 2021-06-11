@@ -17,11 +17,5 @@ namespace NinthThemeSolution.Controllers
         {
             return View();
         }
-        [HttpPost]
-        public IActionResult Index(string message)
-        {
-            return View();
-        }
-
     }
 }
