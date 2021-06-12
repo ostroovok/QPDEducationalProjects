@@ -153,31 +153,32 @@ namespace NinthThemeSolution.Controllers
         [HttpPost("api/Chat")]
         public async Task<JsonResult> Chat(Question request)
         {
-            var question = await _context.Questions.Where(m => m.MessageType.ToLower() == request.MessageType.ToLower()).FirstOrDefaultAsync();
+            Random rnd = new();
 
-            if(question == null)
+            var questionType = await _context.Questions.Where(m => request.Message.ToLower().Contains(m.Message.ToLower())).FirstOrDefaultAsync();
+
+            if(questionType != null)
             {
-                var aphorism = await _context.Answers.Where(m => m.MessageType.ToLower() == "aphorism").FirstOrDefaultAsync();
+                var question = await _context.Questions.Where(m => m.MessageType.ToLower() == questionType.MessageType.ToLower()).FirstOrDefaultAsync();
 
-                return Json(aphorism);
+                if (question != null)
+                {
+                    var answer = await _context.Answers.Where(m => m.MessageType.ToLower() == question.MessageType.ToLower()).ToArrayAsync();
+
+                    if (answer != null)
+                    {
+                        var response = answer[rnd.Next(answer.Length + 1)];
+
+                        return Json(response);
+                    }
+                }
             }
+            
+            var aphorism = await _context.Answers.Where(m => m.MessageType.ToLower() == "aphorism").ToArrayAsync();
+            
+            var result = aphorism[rnd.Next(aphorism.Length + 1)];
 
-            var answer = await _context.Answers.Where(m => m.MessageType.ToLower() == question.MessageType.ToLower()).FirstOrDefaultAsync();
-
-            if (answer != null)
-            {
-                var response = question.Message; //new Answer { Message = question.Message };
-
-                return Json(response);
-            }
-            else
-            {
-
-                //---------------------- Переделать данный метод, убрать лишние проверки ----------------------//
-
-                //var resposta = new ResponseApi { resposta = "Não entendemos sua pergunta. Poderia reformular?" };
-                return Json("");
-            }
+            return Json(result);
         }
     }
 }
