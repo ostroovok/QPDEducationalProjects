@@ -16,7 +16,7 @@ namespace NinthThemeSolution.Data
 
                 if (context.Answers.Any())
                 {
-                    return;
+                    //return;
                 }
 
                 var answers = new Answer[]
@@ -28,7 +28,7 @@ namespace NinthThemeSolution.Data
                     new Answer{ Message = "Шарпик", MessageType = "NameType"},
                     new Answer{ Message = "Приходит муж домой, а там жена!", MessageType = "Anecdote"},
                     new Answer{ Message = "Купил мужик шляпу, а она ему как раз", MessageType = "Anecdote"},
-                    new Answer{ Message = "Если тебе тяжело, значит ты поднимаешься в гору. Если тебе легко, значит ты летишь в пропасть.", 
+                    new Answer{ Message = "Если тебе тяжело, значит ты поднимаешься в гору. Если тебе легко, значит ты летишь в пропасть.",
                         MessageType = "Aphorism"},
                     new Answer{ Message = "Шутку, как и соль, должно употреблять с умеренностью.", MessageType = "Aphorism"},
                     new Answer{ Message = "Не происходит изменений лишь с высшей мудростью и низшей глупостью.", MessageType = "Aphorism"},
@@ -49,6 +49,8 @@ namespace NinthThemeSolution.Data
                     new Question{ Message = "как тебя зовут", MessageType = "NameType"},
                     new Question{ Message = "пока", MessageType = "ByeType"},
                     new Question{ Message = "до свидания", MessageType = "ByeType"},
+                    new Question{ Message = "который час", MessageType = "TimeType"},
+                    new Question{ Message = "сколько времени", MessageType = "TimeType"},
                 };
 
                 context.Questions.AddRange(questions);

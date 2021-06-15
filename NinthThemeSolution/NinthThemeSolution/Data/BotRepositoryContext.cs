@@ -12,7 +12,5 @@ namespace NinthThemeSolution.Data
         public BotRepositoryContext([NotNull] DbContextOptions options) : base(options)
         {
         }
-
-        public DbSet<NinthThemeSolution.Models.Chat> Chat { get; set; }
     }
 }
