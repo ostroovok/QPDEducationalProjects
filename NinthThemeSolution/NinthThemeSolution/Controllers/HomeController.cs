@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NinthThemeSolution.Data;
 using NinthThemeSolution.Models;
 using System.Threading.Tasks;
@@ -18,10 +19,11 @@ namespace NinthThemeSolution.Controllers
         }
 
         [HttpPost("api/Chat")]
+        [Authorize]
         public async Task<JsonResult> ChatBot(Question request)
         {
-
-            /*HttpContext.
+            _ = HttpContext.Session;
+            /*
             if (!bot.Enable)
             {
                 return Json("Шарпик ушел...");
