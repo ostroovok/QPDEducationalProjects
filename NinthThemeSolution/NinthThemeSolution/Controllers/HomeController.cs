@@ -2,7 +2,6 @@
 using NinthThemeSolution.Data;
 using NinthThemeSolution.Models;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace NinthThemeSolution.Controllers
@@ -30,7 +29,7 @@ namespace NinthThemeSolution.Controllers
             {
                 Answer result = await bot.HandleMessage(request);
 
-                if(result.MessageType == "ByeType")
+                if (result.MessageType == "ByeType")
                 {
                     HttpContext.Response.Cookies.Delete(token);
                 }
