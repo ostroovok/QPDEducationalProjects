@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using NinthThemeSolution.Data;
 using NinthThemeSolution.Models;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace NinthThemeSolution.Controllers
@@ -17,21 +18,35 @@ namespace NinthThemeSolution.Controllers
         {
             return View();
         }
+        public IActionResult Start()
+        {
+            return View();
+        }
 
         [HttpPost("api/Chat")]
-        [Authorize]
         public async Task<JsonResult> ChatBot(Question request)
         {
-            _ = HttpContext.Session;
-            /*
-            if (!bot.Enable)
+            if (HttpContext.Request.Cookies.Keys.Contains("pass_token"))
             {
-                return Json("Шарпик ушел...");
-            }*/
+                Answer result = await bot.HandleMessage(request);
 
-            Answer result = await bot.HandleMessage(request);
+                if(result.MessageType == "ByeType")
+                {
+                    HttpContext.Response.Cookies.Delete("pass_token");
+                }
 
-            return Json(result);
+                return Json(result);
+            }
+
+            return Json(new Answer { Message = "Шарпик ушел..." });
+        }
+
+        [HttpGet("api/Token")]
+        public JsonResult GetToken()
+        {
+            var token = Guid.NewGuid().ToString();
+            HttpContext.Response.Cookies.Append("pass_token", token);
+            return Json(token);
         }
     }
 }

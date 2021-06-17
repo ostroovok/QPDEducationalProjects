@@ -43,12 +43,7 @@ namespace NinthThemeSolution.Controllers
 
                 if (question != null)
                 {
-                     
-                    /*if (question.MessageType == "ByeType")
-                    {
-                        Enable = false;
-                    }*/
-                     
+
                     var answer = await _context.Answers.Where(m => m.MessageType.ToLower() == question.MessageType.ToLower()).ToArrayAsync();
 
                     if (answer.Length != 0)
