@@ -24,8 +24,6 @@ namespace NinthThemeSolution
 
             services.AddDbContext<BotRepositoryContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("BotResponseConnection")));
-
-            services.AddSession();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -44,7 +42,6 @@ namespace NinthThemeSolution
             app.UseStaticFiles();
 
             app.UseRouting();
-            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
