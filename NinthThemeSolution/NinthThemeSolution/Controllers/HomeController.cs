@@ -24,15 +24,15 @@ namespace NinthThemeSolution.Controllers
         }
 
         [HttpPost("api/Chat")]
-        public async Task<JsonResult> ChatBot(Question request)
+        public async Task<JsonResult> ChatBot(Question request, string token)
         {
-            if (HttpContext.Request.Cookies.Keys.Contains("pass_token"))
+            if (HttpContext.Request.Cookies.Keys.Contains(token))
             {
                 Answer result = await bot.HandleMessage(request);
 
                 if(result.MessageType == "ByeType")
                 {
-                    HttpContext.Response.Cookies.Delete("pass_token");
+                    HttpContext.Response.Cookies.Delete(token);
                 }
 
                 return Json(result);
@@ -45,7 +45,7 @@ namespace NinthThemeSolution.Controllers
         public JsonResult GetToken()
         {
             var token = Guid.NewGuid().ToString();
-            HttpContext.Response.Cookies.Append("pass_token", token);
+            HttpContext.Response.Cookies.Append(token, string.Empty);
             return Json(token);
         }
     }

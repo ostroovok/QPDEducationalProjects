@@ -1,8 +1,11 @@
 ﻿
 $(document).ready(function () {
-    $.ajax({
-        type: "GET",
-        url: "api/Token",
-        async: false,
-    });
+    let res =
+        $.ajax({
+            type: "GET",
+            url: "api/Token",
+            async: false,
+        }).responseJSON;
+
+    $("#tokenBox").append(res);
 });
